@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Swad Amrutam Billing</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>☕ Swad Amrutam Billing</h1>
+
+<div class="menu" id="menu"></div>
+
+<div class="cart">
+
+<h2>🛒 Cart</h2>
+
+<div id="cart-items"></div>
+
+<h3>Total: ₹<span id="total">0</span></h3>
+
+<input
+type="text"
+id="customerNumber"
+placeholder="Customer WhatsApp Number"
+>
+
+<button onclick="payNow()">Pay Now</button>
+
+<button onclick="sendWhatsApp()">
+Send WhatsApp Bill
+</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
