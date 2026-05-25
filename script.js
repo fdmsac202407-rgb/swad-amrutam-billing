@@ -4,42 +4,42 @@ const items = [
 category: "Tea Product Regular",
 name: "Amrutam Special Tea (Regular)",
 price: 10,
-image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/1.-AMRUTAM-S.P-TEA-scaled-1.jpg"
 },
 
 {
 category: "Tea Product Regular",
 name: "Masala Tea (Regular)",
 price: 20,
-image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/7.-MASALA-MILK-scaled-1-2048x1414.jpg"
 },
 
 {
 category: "Tea Product Regular",
 name: "Adrak Tea (Regular)",
 price: 20,
-image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/2.-GENGER-TEA.jpg"
 },
 
 {
 category: "Hot Product Regular",
 name: "Coffee (Regular)",
 price: 20,
-image: "https://images.unsplash.com/photo-1511920170033-f8396924c348"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/8.-COFFE-scaled-1.jpg"
 },
 
 {
 category: "Cold Product Small",
 name: "Cold Coffee (Small)",
 price: 29,
-image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/14.-COLD-COFFEE-scaled-1.jpg"
 },
 
 {
 category: "Cold Product Large",
 name: "Oreo Milkshake (Large)",
 price: 89,
-image: "https://images.unsplash.com/photo-1577805947697-89e18249d767"
+image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/21.-OREO-SHAKE.jpg"
 }
 
 ];
@@ -157,6 +157,6 @@ total += item.price;
 const upi =
 `upi://pay?pa=9313677679@ibl&pn=Swad Amrutam&am=${total}&cu=INR`;
 
-window.location.href = upi;
+window.location.href = UPI;
 
 }
