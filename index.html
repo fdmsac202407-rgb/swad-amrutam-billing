@@ -11,9 +11,174 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+body{
+margin:0;
+padding:0;
+background:#111;
+font-family:Arial,sans-serif;
+color:white;
+}
+
+/* LOGIN PAGE */
+
+#loginPage{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.loginBox{
+width:100%;
+max-width:350px;
+background:#1f1f1f;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.loginBox h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.loginBox select,
+.loginBox input{
+width:100%;
+padding:14px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+font-size:16px;
+}
+
+.loginBox button{
+width:100%;
+padding:14px;
+margin-top:20px;
+border:none;
+border-radius:12px;
+background:#00c853;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+/* BILLING PAGE */
+
+#billingPage{
+display:none;
+padding:15px;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.card{
+background:#1f1f1f;
+padding:15px;
+border-radius:15px;
+}
+
+.cart{
+background:#1f1f1f;
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+}
+
+.cart input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
+
+.cart button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+color:white;
+}
+
+.payBtn{
+background:#00c853;
+}
+
+.whatsappBtn{
+background:#25D366;
+}
+
+</style>
+
 </head>
 
 <body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="loginBox">
+
+<h1>☕ SWAD AMRUTAM</h1>
+
+<select id="outlet">
+
+<option value="Nikol">
+Nikol Outlet
+</option>
+
+<option value="Vastral">
+Vastral Outlet
+</option>
+
+<option value="Maninagar">
+Maninagar Outlet
+</option>
+
+</select>
+
+<input
+type="text"
+id="username"
+placeholder="Username"
+>
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+>
+
+<button onclick="login()">
+Login
+</button>
+
+</div>
+
+</div>
+
+<!-- BILLING PAGE -->
+
+<div id="billingPage">
 
 <h1>☕ Swad Amrutam Billing</h1>
 
@@ -25,21 +190,77 @@
 
 <div id="cart-items"></div>
 
-<h3>Total: ₹<span id="total">0</span></h3>
+<h3>
+Total: ₹<span id="total">0</span>
+</h3>
 
 <input
 type="text"
+id="customerName"
+placeholder="Customer Name"
+>
+
+<input
+type="number"
 id="customerNumber"
 placeholder="Customer WhatsApp Number"
 >
 
-<button onclick="payNow()">Pay Now</button>
+<button
+class="payBtn"
+onclick="payNow()"
+>
+Pay Now
+</button>
 
-<button onclick="sendWhatsApp()">
+<button
+class="whatsappBtn"
+onclick="sendWhatsApp()"
+>
 Send WhatsApp Bill
 </button>
 
 </div>
+
+</div>
+
+<script>
+
+/* LOGIN SYSTEM */
+
+function login() {
+
+const username =
+document.getElementById('username').value;
+
+const password =
+document.getElementById('password').value;
+
+const outlet =
+document.getElementById('outlet').value;
+
+if (
+username === 'ankit' &&
+password === '1234'
+) {
+
+localStorage.setItem('outlet', outlet);
+
+document.getElementById('loginPage').style.display =
+'none';
+
+document.getElementById('billingPage').style.display =
+'block';
+
+return;
+
+}
+
+alert('Invalid Login');
+
+}
+
+</script>
 
 <script src="script.js"></script>
 
