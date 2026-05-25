@@ -55,10 +55,10 @@ const totalElement = document.getElementById('total');
 let cart = [];
 
 /* =========================
-   MENU
+   MENU ITEMS
 ========================= */
 
-items.forEach(item => {
+items.forEach((item, index) => {
 
 const card = document.createElement('div');
 
@@ -76,7 +76,8 @@ border-radius:12px;
 <h3 style="
 color:white;
 margin-top:15px;
-font-size:28px;
+font-size:20px;
+line-height:1.4;
 ">
 ${item.name}
 </h3>
@@ -89,7 +90,9 @@ color:#00e676;
 ₹${item.price}
 </p>
 
-<button onclick="addToCart('${item.name}')"
+<div id="controls-${index}">
+
+<button onclick="addToCart('${item.name}', ${index})"
 style="
 width:100%;
 background:black;
@@ -103,6 +106,8 @@ cursor:pointer;
 Add
 </button>
 
+</div>
+
 `;
 
 menu.appendChild(card);
@@ -113,7 +118,7 @@ menu.appendChild(card);
    ADD TO CART
 ========================= */
 
-function addToCart(itemName) {
+function addToCart(itemName, index) {
 
 const item = items.find(i => i.name === itemName);
 
@@ -132,86 +137,79 @@ qty: 1
 
 }
 
-renderCart();
-
-}
-
-/* =========================
-   UPDATE QTY
-========================= */
-
-function updateQty(index, change) {
-
-cart[index].qty += change;
-
-if (cart[index].qty <= 0) {
-
-cart.splice(index, 1);
-
-}
+updateControls(itemName, index);
 
 renderCart();
 
 }
 
 /* =========================
-   RENDER CART
+   CHANGE QUANTITY
 ========================= */
 
-function renderCart() {
+function changeQty(itemName, change, index) {
 
-cartItems.innerHTML = '';
+const item = cart.find(c => c.name === itemName);
 
-let total = 0;
+item.qty += change;
 
-cart.forEach((item, index) => {
+if (item.qty <= 0) {
 
-total += item.price * item.qty;
+cart = cart.filter(c => c.name !== itemName);
 
-const div = document.createElement('div');
+}
 
-div.style.background = '#2a2a2a';
-div.style.padding = '15px';
-div.style.borderRadius = '12px';
-div.style.marginBottom = '12px';
+updateControls(itemName, index);
 
-div.innerHTML = `
+renderCart();
+
+}
+
+/* =========================
+   UPDATE BUTTON CONTROLS
+========================= */
+
+function updateControls(itemName, index) {
+
+const cartItem = cart.find(c => c.name === itemName);
+
+const controls = document.getElementById(`controls-${index}`);
+
+if (!cartItem) {
+
+controls.innerHTML = `
+
+<button onclick="addToCart('${itemName}', ${index})"
+style="
+width:100%;
+background:black;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+">
+Add
+</button>
+
+`;
+
+return;
+
+}
+
+controls.innerHTML = `
 
 <div style="
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:center;
 gap:15px;
-color:white;
+margin-top:10px;
 ">
 
-<div>
-
-<b style="
-font-size:18px;
-color:white;
-">
-${item.name}
-</b>
-
-<br>
-
-<span style="
-color:#cccccc;
-font-size:16px;
-">
-₹${item.price} x ${item.qty}
-</span>
-
-</div>
-
-<div style="
-display:flex;
-align-items:center;
-gap:10px;
-">
-
-<button onclick="updateQty(${index}, -1)"
+<button onclick="changeQty('${itemName}', -1, ${index})"
 style="
 width:40px;
 height:40px;
@@ -229,13 +227,13 @@ cursor:pointer;
 font-size:22px;
 font-weight:bold;
 color:white;
-min-width:25px;
+min-width:20px;
 text-align:center;
 ">
-${item.qty}
+${cartItem.qty}
 </span>
 
-<button onclick="updateQty(${index}, 1)"
+<button onclick="changeQty('${itemName}', 1, ${index})"
 style="
 width:40px;
 height:40px;
@@ -251,6 +249,66 @@ cursor:pointer;
 
 </div>
 
+`;
+
+}
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart() {
+
+cartItems.innerHTML = '';
+
+let total = 0;
+
+cart.forEach(item => {
+
+total += item.price * item.qty;
+
+const div = document.createElement('div');
+
+div.style.background = '#2a2a2a';
+div.style.padding = '15px';
+div.style.borderRadius = '12px';
+div.style.marginBottom = '12px';
+
+div.innerHTML = `
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+">
+
+<div>
+
+<b style="
+font-size:18px;
+">
+${item.name}
+</b>
+
+<br>
+
+<span style="
+color:#cccccc;
+">
+₹${item.price} x ${item.qty}
+</span>
+
+</div>
+
+<div style="
+font-size:20px;
+font-weight:bold;
+color:#00e676;
+">
+₹${item.price * item.qty}
+</div>
+
 </div>
 
 `;
@@ -260,6 +318,65 @@ cartItems.appendChild(div);
 });
 
 totalElement.textContent = total;
+
+}
+
+/* =========================
+   PAY NOW
+========================= */
+
+function payNow() {
+
+if (cart.length === 0) {
+
+alert('Cart is Empty');
+
+return;
+
+}
+
+document.getElementById('paymentOptions').style.display = 'block';
+
+}
+
+/* =========================
+   UPI PAYMENT
+========================= */
+
+function payUPI() {
+
+let total = 0;
+
+cart.forEach(item => {
+
+total += item.price * item.qty;
+
+});
+
+const upi =
+`upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad Amrutam&am=${total}&cu=INR`;
+
+window.location.href = upi;
+
+}
+
+/* =========================
+   SHOW QR
+========================= */
+
+function showQR() {
+
+document.getElementById('qrBox').style.display = 'block';
+
+}
+
+/* =========================
+   CASH PAYMENT
+========================= */
+
+function cashPayment() {
+
+alert('Cash Payment Selected');
 
 }
 
@@ -316,37 +433,5 @@ total +
 '🙏 Thank You Visit Again';
 
 window.open(`https://wa.me/91${number}?text=${message}`);
-
-}
-
-/* =========================
-   PAY NOW
-========================= */
-
-function payNow() {
-
-if (cart.length === 0) {
-
-alert('Cart is Empty');
-
-return;
-
-}
-
-let total = 0;
-
-cart.forEach(item => {
-
-total += item.price * item.qty;
-
-});
-
-/* YOUR UPI */
-
-const upi = `upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad Amrutam&am=${total}&cu=INR`;
-
-/* OPEN PAYMENT */
-
-window.open(upi);
 
 }
