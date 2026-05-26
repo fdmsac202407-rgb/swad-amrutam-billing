@@ -23,9 +23,7 @@ background:#111;
 color:white;
 }
 
-/* =========================
-   LOGIN PAGE
-========================= */
+/* LOGIN PAGE */
 
 #loginPage{
 
@@ -151,17 +149,9 @@ font-weight:bold;
 
 cursor:pointer;
 
-transition:0.3s;
-
 }
 
-.loginBtn:hover{
-transform:scale(1.03);
-}
-
-/* =========================
-   BILLING PAGE
-========================= */
+/* BILLING PAGE */
 
 #billingPage{
 display:none;
@@ -221,9 +211,7 @@ background:#00c853;
 background:#25D366;
 }
 
-/* =========================
-   PAYMENT POPUP
-========================= */
+/* PAYMENT POPUP */
 
 #paymentOptions{
 
@@ -290,10 +278,6 @@ background:#2196f3;
 background:red;
 }
 
-/* =========================
-   QR BOX
-========================= */
-
 #qrBox{
 display:none;
 text-align:center;
@@ -311,9 +295,7 @@ border-radius:20px;
 
 <body>
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+<!-- LOGIN PAGE -->
 
 <div id="loginPage">
 
@@ -362,9 +344,7 @@ LOGIN
 
 </div>
 
-<!-- =========================
-     BILLING PAGE
-========================= -->
+<!-- BILLING PAGE -->
 
 <div id="billingPage">
 
@@ -424,9 +404,7 @@ Scan QR To Pay
 
 </div>
 
-<!-- =========================
-     PAYMENT OPTIONS
-========================= -->
+<!-- PAYMENT OPTIONS -->
 
 <div id="paymentOptions">
 
@@ -466,11 +444,49 @@ Close
 
 </div>
 
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+push
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDHhxxXlcvBWtnPvhU9IqBTSl5zhN1YPOw",
+
+authDomain: "swadamrutambilling.firebaseapp.com",
+
+projectId: "swadamrutambilling",
+
+storageBucket: "swadamrutambilling.firebasestorage.app",
+
+messagingSenderId: "941390356397",
+
+appId: "1:941390356397:web:643a54c19cd1329724cb24",
+
+measurementId: "G-FHMXF1YBV8"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+window.db = db;
+window.ref = ref;
+window.push = push;
+
+</script>
+
 <script>
 
-/* =========================
-   LOGIN SYSTEM
-========================= */
+/* LOGIN */
 
 function login() {
 
@@ -482,8 +498,6 @@ document.getElementById('username').value;
 
 const password =
 document.getElementById('password').value;
-
-/* DEMO LOGIN */
 
 if (
 
@@ -519,9 +533,7 @@ alert('Invalid Login');
 
 }
 
-/* =========================
-   ITEMS
-========================= */
+/* ITEMS */
 
 const items = [
 
@@ -574,9 +586,7 @@ document.getElementById('total');
 
 let cart = [];
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 items.forEach((item,index)=>{
 
@@ -634,9 +644,7 @@ menu.appendChild(card);
 
 });
 
-/* =========================
-   ADD TO CART
-========================= */
+/* ADD TO CART */
 
 function addToCart(itemName,index){
 
@@ -665,9 +673,7 @@ renderCart();
 
 }
 
-/* =========================
-   CHANGE QTY
-========================= */
+/* CHANGE QTY */
 
 function changeQty(itemName,change,index){
 
@@ -689,9 +695,7 @@ renderCart();
 
 }
 
-/* =========================
-   UPDATE BUTTONS
-========================= */
+/* UPDATE BUTTONS */
 
 function updateControls(itemName,index){
 
@@ -777,9 +781,7 @@ cursor:pointer;
 
 }
 
-/* =========================
-   RENDER CART
-========================= */
+/* RENDER CART */
 
 function renderCart(){
 
@@ -837,9 +839,7 @@ totalElement.textContent = total;
 
 }
 
-/* =========================
-   PAYMENT
-========================= */
+/* PAYMENT */
 
 function payNow(){
 
@@ -873,6 +873,8 @@ total += item.price * item.qty;
 
 });
 
+saveSale("UPI");
+
 const upi =
 `upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad Amrutam&am=${total}&cu=INR`;
 
@@ -891,15 +893,15 @@ closePayment();
 
 function cashPayment(){
 
-alert('Cash Payment Selected');
+saveSale("Cash");
+
+alert('Cash Payment Successful');
 
 closePayment();
 
 }
 
-/* =========================
-   WHATSAPP BILL
-========================= */
+/* WHATSAPP BILL */
 
 function sendWhatsApp(){
 
@@ -942,6 +944,45 @@ total +
 window.open(
 `https://wa.me/91${number}?text=${message}`
 );
+
+}
+
+/* SAVE SALES */
+
+function saveSale(paymentMode){
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price * item.qty;
+
+});
+
+const salesRef =
+window.ref(window.db,'sales');
+
+window.push(salesRef,{
+
+date: new Date().toLocaleDateString(),
+
+time: new Date().toLocaleTimeString(),
+
+outlet: localStorage.getItem('username'),
+
+customerName:
+document.getElementById('customerName').value,
+
+customerNumber:
+document.getElementById('customerNumber').value,
+
+paymentMode: paymentMode,
+
+items: cart,
+
+total: total
+
+});
 
 }
 
