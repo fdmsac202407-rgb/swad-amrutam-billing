@@ -438,51 +438,11 @@ Close
 
 </div>
 
-<!-- FIREBASE -->
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getDatabase,
-ref,
-push
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyDHhxxXlcvBWtnPvhU9IqBTSl5zhN1YPOw",
-
-authDomain: "swadamrutambilling.firebaseapp.com",
-
-projectId: "swadamrutambilling",
-
-storageBucket: "swadamrutambilling.firebasestorage.app",
-
-messagingSenderId: "941390356397",
-
-appId: "1:941390356397:web:643a54c19cd1329724cb24",
-
-measurementId: "G-FHMXF1YBV8"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getDatabase(app);
-
-window.db = db;
-window.ref = ref;
-window.push = push;
-
-</script>
-
 <script>
 
 /* LOGIN */
 
-function login() {
+async function login() {
 
 const customerId =
 document.getElementById('customerId').value;
@@ -496,9 +456,7 @@ document.getElementById('password').value;
 if (
 
 customerId === '101' &&
-
 username === 'nikolmanager' &&
-
 password === '1234'
 
 ) {
@@ -513,21 +471,24 @@ localStorage.setItem(
 username
 );
 
+localStorage.setItem(
+'outlet',
+'Nikol'
+);
+
 document.getElementById('loginPage').style.display =
 'none';
 
 document.getElementById('billingPage').style.display =
 'block';
 
-return;
-
-}
+}else{
 
 alert('Invalid Login');
 
 }
 
-window.login = login;
+}
 
 /* ITEMS */
 
@@ -571,9 +532,14 @@ image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/21.-OREO-SHAKE.jp
 
 ];
 
-const menu = document.getElementById('menu');
-const cartItems = document.getElementById('cart-items');
-const totalElement = document.getElementById('total');
+const menu =
+document.getElementById('menu');
+
+const cartItems =
+document.getElementById('cart-items');
+
+const totalElement =
+document.getElementById('total');
 
 let cart = [];
 
@@ -581,7 +547,8 @@ let cart = [];
 
 items.forEach((item,index)=>{
 
-const card = document.createElement('div');
+const card =
+document.createElement('div');
 
 card.className = 'card';
 
@@ -636,9 +603,11 @@ menu.appendChild(card);
 
 function addToCart(itemName,index){
 
-const item = items.find(i=>i.name===itemName);
+const item =
+items.find(i=>i.name===itemName);
 
-const existing = cart.find(c=>c.name===item.name);
+const existing =
+cart.find(c=>c.name===item.name);
 
 if(existing){
 
@@ -659,19 +628,19 @@ renderCart();
 
 }
 
-window.addToCart = addToCart;
-
 /* CHANGE QTY */
 
 function changeQty(itemName,change,index){
 
-const item = cart.find(c=>c.name===itemName);
+const item =
+cart.find(c=>c.name===itemName);
 
 item.qty += change;
 
 if(item.qty <= 0){
 
-cart = cart.filter(c=>c.name!==itemName);
+cart =
+cart.filter(c=>c.name!==itemName);
 
 }
 
@@ -681,13 +650,12 @@ renderCart();
 
 }
 
-window.changeQty = changeQty;
-
 /* UPDATE BUTTONS */
 
 function updateControls(itemName,index){
 
-const cartItem = cart.find(c=>c.name===itemName);
+const cartItem =
+cart.find(c=>c.name===itemName);
 
 const controls =
 document.getElementById(`controls-${index}`);
@@ -695,6 +663,7 @@ document.getElementById(`controls-${index}`);
 if(!cartItem){
 
 controls.innerHTML = `
+
 <button onclick="addToCart('${itemName}',${index})"
 style="
 width:100%;
@@ -709,6 +678,7 @@ cursor:pointer;
 ">
 Add
 </button>
+
 `;
 
 return;
@@ -778,7 +748,8 @@ cart.forEach(item=>{
 
 total += item.price * item.qty;
 
-const div = document.createElement('div');
+const div =
+document.createElement('div');
 
 div.style.background = '#2a2a2a';
 div.style.padding = '15px';
@@ -839,8 +810,6 @@ document.getElementById('paymentOptions').style.display =
 
 }
 
-window.payNow = payNow;
-
 function closePayment(){
 
 document.getElementById('paymentOptions').style.display =
@@ -848,28 +817,30 @@ document.getElementById('paymentOptions').style.display =
 
 }
 
-window.closePayment = closePayment;
-
-/* SAVE SALES */
+/* SAVE SALE */
 
 function saveSale(paymentMode){
 
 let total = 0;
 
+let itemList = '';
+
 cart.forEach(item=>{
+
 total += item.price * item.qty;
+
+itemList +=
+item.name +
+' x ' +
+item.qty +
+', ';
+
 });
 
-const salesRef =
-window.ref(window.db,'sales');
+const data = {
 
-window.push(salesRef,{
-
-date: new Date().toLocaleDateString(),
-
-time: new Date().toLocaleTimeString(),
-
-outlet: localStorage.getItem('username'),
+outlet:
+localStorage.getItem('outlet'),
 
 customerName:
 document.getElementById('customerName').value,
@@ -877,11 +848,40 @@ document.getElementById('customerName').value,
 customerNumber:
 document.getElementById('customerNumber').value,
 
-paymentMode: paymentMode,
+items:
+itemList,
 
-items: cart,
+paymentMode:
+paymentMode,
 
-total: total
+total:
+total
+
+};
+
+fetch(
+'https://script.google.com/macros/s/AKfycbz2_cBufWmnUWyCkMy62MEhJ8K0kkF3K07Q1Z9QXtyxNuJj4d_NB0Gv7sZHTvPOm2Rz/exec',
+{
+
+method:'POST',
+
+body: JSON.stringify(data)
+
+}
+
+)
+
+.then(res=>res.json())
+
+.then(response=>{
+
+console.log(response);
+
+})
+
+.catch(error=>{
+
+console.log(error);
 
 });
 
@@ -893,18 +893,16 @@ function saveOnlyBill(){
 
 if(cart.length===0){
 
-alert('Cart is Empty');
+alert('Cart Empty');
 return;
 
 }
 
 saveSale("Saved");
 
-alert('Bill Saved Successfully');
+alert('Bill Saved');
 
 }
-
-window.saveOnlyBill = saveOnlyBill;
 
 /* PAY UPI */
 
@@ -925,8 +923,6 @@ window.location.href = upi;
 
 }
 
-window.payUPI = payUPI;
-
 /* QR */
 
 function showQR(){
@@ -940,30 +936,33 @@ closePayment();
 
 }
 
-window.showQR = showQR;
-
 /* CASH */
 
 function cashPayment(){
 
 saveSale("Cash");
 
-alert('Cash Payment Successful');
+alert('Cash Payment Saved');
 
 closePayment();
 
 }
 
-window.cashPayment = cashPayment;
-
 /* WHATSAPP */
 
 function sendWhatsApp(){
 
-saveSale("WhatsApp");
-
 const number =
 document.getElementById('customerNumber').value;
+
+if(!number){
+
+alert('Enter Customer Number');
+return;
+
+}
+
+saveSale("WhatsApp");
 
 let total = 0;
 
@@ -990,21 +989,11 @@ message +=
 total +
 '*%0A%0A🙏 Thank You';
 
-if(number){
-
 window.open(
 `https://wa.me/91${number}?text=${message}`
 );
 
-}else{
-
-alert('Bill Saved Successfully');
-
 }
-
-}
-
-window.sendWhatsApp = sendWhatsApp;
 
 </script>
 
