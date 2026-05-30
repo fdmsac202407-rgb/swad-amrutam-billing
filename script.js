@@ -1,9 +1,22 @@
 /* =========================
-   GOOGLE SHEET URL
+   LOGIN USERS
 ========================= */
 
-const scriptURL =
-"https://script.google.com/macros/s/AKfycbxTcsv84_fCcPTZNqvj_-TQfKNx2rdmbPHcolJx2NfjmPnCpSNkKi_SZ-sOh8TYxGww/exec";
+const users = [
+
+{
+customerId:"101",
+username:"nikolmanager",
+password:"1234"
+},
+
+{
+customerId:"2612",
+username:"ankitsinh",
+password:"2612"
+}
+
+];
 
 /* =========================
    LOGIN
@@ -20,31 +33,14 @@ document.getElementById("username").value;
 const password =
 document.getElementById("password").value;
 
-if(
+const user =
+users.find(u =>
+u.customerId === customerId &&
+u.username === username &&
+u.password === password
+);
 
-(customerId=="101" &&
-username=="nikolmanager" &&
-password=="1234")
-
-||
-
-(customerId=="2612" &&
-username=="ankitsinh" &&
-password=="2612")
-
-||
-
-(customerId=="102" &&
-username=="vastralmanager" &&
-password=="1234")
-
-||
-
-(customerId=="103" &&
-username=="maninagarmanager" &&
-password=="1234")
-
-){
+if(user){
 
 localStorage.setItem(
 "outlet",
@@ -57,6 +53,8 @@ document.getElementById("loginPage")
 document.getElementById("billingPage")
 .style.display = "block";
 
+showCategory("Tea Products");
+
 }else{
 
 alert("Invalid Login");
@@ -68,12 +66,28 @@ alert("Invalid Login");
 window.login = login;
 
 /* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+localStorage.clear();
+
+document.getElementById("billingPage")
+.style.display = "none";
+
+document.getElementById("loginPage")
+.style.display = "flex";
+
+}
+
+window.logout = logout;
+
+/* =========================
    ITEMS
 ========================= */
 
 const items = [
-
-/* TEA */
 
 {
 name:"Amrutam Special Tea",
@@ -81,8 +95,7 @@ category:"Tea Products",
 variations:[
 {type:"Regular",price:10},
 {type:"Kullad",price:20}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/1.-AMRUTAM-S.P-TEA-scaled-1.jpg"
+]
 },
 
 {
@@ -91,8 +104,16 @@ category:"Tea Products",
 variations:[
 {type:"Regular",price:20},
 {type:"Kullad",price:25}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/7.-MASALA-MILK-scaled-1-2048x1414.jpg"
+]
+},
+
+{
+name:"Adrak Pudina Tea",
+category:"Tea Products",
+variations:[
+{type:"Regular",price:20},
+{type:"Kullad",price:25}
+]
 },
 
 {
@@ -101,8 +122,7 @@ category:"Tea Products",
 variations:[
 {type:"Regular",price:20},
 {type:"Kullad",price:25}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/2.-GENGER-TEA.jpg"
+]
 },
 
 {
@@ -111,268 +131,167 @@ category:"Tea Products",
 variations:[
 {type:"Regular",price:20},
 {type:"Kullad",price:25}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/2.-GENGER-TEA.jpg"
+]
 },
 
-/* HOT */
-
 {
-name:"Coffee",
-category:"Hot Products",
+name:"Elaichi Tea",
+category:"Tea Products",
 variations:[
 {type:"Regular",price:20},
 {type:"Kullad",price:25}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/8.-COFFE-scaled-1.jpg"
+]
 },
 
 {
-name:"Bournvita",
-category:"Hot Products",
+name:"Chocolate Tea",
+category:"Tea Products",
 variations:[
 {type:"Regular",price:20},
 {type:"Kullad",price:25}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/8.-COFFE-scaled-1.jpg"
-},
-
-/* COLD */
-
-{
-name:"Nimboo Pani",
-category:"Cold Products",
-price:20,
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/14.-COLD-COFFEE-scaled-1.jpg"
+]
 },
 
 {
-name:"Lemon Ice Tea",
-category:"Cold Products",
-price:40,
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/14.-COLD-COFFEE-scaled-1.jpg"
-},
-
-/* SHAKES */
-
-{
-name:"Cold Coffee",
-category:"Shakes",
+name:"Lemon Tea",
+category:"Tea Products",
 variations:[
-{type:"Small",price:29},
-{type:"Large",price:59}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/14.-COLD-COFFEE-scaled-1.jpg"
+{type:"Regular",price:20},
+{type:"Kullad",price:25}
+]
 },
 
 {
-name:"Oreo Milkshake",
-category:"Shakes",
+name:"Gud Tea",
+category:"Tea Products",
 variations:[
-{type:"Small",price:44},
-{type:"Large",price:89}
-],
-image:"https://swadamrutamchai.com/wp-content/uploads/2025/10/21.-OREO-SHAKE.jpg"
+{type:"Regular",price:20},
+{type:"Kullad",price:25}
+]
+},
+
+{
+name:"Sugar Free Tea",
+category:"Tea Products",
+variations:[
+{type:"Regular",price:20},
+{type:"Kullad",price:25}
+]
 }
 
 ];
 
 /* =========================
-   HTML ELEMENTS
+   CART
 ========================= */
-
-const menu =
-document.getElementById("menu");
-
-const cartItems =
-document.getElementById("cart-items");
-
-const totalElement =
-document.getElementById("total");
 
 let cart = [];
 
-/* =========================
-   CATEGORY BUTTONS
-========================= */
-
-const categories =
-[...new Set(items.map(item=>item.category))];
-
-categories.forEach(category=>{
-
-const button =
-document.createElement("button");
-
-button.innerHTML = category;
-
-button.style.padding = "15px";
-button.style.margin = "10px";
-button.style.border = "none";
-button.style.borderRadius = "10px";
-button.style.background = "#00c853";
-button.style.color = "white";
-button.style.fontSize = "20px";
-button.style.cursor = "pointer";
-
-button.onclick = ()=>{
-
-showCategory(category);
-
-};
-
-menu.appendChild(button);
-
-});
+let selectedItem = null;
 
 /* =========================
-   SHOW CATEGORY ITEMS
+   SHOW CATEGORY
 ========================= */
 
 function showCategory(category){
 
-menu.innerHTML = "";
+const productGrid =
+document.getElementById("productGrid");
 
-const backBtn =
-document.createElement("button");
-
-backBtn.innerHTML = "⬅ Back";
-
-backBtn.style.padding = "12px";
-backBtn.style.marginBottom = "20px";
-backBtn.style.background = "red";
-backBtn.style.color = "white";
-backBtn.style.border = "none";
-backBtn.style.borderRadius = "10px";
-
-backBtn.onclick = ()=>{
-
-menu.innerHTML = "";
-
-loadCategories();
-
-};
-
-menu.appendChild(backBtn);
+productGrid.innerHTML = "";
 
 items
-.filter(item=>item.category===category)
-.forEach((item,index)=>{
+.filter(item => item.category === category)
+.forEach(item=>{
 
 const card =
 document.createElement("div");
 
 card.className = "card";
 
-let priceText = "";
-
-if(item.variations){
-
-priceText =
-"From ₹" + item.variations[0].price;
-
-}else{
-
-priceText =
-"₹" + item.price;
-
-}
-
 card.innerHTML = `
-
-<img src="${item.image}">
-
 <h3>${item.name}</h3>
-
-<div class="price">
-${priceText}
-</div>
-
-<button class="addBtn"
-onclick="selectItem(${index})">
-
-Select
-
-</button>
-
+<p>From ₹${item.variations[0].price}</p>
 `;
 
-menu.appendChild(card);
+card.onclick = ()=>{
+
+openSizePopup(item);
+
+};
+
+productGrid.appendChild(card);
 
 });
 
 }
 
+window.showCategory = showCategory;
+
 /* =========================
-   SELECT ITEM
+   SIZE POPUP
 ========================= */
 
-function selectItem(index){
+function openSizePopup(item){
 
-const item = items[index];
+selectedItem = item;
 
-if(item.variations){
+document.getElementById("sizePopup")
+.style.display = "flex";
 
-let options = "";
+const sizeOptions =
+document.getElementById("sizeOptions");
+
+sizeOptions.innerHTML = "";
 
 item.variations.forEach(v=>{
 
-options +=
-`${v.type} - ₹${v.price}\n`;
+sizeOptions.innerHTML += `
+<button
+class="popupBtn"
+style="background:#00c853"
+onclick="addToCart(
+'${item.name}',
+'${v.type}',
+${v.price}
+)">
+${v.type} - ₹${v.price}
+</button>
+`;
 
 });
 
-const selected =
-prompt(
-`Select Option:\n\n${options}\nType exact option name`
-);
+}
 
-const variation =
-item.variations.find(
-v=>v.type.toLowerCase() ===
-selected.toLowerCase()
-);
+function closeSizePopup(){
 
-if(!variation){
-
-alert("Invalid Option");
-return;
+document.getElementById("sizePopup")
+.style.display = "none";
 
 }
 
-addToCart(
-item.name,
-variation.type,
-variation.price
-);
-
-}else{
-
-addToCart(
-item.name,
-"",
-item.price
-);
-
-}
-
-}
+window.closeSizePopup =
+closeSizePopup;
 
 /* =========================
    ADD TO CART
 ========================= */
 
-function addToCart(name,type,price){
+function addToCart(
+name,
+type,
+price
+){
 
 const existing =
-cart.find(c=>
-c.name===name &&
-c.type===type
+cart.find(c =>
+c.name === name &&
+c.type === type
 );
 
 if(existing){
 
-existing.qty += 1;
+existing.qty++;
 
 }else{
 
@@ -385,74 +304,13 @@ qty:1
 
 }
 
+closeSizePopup();
+
 renderCart();
 
 }
 
-/* =========================
-   RENDER CART
-========================= */
-
-function renderCart(){
-
-cartItems.innerHTML = "";
-
-let total = 0;
-
-cart.forEach((item,index)=>{
-
-total += item.price * item.qty;
-
-const div =
-document.createElement("div");
-
-div.className = "cartItem";
-
-div.innerHTML = `
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
-
-<div>
-
-<b>${item.name}</b>
-
-<br>
-
-${item.type}
-
-<br>
-
-₹${item.price} × ${item.qty}
-
-</div>
-
-<div>
-
-<button onclick="changeQty(${index},-1)">
--</button>
-
-${item.qty}
-
-<button onclick="changeQty(${index},1)">
-+</button>
-
-</div>
-
-</div>
-
-`;
-
-cartItems.appendChild(div);
-
-});
-
-totalElement.innerText = total;
-
-}
+window.addToCart = addToCart;
 
 /* =========================
    CHANGE QTY
@@ -475,86 +333,63 @@ renderCart();
 window.changeQty = changeQty;
 
 /* =========================
-   SAVE DATA
+   RENDER CART
 ========================= */
 
-function saveData(paymentMode){
+function renderCart(){
+
+const cartItems =
+document.getElementById("cartItems");
+
+const totalEl =
+document.getElementById("total");
+
+cartItems.innerHTML = "";
 
 let total = 0;
 
-let itemNames = "";
+cart.forEach((item,index)=>{
 
-cart.forEach(item=>{
+total +=
+item.price * item.qty;
 
-total += item.price * item.qty;
+cartItems.innerHTML += `
 
-itemNames +=
-item.name +
-" " +
-item.type +
-" x " +
-item.qty +
-", ";
+<div class="cartItem">
+
+<b>${item.name}</b>
+
+<br>
+
+${item.type}
+
+<br><br>
+
+<button
+onclick="changeQty(${index},-1)">
+-
+</button>
+
+${item.qty}
+
+<button
+onclick="changeQty(${index},1)">
++
+</button>
+
+&nbsp;&nbsp;
+
+₹${item.price * item.qty}
+
+</div>
+
+`;
 
 });
 
-const data = {
-
-billNo:"BILL"+Date.now(),
-
-outlet:
-localStorage.getItem("outlet"),
-
-date:
-new Date().toLocaleDateString(),
-
-time:
-new Date().toLocaleTimeString(),
-
-customerName:
-document.getElementById("customerName").value,
-
-customerId:
-document.getElementById("customerId").value,
-
-items:itemNames,
-
-total:total,
-
-payment:paymentMode,
-
-customerNumber:
-document.getElementById("customerNumber").value
-
-};
-
-fetch(scriptURL,{
-method:"POST",
-body:JSON.stringify(data)
-});
+totalEl.innerText = total;
 
 }
-
-/* =========================
-   SAVE BILL
-========================= */
-
-function saveBill(){
-
-if(cart.length===0){
-
-alert("Cart Empty");
-return;
-
-}
-
-saveData("Saved");
-
-alert("Bill Saved");
-
-}
-
-window.saveBill = saveBill;
 
 /* =========================
    PAYMENT
@@ -581,23 +416,24 @@ window.closePaymentPopup =
 closePaymentPopup;
 
 /* =========================
+   SAVE BILL
+========================= */
+
+function saveBill(){
+
+alert("Bill Saved");
+
+}
+
+window.saveBill = saveBill;
+
+/* =========================
    UPI
 ========================= */
 
 function payUPI(){
 
-saveData("UPI");
-
-let total = 0;
-
-cart.forEach(item=>{
-
-total += item.price * item.qty;
-
-});
-
-window.location.href =
-`upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad%20Amrutam&am=${total}&cu=INR`;
+alert("UPI Payment");
 
 }
 
@@ -609,10 +445,7 @@ window.payUPI = payUPI;
 
 function showQR(){
 
-document.getElementById("qrImage")
-.style.display = "block";
-
-saveData("QR");
+alert("QR Payment");
 
 }
 
@@ -624,9 +457,7 @@ window.showQR = showQR;
 
 function cashPayment(){
 
-saveData("Cash");
-
-alert("Cash Payment Success");
+alert("Cash Payment");
 
 }
 
@@ -639,33 +470,7 @@ cashPayment;
 
 function sendWhatsApp(){
 
-let total = 0;
-
-let message =
-"🧾 *SWAD AMRUTAM*%0A%0A";
-
-cart.forEach(item=>{
-
-message +=
-`${item.name} ${item.type}
-x ${item.qty}
-= ₹${item.price * item.qty}%0A`;
-
-total +=
-item.price * item.qty;
-
-});
-
-message +=
-`%0A💰 Total: ₹${total}`;
-
-const number =
-document.getElementById("customerNumber")
-.value;
-
-window.open(
-`https://wa.me/91${number}?text=${message}`
-);
+alert("WhatsApp Bill");
 
 }
 
