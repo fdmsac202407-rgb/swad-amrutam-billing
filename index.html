@@ -26,120 +26,82 @@ color:white;
 /* LOGIN PAGE */
 
 #loginPage{
-
 height:100vh;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 padding:20px;
-
-background:
-linear-gradient(
-135deg,
-#0f2027,
-#203a43,
-#2c5364
-);
-
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 }
 
 .loginBox{
-
 width:100%;
 max-width:380px;
-
 background:rgba(255,255,255,0.08);
-
-backdrop-filter:blur(20px);
-
 padding:35px;
-
 border-radius:25px;
-
-box-shadow:
-0 0 30px rgba(0,0,0,0.4);
-
-border:
-1px solid rgba(255,255,255,0.1);
-
+backdrop-filter:blur(15px);
 }
 
 .logo{
 text-align:center;
-margin-bottom:15px;
+margin-bottom:20px;
 }
 
 .logo img{
 width:140px;
-height:140px;
-object-fit:contain;
 }
 
 .loginTitle{
 text-align:center;
-font-size:32px;
+font-size:30px;
 font-weight:bold;
+margin-bottom:5px;
 }
 
 .subTitle{
 text-align:center;
-color:#cccccc;
-margin-top:5px;
-margin-bottom:25px;
+color:#ccc;
+margin-bottom:20px;
 }
 
 .loginBox input{
-
 width:100%;
-
-padding:15px;
-
-margin-top:15px;
-
+padding:14px;
+margin-top:14px;
 border:none;
-outline:none;
-
-border-radius:14px;
-
-background:rgba(255,255,255,0.1);
-
-color:white;
-
+border-radius:12px;
 font-size:16px;
-
+outline:none;
 }
 
 .loginBtn{
-
 width:100%;
-
-padding:15px;
-
-margin-top:25px;
-
+padding:14px;
+margin-top:20px;
 border:none;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-90deg,
-#00c853,
-#00e676
-);
-
+border-radius:12px;
+background:#00c853;
 color:white;
-
 font-size:18px;
-font-weight:bold;
-
 cursor:pointer;
-
+font-weight:bold;
 }
 
 /* BILLING PAGE */
+
+<button onclick="logout()"
+style="
+background:red;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+margin-bottom:15px;
+cursor:pointer;
+">
+Logout
+</button>
 
 #billingPage{
 display:none;
@@ -148,8 +110,8 @@ padding:15px;
 
 .mainTitle{
 text-align:center;
+font-size:34px;
 margin-bottom:20px;
-font-size:32px;
 }
 
 .menu{
@@ -161,20 +123,83 @@ gap:15px;
 .card{
 background:#1f1f1f;
 padding:15px;
-border-radius:15px;
+border-radius:18px;
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.card h3{
+margin-top:12px;
+}
+
+.price{
+font-size:24px;
+color:#00e676;
+margin-top:10px;
+font-weight:bold;
+}
+
+.addBtn{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+background:black;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.qtyBox{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+margin-top:12px;
+}
+
+.qtyBtn{
+width:40px;
+height:40px;
+border:none;
+border-radius:50%;
+font-size:22px;
+color:white;
+cursor:pointer;
+}
+
+.minus{
+background:red;
+}
+
+.plus{
+background:green;
 }
 
 .cart{
 background:#1f1f1f;
 margin-top:20px;
 padding:20px;
-border-radius:15px;
+border-radius:18px;
+}
+
+.cartItem{
+background:#2a2a2a;
+padding:15px;
+border-radius:12px;
+margin-top:10px;
 }
 
 .cart input{
 width:100%;
-padding:12px;
-margin-top:10px;
+padding:14px;
+margin-top:12px;
 border:none;
 border-radius:10px;
 font-size:16px;
@@ -191,54 +216,43 @@ cursor:pointer;
 color:white;
 }
 
-.payBtn{
-background:#00c853;
+.saveBtn{
+background:#2196f3;
+}
+
+.paymentBtn{
+background:#ff9800;
 }
 
 .whatsappBtn{
 background:#25D366;
 }
 
-.saveBtn{
-background:#2196f3;
-}
-
 /* PAYMENT POPUP */
 
-#paymentOptions{
-
+.paymentPopup{
 display:none;
-
 position:fixed;
 top:0;
 left:0;
-
 width:100%;
 height:100%;
-
-background:rgba(0,0,0,0.8);
-
+background:rgba(0,0,0,0.7);
 justify-content:center;
 align-items:center;
-
 z-index:999;
-
 }
 
-.paymentBox{
-
+.popupBox{
 background:#1f1f1f;
-
 padding:25px;
-
 border-radius:20px;
-
 width:90%;
 max-width:350px;
-
+text-align:center;
 }
 
-.paymentBox button{
+.popupBox button{
 width:100%;
 padding:14px;
 margin-top:12px;
@@ -247,6 +261,7 @@ border-radius:10px;
 font-size:18px;
 cursor:pointer;
 color:white;
+font-weight:bold;
 }
 
 .upiBtn{
@@ -254,26 +269,28 @@ background:#00c853;
 }
 
 .qrBtn{
-background:#ff9800;
+background:#9c27b0;
 }
 
 .cashBtn{
-background:#2196f3;
+background:#f44336;
 }
 
 .closeBtn{
-background:red;
+background:#555;
 }
 
-#qrBox{
+.qrImage{
 display:none;
 text-align:center;
 margin-top:20px;
 }
 
-#qrBox img{
-width:220px;
-border-radius:20px;
+.qrImage img{
+width:250px;
+background:white;
+padding:10px;
+border-radius:15px;
 }
 
 </style>
@@ -281,8 +298,6 @@ border-radius:20px;
 </head>
 
 <body>
-
-<!-- LOGIN PAGE -->
 
 <div id="loginPage">
 
@@ -302,36 +317,30 @@ SWAD AMRUTAM CHAI
 Central Billing System
 </div>
 
-<input
-type="number"
+<input type="number"
 id="customerId"
-placeholder="Enter Customer ID"
->
+placeholder="Customer ID">
 
-<input
-type="text"
+<input type="text"
 id="username"
-placeholder="Enter Username"
->
+placeholder="Username">
 
-<input
-type="password"
+<input type="password"
 id="password"
-placeholder="Enter Password"
->
+placeholder="Password">
 
 <button
+type="button"
 class="loginBtn"
-onclick="login()"
->
+onclick="login()">
+
 LOGIN
+
 </button>
 
 </div>
 
 </div>
-
-<!-- BILLING PAGE -->
 
 <div id="billingPage">
 
@@ -347,656 +356,94 @@ LOGIN
 
 <div id="cart-items"></div>
 
-<h2>
+<h2 style="margin-top:20px;">
 Total: ₹<span id="total">0</span>
 </h2>
 
-<input
-type="text"
+<input type="text"
 id="customerName"
-placeholder="Customer Name"
->
+placeholder="Customer Name">
 
-<input
-type="number"
+<input type="number"
 id="customerNumber"
-placeholder="Customer WhatsApp Number (Optional)"
->
+placeholder="WhatsApp Number">
 
-<button
-class="payBtn"
-onclick="payNow()"
->
-Pay Now
-</button>
+<button class="saveBtn"
+onclick="saveBill('Saved')">
 
-<button
-class="saveBtn"
-onclick="saveOnlyBill()"
->
 Save Bill
+
 </button>
 
-<button
-class="whatsappBtn"
-onclick="sendWhatsApp()"
->
+<button class="paymentBtn"
+onclick="openPaymentPopup()">
+
+Payment Mode
+
+</button>
+
+<button class="whatsappBtn"
+onclick="sendWhatsApp()">
+
 Send WhatsApp Bill
+
 </button>
 
-<div id="qrBox">
+<div class="qrImage"
+id="qrImage">
 
-<h3 style="margin-bottom:15px;">
-Scan QR To Pay
-</h3>
-
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=rajput.ankit101-3@okicici">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PAYMENT OPTIONS -->
-
-<div id="paymentOptions">
-
-<div class="paymentBox">
-
-<h2>Select Payment</h2>
-
-<button
-class="upiBtn"
-onclick="payUPI()"
->
-UPI Payment
-</button>
-
-<button
-class="qrBtn"
-onclick="showQR()"
->
-QR Payment
-</button>
-
-<button
-class="cashBtn"
-onclick="cashPayment()"
->
-Cash Payment
-</button>
-
-<button
-class="closeBtn"
-onclick="closePayment()"
->
-Close
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-/* LOGIN */
-
-async function login() {
-
-const customerId =
-document.getElementById('customerId').value;
-
-const username =
-document.getElementById('username').value;
-
-const password =
-document.getElementById('password').value;
-
-if (
-
-customerId === '101' &&
-username === 'nikolmanager' &&
-password === '1234'
-
-) {
-
-localStorage.setItem(
-'customerId',
-customerId
-);
-
-localStorage.setItem(
-'username',
-username
-);
-
-localStorage.setItem(
-'outlet',
-'Nikol'
-);
-
-document.getElementById('loginPage').style.display =
-'none';
-
-document.getElementById('billingPage').style.display =
-'block';
-
-}else{
-
-alert('Invalid Login');
-
-}
-
-}
-
-/* ITEMS */
-
-const items = [
-
-{
-name: "Amrutam Special Tea",
-price: 10,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/1.-AMRUTAM-S.P-TEA-scaled-1.jpg"
-},
-
-{
-name: "Masala Tea",
-price: 20,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/7.-MASALA-MILK-scaled-1-2048x1414.jpg"
-},
-
-{
-name: "Adrak Tea",
-price: 20,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/2.-GENGER-TEA.jpg"
-},
-
-{
-name: "Coffee",
-price: 20,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/8.-COFFE-scaled-1.jpg"
-},
-
-{
-name: "Cold Coffee",
-price: 29,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/14.-COLD-COFFEE-scaled-1.jpg"
-},
-
-{
-name: "Oreo Milkshake",
-price: 89,
-image: "https://swadamrutamchai.com/wp-content/uploads/2025/10/21.-OREO-SHAKE.jpg"
-}
-
-];
-
-const menu =
-document.getElementById('menu');
-
-const cartItems =
-document.getElementById('cart-items');
-
-const totalElement =
-document.getElementById('total');
-
-let cart = [];
-
-/* MENU */
-
-items.forEach((item,index)=>{
-
-const card =
-document.createElement('div');
-
-card.className = 'card';
-
-card.innerHTML = `
-
-<img src="${item.image}" style="
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:12px;
-">
-
-<h3 style="margin-top:15px;">
-${item.name}
-</h3>
-
-<p style="
-font-size:22px;
-color:#00e676;
-margin-top:10px;
-font-weight:bold;
-">
-₹${item.price}
-</p>
-
-<div id="controls-${index}">
-
-<button onclick="addToCart('${item.name}',${index})"
-style="
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-background:black;
-color:white;
-font-size:18px;
-margin-top:10px;
-cursor:pointer;
-">
-Add
-</button>
-
-</div>
-
-`;
-
-menu.appendChild(card);
-
-});
-
-/* ADD TO CART */
-
-function addToCart(itemName,index){
-
-const item =
-items.find(i=>i.name===itemName);
-
-const existing =
-cart.find(c=>c.name===item.name);
-
-if(existing){
-
-existing.qty += 1;
-
-}else{
-
-cart.push({
-...item,
-qty:1
-});
-
-}
-
-updateControls(itemName,index);
-
-renderCart();
-
-}
-
-/* CHANGE QTY */
-
-function changeQty(itemName,change,index){
-
-const item =
-cart.find(c=>c.name===itemName);
-
-item.qty += change;
-
-if(item.qty <= 0){
-
-cart =
-cart.filter(c=>c.name!==itemName);
-
-}
-
-updateControls(itemName,index);
-
-renderCart();
-
-}
-
-/* UPDATE BUTTONS */
-
-function updateControls(itemName,index){
-
-const cartItem =
-cart.find(c=>c.name===itemName);
-
-const controls =
-document.getElementById(`controls-${index}`);
-
-if(!cartItem){
-
-controls.innerHTML = `
-
-<button onclick="addToCart('${itemName}',${index})"
-style="
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-background:black;
-color:white;
-font-size:18px;
-margin-top:10px;
-cursor:pointer;
-">
-Add
-</button>
-
-`;
-
-return;
-
-}
-
-controls.innerHTML = `
-
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-gap:15px;
-margin-top:10px;
-">
-
-<button onclick="changeQty('${itemName}',-1,${index})"
-style="
-width:40px;
-height:40px;
-border:none;
-border-radius:50%;
-background:red;
-color:white;
-font-size:22px;
-cursor:pointer;
-">
--
-</button>
-
-<span style="
-font-size:22px;
-font-weight:bold;
-">
-${cartItem.qty}
-</span>
-
-<button onclick="changeQty('${itemName}',1,${index})"
-style="
-width:40px;
-height:40px;
-border:none;
-border-radius:50%;
-background:green;
-color:white;
-font-size:22px;
-cursor:pointer;
-">
-+
-</button>
-
-</div>
-
-`;
-
-}
-
-/* RENDER CART */
-
-function renderCart(){
-
-cartItems.innerHTML = '';
-
-let total = 0;
-
-cart.forEach(item=>{
-
-total += item.price * item.qty;
-
-const div =
-document.createElement('div');
-
-div.style.background = '#2a2a2a';
-div.style.padding = '15px';
-div.style.borderRadius = '12px';
-div.style.marginTop = '10px';
-
-div.innerHTML = `
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
-
-<div>
-
-<b>${item.name}</b>
+<h2>Scan QR To Pay</h2>
 
 <br>
 
-₹${item.price} x ${item.qty}
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad%20Amrutam">
 
 </div>
 
-<div style="
-font-size:20px;
-font-weight:bold;
-color:#00e676;
-">
-₹${item.price * item.qty}
 </div>
 
 </div>
 
-`;
+<div class="paymentPopup"
+id="paymentPopup">
 
-cartItems.appendChild(div);
+<div class="popupBox">
 
-});
+<h2>Select Payment Mode</h2>
 
-totalElement.textContent = total;
+<button class="upiBtn"
+onclick="payUPI()">
 
-}
+UPI Payment
 
-/* PAYMENT */
+</button>
 
-function payNow(){
+<button class="qrBtn"
+onclick="showQR()">
 
-if(cart.length===0){
+QR Payment
 
-alert('Cart is Empty');
-return;
+</button>
 
-}
+<button class="cashBtn"
+onclick="cashPayment()">
 
-document.getElementById('paymentOptions').style.display =
-'flex';
+Cash Payment
 
-}
+</button>
 
-function closePayment(){
+<button class="closeBtn"
+onclick="closePaymentPopup()">
 
-document.getElementById('paymentOptions').style.display =
-'none';
+Close
 
-}
+</button>
 
-/* SAVE SALE */
+</div>
 
-function saveSale(paymentMode){
+</div>
 
-let total = 0;
-
-let itemList = '';
-
-cart.forEach(item=>{
-
-total += item.price * item.qty;
-
-itemList +=
-item.name +
-' x ' +
-item.qty +
-', ';
-
-});
-
-const data = {
-
-outlet:
-localStorage.getItem('outlet'),
-
-customerName:
-document.getElementById('customerName').value,
-
-customerNumber:
-document.getElementById('customerNumber').value,
-
-items:
-itemList,
-
-paymentMode:
-paymentMode,
-
-total:
-total
-
-};
-
-fetch(
-'https://script.google.com/macros/s/AKfycbz2_cBufWmnUWyCkMy62MEhJ8K0kkF3K07Q1Z9QXtyxNuJj4d_NB0Gv7sZHTvPOm2Rz/exec',
-{
-
-method:'POST',
-
-body: JSON.stringify(data)
-
-}
-
-)
-
-.then(res=>res.json())
-
-.then(response=>{
-
-console.log(response);
-
-})
-
-.catch(error=>{
-
-console.log(error);
-
-});
-
-}
-
-/* SAVE BILL */
-
-function saveOnlyBill(){
-
-if(cart.length===0){
-
-alert('Cart Empty');
-return;
-
-}
-
-saveSale("Saved");
-
-alert('Bill Saved');
-
-}
-
-/* PAY UPI */
-
-function payUPI(){
-
-let total = 0;
-
-cart.forEach(item=>{
-total += item.price * item.qty;
-});
-
-saveSale("UPI");
-
-const upi =
-`upi://pay?pa=rajput.ankit101-3@okicici&pn=Swad Amrutam&am=${total}&cu=INR`;
-
-window.location.href = upi;
-
-}
-
-/* QR */
-
-function showQR(){
-
-saveSale("QR");
-
-document.getElementById('qrBox').style.display =
-'block';
-
-closePayment();
-
-}
-
-/* CASH */
-
-function cashPayment(){
-
-saveSale("Cash");
-
-alert('Cash Payment Saved');
-
-closePayment();
-
-}
-
-/* WHATSAPP */
-
-function sendWhatsApp(){
-
-const number =
-document.getElementById('customerNumber').value;
-
-if(!number){
-
-alert('Enter Customer Number');
-return;
-
-}
-
-saveSale("WhatsApp");
-
-let total = 0;
-
-let message =
-'🧾 *SWAD AMRUTAM* %0A%0A';
-
-cart.forEach(item=>{
-
-message +=
-'☕ ' +
-item.name +
-' x ' +
-item.qty +
-' = ₹' +
-(item.price * item.qty) +
-'%0A';
-
-total += item.price * item.qty;
-
-});
-
-message +=
-'%0A💰 *Total: ₹' +
-total +
-'*%0A%0A🙏 Thank You';
-
-window.open(
-`https://wa.me/91${number}?text=${message}`
-);
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
-
 </html>
