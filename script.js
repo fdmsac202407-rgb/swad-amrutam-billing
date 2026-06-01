@@ -1,26 +1,24 @@
-/* =========================
-   LOGIN USERS
-========================= */
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwg8DYeMJgiw6bwsXLsB0Ia8VLuNQpHwDjyYcCxciXkRlvv22OBy4Uj-zzipaaKvVBc/exec";
+
+let items = [];
+let cart = [];
+let paymentMode = "Cash";
+
+/* LOGIN */
 
 const users = [
-
 {
 customerId:"101",
 username:"nikolmanager",
 password:"1234"
 },
-
 {
 customerId:"2612",
 username:"ankitsinh",
 password:"2612"
 }
-
 ];
-
-/* =========================
-   LOGIN
-========================= */
 
 function login(){
 
@@ -42,211 +40,145 @@ u.password === password
 
 if(user){
 
-localStorage.setItem(
-"outlet",
-username
-);
+localStorage.setItem("outlet",username);
 
-document.getElementById("loginPage")
-.style.display = "none";
+document.getElementById("loginPage").style.display="none";
+document.getElementById("billingPage").style.display="block";
 
-document.getElementById("billingPage")
-.style.display = "block";
-
-showCategory("Tea Products");
+loadMenu();
 
 }else{
-
 alert("Invalid Login");
-
 }
 
 }
 
 window.login = login;
 
-/* =========================
-   LOGOUT
-========================= */
-
 function logout(){
 
 localStorage.clear();
-
-document.getElementById("billingPage")
-.style.display = "none";
-
-document.getElementById("loginPage")
-.style.display = "flex";
+location.reload();
 
 }
 
 window.logout = logout;
 
-/* =========================
-   ITEMS
-========================= */
+/* LOAD MENU */
 
-const items = [
+async function loadMenu(){
 
-{
-name:"Amrutam Special Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:10},
-{type:"Kullad",price:20}
-]
-},
+const res = await fetch(API_URL);
+const data = await res.json();
 
-{
-name:"Masala Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+const grouped = {};
 
-{
-name:"Adrak Pudina Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+data.forEach(row=>{
 
-{
-name:"Adrak Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+if(row.active !== "Yes") return;
 
-{
-name:"Pudina Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+const key = row.itemName;
 
-{
-name:"Elaichi Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+if(!grouped[key]){
 
-{
-name:"Chocolate Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
+grouped[key] = {
+name: row.itemName,
+category: row.category,
+image: row.imageUrl || "https://via.placeholder.com/150",
+variations:[]
+};
 
-{
-name:"Lemon Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
-
-{
-name:"Gud Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
-},
-
-{
-name:"Sugar Free Tea",
-category:"Tea Products",
-variations:[
-{type:"Regular",price:20},
-{type:"Kullad",price:25}
-]
 }
 
-];
+grouped[key].variations.push({
+type: row.size || "Single",
+price: Number(row.price)
+});
 
-/* =========================
-   CART
-========================= */
+});
 
-let cart = [];
+items = Object.values(grouped);
 
-let selectedItem = null;
+showCategory("Tea Products");
 
-/* =========================
-   SHOW CATEGORY
-========================= */
+}
+
+/* SHOW CATEGORY */
 
 function showCategory(category){
 
-const productGrid =
+const grid =
 document.getElementById("productGrid");
 
-productGrid.innerHTML = "";
+grid.innerHTML = "";
 
 items
-.filter(item => item.category === category)
+.filter(item=>item.category===category)
 .forEach(item=>{
 
 const card =
 document.createElement("div");
 
-card.className = "card";
+card.className="card";
 
-card.innerHTML = `
+card.innerHTML=`
+<img
+src="${item.image}"
+style="
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+">
+
 <h3>${item.name}</h3>
-<p>From ₹${item.variations[0].price}</p>
+
+<p>
+From ₹${item.variations[0].price}
+</p>
 `;
 
-card.onclick = ()=>{
+card.onclick=()=>{
+
+if(item.variations.length===1){
+
+addToCart(
+item.name,
+item.variations[0].type,
+item.variations[0].price
+);
+
+}else{
 
 openSizePopup(item);
 
+}
+
 };
 
-productGrid.appendChild(card);
+grid.appendChild(card);
 
 });
 
 }
 
-window.showCategory = showCategory;
+window.showCategory=showCategory;
 
-/* =========================
-   SIZE POPUP
-========================= */
+/* POPUP */
 
 function openSizePopup(item){
 
-selectedItem = item;
-
 document.getElementById("sizePopup")
-.style.display = "flex";
+.style.display="flex";
 
-const sizeOptions =
+const options =
 document.getElementById("sizeOptions");
 
-sizeOptions.innerHTML = "";
+options.innerHTML="";
 
 item.variations.forEach(v=>{
 
-sizeOptions.innerHTML += `
+options.innerHTML += `
 <button
 class="popupBtn"
 style="background:#00c853"
@@ -266,27 +198,20 @@ ${v.type} - ₹${v.price}
 function closeSizePopup(){
 
 document.getElementById("sizePopup")
-.style.display = "none";
+.style.display="none";
 
 }
 
-window.closeSizePopup =
-closeSizePopup;
+window.closeSizePopup=closeSizePopup;
 
-/* =========================
-   ADD TO CART
-========================= */
+/* CART */
 
-function addToCart(
-name,
-type,
-price
-){
+function addToCart(name,type,price){
 
 const existing =
 cart.find(c =>
-c.name === name &&
-c.type === type
+c.name===name &&
+c.type===type
 );
 
 if(existing){
@@ -305,22 +230,17 @@ qty:1
 }
 
 closeSizePopup();
-
 renderCart();
 
 }
 
-window.addToCart = addToCart;
-
-/* =========================
-   CHANGE QTY
-========================= */
+window.addToCart=addToCart;
 
 function changeQty(index,change){
 
 cart[index].qty += change;
 
-if(cart[index].qty <= 0){
+if(cart[index].qty<=0){
 
 cart.splice(index,1);
 
@@ -330,31 +250,22 @@ renderCart();
 
 }
 
-window.changeQty = changeQty;
-
-/* =========================
-   RENDER CART
-========================= */
+window.changeQty=changeQty;
 
 function renderCart(){
 
 const cartItems =
 document.getElementById("cartItems");
 
-const totalEl =
-document.getElementById("total");
+cartItems.innerHTML="";
 
-cartItems.innerHTML = "";
-
-let total = 0;
+let total=0;
 
 cart.forEach((item,index)=>{
 
-total +=
-item.price * item.qty;
+total += item.price*item.qty;
 
 cartItems.innerHTML += `
-
 <div class="cartItem">
 
 <b>${item.name}</b>
@@ -365,114 +276,115 @@ ${item.type}
 
 <br><br>
 
-<button
-onclick="changeQty(${index},-1)">
--
-</button>
+<button onclick="changeQty(${index},-1)">-</button>
 
 ${item.qty}
 
-<button
-onclick="changeQty(${index},1)">
-+
-</button>
+<button onclick="changeQty(${index},1)">+</button>
 
-&nbsp;&nbsp;
-
-₹${item.price * item.qty}
+₹${item.price*item.qty}
 
 </div>
-
 `;
 
 });
 
-totalEl.innerText = total;
+document.getElementById("total")
+.innerText=total;
 
 }
 
-/* =========================
-   PAYMENT
-========================= */
+/* PAYMENT */
 
-function openPaymentPopup(){
-
-document.getElementById("paymentPopup")
-.style.display = "flex";
-
+function payUPI(){
+paymentMode="UPI";
+alert("UPI Selected");
 }
 
-function closePaymentPopup(){
-
-document.getElementById("paymentPopup")
-.style.display = "none";
-
+function showQR(){
+paymentMode="QR";
+alert("QR Selected");
 }
 
-window.openPaymentPopup =
-openPaymentPopup;
+function cashPayment(){
+paymentMode="Cash";
+alert("Cash Selected");
+}
 
-window.closePaymentPopup =
-closePaymentPopup;
+window.payUPI=payUPI;
+window.showQR=showQR;
+window.cashPayment=cashPayment;
 
-/* =========================
-   SAVE BILL
-========================= */
+/* SAVE BILL */
 
-function saveBill(){
+async function saveBill(){
+
+const customerName =
+document.getElementById("customerName").value;
+
+const mobile =
+document.getElementById("customerNumber").value;
+
+const total =
+document.getElementById("total").innerText;
+
+const data = {
+
+outlet:
+localStorage.getItem("outlet"),
+
+customerName,
+mobile,
+
+items:
+cart.map(i=>i.name).join(","),
+
+qty:
+cart.map(i=>i.qty).join(","),
+
+total,
+paymentMode
+
+};
+
+await fetch(API_URL,{
+method:"POST",
+body:JSON.stringify(data)
+});
 
 alert("Bill Saved");
 
 }
 
-window.saveBill = saveBill;
+window.saveBill=saveBill;
 
-/* =========================
-   UPI
-========================= */
-
-function payUPI(){
-
-alert("UPI Payment");
-
-}
-
-window.payUPI = payUPI;
-
-/* =========================
-   QR
-========================= */
-
-function showQR(){
-
-alert("QR Payment");
-
-}
-
-window.showQR = showQR;
-
-/* =========================
-   CASH
-========================= */
-
-function cashPayment(){
-
-alert("Cash Payment");
-
-}
-
-window.cashPayment =
-cashPayment;
-
-/* =========================
-   WHATSAPP
-========================= */
+/* WHATSAPP */
 
 function sendWhatsApp(){
 
-alert("WhatsApp Bill");
+const number =
+document.getElementById("customerNumber").value;
+
+let msg =
+"☕ Swad Amrutam Bill%0A%0A";
+
+let total=0;
+
+cart.forEach(item=>{
+
+msg +=
+`${item.name} (${item.type}) x${item.qty} = ₹${item.price*item.qty}%0A`;
+
+total += item.price*item.qty;
+
+});
+
+msg += `%0ATotal : ₹${total}`;
+
+window.open(
+`https://wa.me/91${number}?text=${msg}`
+);
 
 }
 
-window.sendWhatsApp =
-sendWhatsApp;
+window.sendWhatsApp=sendWhatsApp;
