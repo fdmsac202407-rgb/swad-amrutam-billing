@@ -40,6 +40,8 @@ u.password === password
 if(user){
 
 localStorage.setItem("outlet",username);
+localStorage.setItem("customerId",customerId);
+localStorage.setItem("isLoggedIn","true");
 
 document.getElementById("loginPage").style.display="none";
 document.getElementById("billingPage").style.display="block";
@@ -296,23 +298,54 @@ document.getElementById("total")
 /* PAYMENT */
 
 function payUPI(){
+
 paymentMode="UPI";
+
+closePaymentPopup();
+
 alert("UPI Selected");
+
 }
 
 function showQR(){
+
 paymentMode="QR";
+
+closePaymentPopup();
+
 alert("QR Selected");
+
 }
 
 function cashPayment(){
+
 paymentMode="Cash";
+
+closePaymentPopup();
+
 alert("Cash Selected");
+
 }
 
 window.payUPI=payUPI;
 window.showQR=showQR;
 window.cashPayment=cashPayment;
+function openPaymentPopup(){
+
+document.getElementById("paymentPopup")
+.style.display="flex";
+
+}
+
+function closePaymentPopup(){
+
+document.getElementById("paymentPopup")
+.style.display="none";
+
+}
+
+window.openPaymentPopup=openPaymentPopup;
+window.closePaymentPopup=closePaymentPopup;
 
 /* SAVE BILL */
 
@@ -328,6 +361,9 @@ const total =
 document.getElementById("total").innerText;
 
 const data = {
+
+customerId:
+localStorage.getItem("customerId"),
 
 outlet:
 localStorage.getItem("outlet"),
@@ -387,3 +423,15 @@ window.open(
 }
 
 window.sendWhatsApp=sendWhatsApp;
+window.onload = function(){
+
+if(localStorage.getItem("isLoggedIn") === "true"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("billingPage").style.display="block";
+
+loadMenu();
+
+}
+
+};
