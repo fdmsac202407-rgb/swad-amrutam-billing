@@ -1,5 +1,6 @@
 const API_URL =
-"https://script.google.com/macros/s/AKfycbwg8DYeMJgiw6bwsXLsB0Ia8VLuNQpHwDjyYcCxciXkRlvv22OBy4Uj-zzipaaKvVBc/exec";
+"const API_URL =
+"https://script.google.com/macros/s/AKfycbwC3Gg9gSLKBCD40EMzqfQxb63NjF4IeeaOxZJ9SJ4ROz1d1ok6iLSUV0lzorGbjxJx/exec";";
 
 let items = [];
 let cart = [];
