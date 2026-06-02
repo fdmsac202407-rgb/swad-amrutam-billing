@@ -115,3 +115,98 @@ color: white;
 font-size: 16px;
 
 }
+
+@media screen and (max-width:768px){
+
+.topBar{
+height:auto;
+padding:10px;
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+.topBar h2{
+font-size:18px;
+}
+
+.container{
+display:block;
+height:auto;
+}
+
+.sidebar{
+width:100%;
+display:flex;
+overflow-x:auto;
+white-space:nowrap;
+padding:10px;
+gap:8px;
+}
+
+.sidebar h2{
+display:none;
+}
+
+.categoryBtn{
+min-width:120px;
+margin:0;
+font-size:14px;
+}
+
+.products{
+width:100%;
+padding:10px;
+}
+
+.productGrid{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+padding:8px;
+}
+
+.card img{
+height:100px !important;
+}
+
+.card h3{
+font-size:13px;
+}
+
+.card p{
+font-size:13px;
+}
+
+.cart{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+.totalBox{
+font-size:20px;
+}
+
+.popupBox{
+width:90%;
+max-width:350px;
+}
+
+.loginBox{
+width:100%;
+max-width:100%;
+padding:20px;
+}
+
+.logo img{
+width:100px;
+}
+
+.loginTitle{
+font-size:22px;
+}
+
+}
