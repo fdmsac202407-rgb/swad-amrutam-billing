@@ -6,20 +6,7 @@ let paymentMode = "Cash";
 
 /* LOGIN */
 
-const users = [
-{
-customerId:"101",
-username:"nikolmanager",
-password:"1234"
-},
-{
-customerId:"2612",
-username:"ankitsinh",
-password:"2612"
-}
-];
-
-function login(){
+async function login(){
 
 const customerId =
 document.getElementById("customerId").value;
@@ -30,11 +17,20 @@ document.getElementById("username").value;
 const password =
 document.getElementById("password").value;
 
+const res =
+await fetch(API_URL + "?type=users");
+
+const users =
+await res.json();
+
 const user =
 users.find(u =>
+
 u.customerId === customerId &&
 u.username === username &&
-u.password === password
+u.password === password &&
+u.active === "Yes"
+
 );
 
 if(user){
@@ -49,13 +45,14 @@ document.getElementById("billingPage").style.display="block";
 loadMenu();
 
 }else{
+
 alert("Invalid Login");
+
 }
 
 }
 
 window.login = login;
-
 function logout(){
 
 localStorage.clear();
@@ -100,7 +97,7 @@ price: Number(row.price)
 
 items = Object.values(grouped);
 
-showCategory("Tea Products");
+loadCategories();
 
 }
 
@@ -423,6 +420,34 @@ window.open(
 }
 
 window.sendWhatsApp=sendWhatsApp;
+function loadCategories(){
+
+const categories = [...new Set(
+items.map(item => item.category)
+)];
+
+const categoryList =
+document.getElementById("categoryList");
+
+categoryList.innerHTML = "";
+
+categories.forEach(category => {
+
+categoryList.innerHTML += `
+<button
+class="categoryBtn"
+onclick="showCategory('${category}')">
+${category}
+</button>
+`;
+
+});
+
+if(categories.length > 0){
+showCategory(categories[0]);
+}
+
+}
 window.onload = function(){
 
 if(localStorage.getItem("isLoggedIn") === "true"){
