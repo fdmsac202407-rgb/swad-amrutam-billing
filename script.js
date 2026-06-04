@@ -450,7 +450,6 @@ showCategory(categories[0]);
 
 }
 
-}
 window.onload = function(){
 
 if(localStorage.getItem("isLoggedIn") === "true"){
