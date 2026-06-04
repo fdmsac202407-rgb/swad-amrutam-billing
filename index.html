@@ -311,6 +311,12 @@ Logout
 
 <div id="categoryList"></div>
 
+<button
+class="categoryBtn"
+onclick="openSalesDashboard()">
+📊 Sales Dashboard
+</button>
+
 </div>
 
 <!-- PRODUCTS -->
@@ -424,6 +430,27 @@ Cash
 class="popupBtn"
 style="background:red"
 onclick="closePaymentPopup()">
+Close
+</button>
+
+</div>
+
+</div>
+
+<!-- SALES POPUP -->
+
+<div class="popup" id="salesPopup">
+
+<div class="popupBox">
+
+<h2>Sales Dashboard</h2>
+
+<div id="salesData"></div>
+
+<button
+class="popupBtn"
+style="background:red"
+onclick="closeSalesPopup()">
 Close
 </button>
 
