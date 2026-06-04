@@ -420,6 +420,7 @@ window.open(
 }
 
 window.sendWhatsApp=sendWhatsApp;
+
 function loadCategories(){
 
 const categories = [...new Set(
@@ -427,7 +428,7 @@ items.map(item => item.category)
 )];
 
 const categoryList =
-document.getElementById("categoryList");
+document.getElementById("menuDropdown");
 
 categoryList.innerHTML = "";
 
@@ -435,7 +436,7 @@ categories.forEach(category => {
 
 categoryList.innerHTML += `
 <button
-class="categoryBtn"
+class="menuCategory"
 onclick="showCategory('${category}')">
 ${category}
 </button>
@@ -445,6 +446,8 @@ ${category}
 
 if(categories.length > 0){
 showCategory(categories[0]);
+}
+
 }
 
 }
@@ -566,3 +569,22 @@ document.getElementById("salesData").innerHTML = `
 
 window.loadCustomSales =
 loadCustomSales;
+
+function toggleMenu(){
+
+const menu =
+document.getElementById("menuDropdown");
+
+if(menu.style.display === "block"){
+
+menu.style.display = "none";
+
+}else{
+
+menu.style.display = "block";
+
+}
+
+}
+
+window.toggleMenu = toggleMenu;
