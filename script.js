@@ -460,3 +460,62 @@ loadMenu();
 }
 
 };
+
+/* SALES DASHBOARD */
+
+async function openSalesDashboard(){
+
+const customerId =
+localStorage.getItem("customerId");
+
+const res =
+await fetch(
+API_URL +
+"?action=sales&customerId=" +
+customerId
+);
+
+const data =
+await res.json();
+
+document.getElementById("salesData").innerHTML = `
+
+<div style="text-align:left">
+
+<h3>📅 Today</h3>
+<p>Revenue : ₹${data.today}</p>
+<p>Bills : ${data.todayBills}</p>
+
+<hr>
+
+<h3>📆 This Week</h3>
+<p>Revenue : ₹${data.week}</p>
+<p>Bills : ${data.weekBills}</p>
+
+<hr>
+
+<h3>🗓 This Month</h3>
+<p>Revenue : ₹${data.month}</p>
+<p>Bills : ${data.monthBills}</p>
+
+</div>
+
+`;
+
+document.getElementById("salesPopup")
+.style.display = "flex";
+
+}
+
+function closeSalesPopup(){
+
+document.getElementById("salesPopup")
+.style.display = "none";
+
+}
+
+window.openSalesDashboard =
+openSalesDashboard;
+
+window.closeSalesPopup =
+closeSalesPopup;
