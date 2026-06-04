@@ -519,3 +519,50 @@ openSalesDashboard;
 
 window.closeSalesPopup =
 closeSalesPopup;
+
+async function loadCustomSales(){
+
+const customerId =
+localStorage.getItem("customerId");
+
+const fromDate =
+document.getElementById("fromDate").value;
+
+const toDate =
+document.getElementById("toDate").value;
+
+if(!fromDate || !toDate){
+
+alert("Select Date Range");
+return;
+
+}
+
+const res = await fetch(
+API_URL +
+"?action=customSales" +
+"&customerId=" + customerId +
+"&fromDate=" + fromDate +
+"&toDate=" + toDate
+);
+
+const data = await res.json();
+
+document.getElementById("salesData").innerHTML = `
+
+<div style="text-align:left">
+
+<h3>📊 Custom Report</h3>
+
+<p>💰 Revenue : ₹${data.revenue}</p>
+
+<p>🧾 Bills : ${data.bills}</p>
+
+</div>
+
+`;
+
+}
+
+window.loadCustomSales =
+loadCustomSales;
