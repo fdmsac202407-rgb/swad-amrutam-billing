@@ -467,6 +467,8 @@ loadMenu();
 
 async function openSalesDashboard(){
 
+document.getElementById("menuDropdown").style.display = "none";
+
 const customerId =
 localStorage.getItem("customerId");
 
