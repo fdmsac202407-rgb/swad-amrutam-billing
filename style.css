@@ -382,3 +382,16 @@ font-size:22px;
 }
 
 }
+
+.welcomeLogo{
+height:75vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.welcomeLogo img{
+width:650px;
+max-width:90%;
+opacity:0.20;
+}
