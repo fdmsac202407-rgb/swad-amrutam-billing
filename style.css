@@ -84,6 +84,11 @@ padding:0 15px;
 position:relative;
 }
 
+.topBar h2{
+margin:0;
+font-size:24px;
+}
+
 .logoutBtn{
 background:red;
 border:none;
@@ -96,19 +101,23 @@ cursor:pointer;
 .customerHeader{
 position:absolute;
 left:50%;
-transform:translateX(-50%);
+top:50%;
+transform:translate(-50%,-50%);
 
 color:#ffd700;
 font-size:18px;
 font-weight:bold;
 
-border:2px dashed #ffd700;
-border-radius:8px;
+border:2px solid #ffd700;
+border-radius:12px;
 
-padding:6px 14px;
-background:rgba(255,255,255,0.05);
+padding:10px 20px;
+background:#111;
+
+box-shadow:0 0 8px rgba(255,215,0,0.4);
 
 white-space:nowrap;
+z-index:10;
 }
 
 .container{
