@@ -109,6 +109,18 @@ loadCategories();
 
 function showCategory(category){
 
+document
+.querySelectorAll(".menuCategory")
+.forEach(btn => btn.classList.remove("active"));
+
+const activeBtn =
+Array.from(document.querySelectorAll(".menuCategory"))
+.find(btn => btn.innerText === category);
+
+if(activeBtn){
+activeBtn.classList.add("active");
+}
+
 const grid =
 document.getElementById("productGrid");
 
