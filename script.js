@@ -109,6 +109,8 @@ loadCategories();
 
 function showCategory(category){
 
+document.getElementById("welcomeLogo").style.display = "none";
+
 document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
@@ -460,9 +462,9 @@ ${category}
 
 });
 
-if(categories.length > 0){
-showCategory(categories[0]);
-}
+document.getElementById("productGrid").innerHTML = "";
+
+document.getElementById("welcomeLogo").style.display = "flex";
 
 }
 
@@ -487,6 +489,9 @@ loadMenu();
 async function openSalesDashboard(){
 
 document.getElementById("menuDropdown").style.display = "none";
+
+document.getElementById("productGrid").innerHTML = "";
+document.getElementById("welcomeLogo").style.display = "flex";
 
 const customerId =
 localStorage.getItem("customerId");
