@@ -41,7 +41,7 @@ localStorage.setItem("isLoggedIn","true");
 
 /* NEW */
 document.getElementById("customerHeader").innerHTML =
-`📍 ${username} (ID: ${customerId})`;
+`${username} (ID: ${customerId})`;
 
 document.getElementById("loginPage").style.display="none";
 document.getElementById("billingPage").style.display="block";
@@ -462,7 +462,7 @@ document.getElementById("loginPage").style.display="none";
 document.getElementById("billingPage").style.display="block";
 
 document.getElementById("customerHeader").innerHTML =
-`📍 ${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
+`${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
 
 loadMenu();
 
