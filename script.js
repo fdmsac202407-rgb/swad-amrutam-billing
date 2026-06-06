@@ -137,21 +137,27 @@ document.createElement("div");
 
 card.className="card";
 
-card.innerHTML=`
+card.innerHTML = `
 <img
 src="${item.image}"
-style="
-width:100%;
-height:120px;
-object-fit:cover;
-border-radius:10px;
-">
+class="productImage">
 
 <h3>${item.name}</h3>
 
-<p>
-From ₹${item.variations[0].price}
+<p class="priceText">
+₹${item.variations[0].price}
 </p>
+
+<button
+class="addOrderBtn"
+onclick="event.stopPropagation();
+addToCart(
+'${item.name}',
+'${item.variations[0].type}',
+${item.variations[0].price}
+)">
+🛒 Add Order
+</button>
 `;
 
 card.onclick=()=>{
@@ -452,11 +458,21 @@ categoryList.innerHTML = "";
 
 categories.forEach(category => {
 
+const icons = {
+"Tea":"☕",
+"Coffee":"☕",
+"Snacks":"🍔",
+"Cold Drinks":"🥤",
+"Shake":"🥤",
+"Hot":"🔥",
+"Cold":"❄️"
+};
+
 categoryList.innerHTML += `
 <button
 class="menuCategory"
 onclick="showCategory('${category}')">
-${category}
+${icons[category] || "📦"} ${category}
 </button>
 `;
 
