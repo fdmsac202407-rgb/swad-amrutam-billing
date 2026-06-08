@@ -535,6 +535,49 @@ ${icons[category] || ""} ${category}
 
 document.getElementById("productGrid").innerHTML = "";
 
+document.getElementById("productGrid").innerHTML = "";
+
+document.getElementById("emptyState").innerHTML = `
+
+<div class="emptyWrapper">
+
+<div class="topSellingBox">
+
+<h2>🔥 Top Selling Items Today</h2>
+
+<div class="topItems">
+
+<div class="topItem">☕ Masala Tea</div>
+<div class="topItem">🍵 Adrak Tea</div>
+<div class="topItem">🥪 Sandwich</div>
+<div class="topItem">☕ Elaichi Tea</div>
+<div class="topItem">🥤 Cold Coffee</div>
+<div class="topItem">🍔 Veg Puff</div>
+
+</div>
+
+<div class="todayStats">
+<p>💰 Today's Revenue : ₹1250</p>
+<p>🧾 Today's Bills : 18</p>
+</div>
+
+</div>
+
+<div class="emptyCartBox">
+
+<div class="emptyIcon">🛒</div>
+
+<h2>Your Cart Is Empty</h2>
+
+<p>Select Category From Left Menu</p>
+
+</div>
+
+</div>
+`;
+
+document.getElementById("emptyState").style.display = "block";
+
 document.getElementById("emptyState").innerHTML = `
 
 <div style="text-align:center">
@@ -738,6 +781,8 @@ const grid =
 document.getElementById("productGrid");
 
 grid.innerHTML = "";
+
+document.getElementById("emptyState").style.display = "none";
 
 items
 .filter(item =>
