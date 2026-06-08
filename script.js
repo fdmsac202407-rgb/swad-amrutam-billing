@@ -152,16 +152,11 @@ class="productImage">
 
 <div class="productActions">
 
-<button
-class="qtyBtn"
-onclick="event.stopPropagation();
-addToCart(
-'${item.name}',
-'${item.variations[0].type}',
-${item.variations[0].price}
-)">
-+
-</button>
+<div class="qtyControl">
+<button class="qtyBtn">−</button>
+<span class="qtyCount">0</span>
+<button class="qtyBtn">+</button>
+</div>
 
 <button
 class="addOrderBtn"
@@ -171,7 +166,7 @@ addToCart(
 '${item.variations[0].type}',
 ${item.variations[0].price}
 )">
-Add
+Add Order
 </button>
 
 </div>
