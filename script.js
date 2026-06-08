@@ -148,6 +148,25 @@ class="productImage">
 ₹${item.variations[0].price}
 </p>
 
+<h3>${item.name}</h3>
+
+<p class="priceText">
+₹${item.variations[0].price}
+</p>
+
+<div class="productActions">
+
+<button
+class="qtyBtn"
+onclick="event.stopPropagation();
+addToCart(
+'${item.name}',
+'${item.variations[0].type}',
+${item.variations[0].price}
+)">
++
+</button>
+
 <button
 class="addOrderBtn"
 onclick="event.stopPropagation();
@@ -156,8 +175,10 @@ addToCart(
 '${item.variations[0].type}',
 ${item.variations[0].price}
 )">
-🛒 Add Order
+Add
 </button>
+
+</div>
 `;
 
 card.onclick=()=>{
@@ -290,21 +311,35 @@ total += item.price*item.qty;
 cartItems.innerHTML += `
 <div class="cartItem">
 
+<div class="cartTop">
+
+<div>
 <b>${item.name}</b>
-
 <br>
+<small>${item.type}</small>
+</div>
 
-${item.type}
+<div>
+₹${item.price * item.qty}
+</div>
 
-<br><br>
+</div>
 
-<button onclick="changeQty(${index},-1)">-</button>
+<div class="cartQty">
 
-${item.qty}
+<button class="qtyBtn"
+onclick="changeQty(${index},-1)">
+−
+</button>
 
-<button onclick="changeQty(${index},1)">+</button>
+<span>${item.qty}</span>
 
-₹${item.price*item.qty}
+<button class="qtyBtn"
+onclick="changeQty(${index},1)">
++
+</button>
+
+</div>
 
 </div>
 `;
@@ -472,7 +507,7 @@ categoryList.innerHTML += `
 <button
 class="menuCategory"
 onclick="showCategory('${category}')">
-${icons[category] || "📦"} ${category}
+${icons[category] || ""} ${category}
 </button>
 `;
 
