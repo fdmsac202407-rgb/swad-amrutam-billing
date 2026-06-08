@@ -150,10 +150,6 @@ class="productImage">
 
 <h3>${item.name}</h3>
 
-<p class="priceText">
-₹${item.variations[0].price}
-</p>
-
 <div class="productActions">
 
 <button
