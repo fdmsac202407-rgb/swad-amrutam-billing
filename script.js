@@ -113,6 +113,8 @@ document
 
 function showCategory(category){
 
+document.getElementById("emptyState").style.display = "none";
+
 document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
@@ -532,6 +534,51 @@ ${icons[category] || ""} ${category}
 });
 
 document.getElementById("productGrid").innerHTML = "";
+
+document.getElementById("emptyState").innerHTML = `
+
+<div style="text-align:center">
+
+<h2 style="margin-bottom:20px;">
+🔥 Top Selling Items Today
+</h2>
+
+<div style="
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:25px;
+">
+
+<div class="card" style="width:180px;">
+☕<br><br>
+Masala Tea
+</div>
+
+<div class="card" style="width:180px;">
+🍵<br><br>
+Adrak Tea
+</div>
+
+<div class="card" style="width:180px;">
+🥪<br><br>
+Sandwich
+</div>
+
+</div>
+
+<div class="emptyIcon">🛒</div>
+
+<h2>Your Cart Is Empty</h2>
+
+<p>Select Category From Left Menu</p>
+
+</div>
+
+`;
+
+document.getElementById("emptyState").style.display = "flex";
 
 }
 
