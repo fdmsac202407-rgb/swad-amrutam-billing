@@ -109,8 +109,6 @@ loadCategories();
 
 function showCategory(category){
 
-document.getElementById("welcomeLogo").style.display = "none";
-
 document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
@@ -509,8 +507,6 @@ ${icons[category] || ""} ${category}
 
 document.getElementById("productGrid").innerHTML = "";
 
-document.getElementById("welcomeLogo").style.display = "flex";
-
 }
 
 window.onload = function(){
@@ -536,7 +532,6 @@ async function openSalesDashboard(){
 document.getElementById("menuDropdown").style.display = "none";
 
 document.getElementById("productGrid").innerHTML = "";
-document.getElementById("welcomeLogo").style.display = "flex";
 
 const customerId =
 localStorage.getItem("customerId");
