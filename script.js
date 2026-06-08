@@ -152,12 +152,6 @@ class="productImage">
 
 <div class="productActions">
 
-<div class="qtyControl">
-<button class="qtyBtn">−</button>
-<span class="qtyCount">0</span>
-<button class="qtyBtn">+</button>
-</div>
-
 <button
 class="addOrderBtn"
 onclick="event.stopPropagation();
