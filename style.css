@@ -196,6 +196,31 @@ overflow:auto;
 background:#121218;
 }
 
+/* SEARCH BOX */
+
+.searchBox{
+width:320px;
+height:42px;
+background:#1f2230;
+border:1px solid #35384a;
+border-radius:10px;
+padding:0 15px;
+color:#fff;
+font-size:14px;
+outline:none;
+margin-bottom:20px;
+}
+
+.searchBox::placeholder{
+color:#9ca3af;
+}
+
+.productGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
 .productGrid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
