@@ -155,11 +155,20 @@ class="productImage">
 <button
 class="addOrderBtn"
 onclick="event.stopPropagation();
+
+if(item.variations.length > 1){
+
+openSizePopup(item);
+
+}else{
+
 addToCart(
-'${item.name}',
-'${item.variations[0].type}',
-${item.variations[0].price}
-)">
+item.name,
+item.variations[0].type,
+item.variations[0].price
+);
+
+}">
 Add Order
 </button>
 
