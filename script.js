@@ -103,6 +103,10 @@ items = Object.values(grouped);
 
 loadCategories();
 
+document
+.getElementById("searchBox")
+.addEventListener("input", searchProducts);
+
 }
 
 /* SHOW CATEGORY */
@@ -653,3 +657,70 @@ menu.style.display = "block";
 }
 
 window.toggleMenu = toggleMenu;
+
+function searchProducts(){
+
+const search =
+document.getElementById("searchBox")
+.value
+.toLowerCase();
+
+const grid =
+document.getElementById("productGrid");
+
+grid.innerHTML = "";
+
+items
+.filter(item =>
+item.name.toLowerCase().includes(search)
+)
+.forEach(item=>{
+
+const card =
+document.createElement("div");
+
+card.className="card";
+
+card.innerHTML = `
+<img
+src="${item.image}"
+class="productImage">
+
+<h3>${item.name}</h3>
+
+<p class="priceText">
+₹${item.variations[0].price}
+</p>
+
+<div class="productActions">
+
+<button
+class="qtyBtn"
+onclick="event.stopPropagation();
+addToCart(
+'${item.name}',
+'${item.variations[0].type}',
+${item.variations[0].price}
+)">
++
+</button>
+
+<button
+class="addOrderBtn"
+onclick="event.stopPropagation();
+addToCart(
+'${item.name}',
+'${item.variations[0].type}',
+${item.variations[0].price}
+)">
+Add
+</button>
+
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+}
