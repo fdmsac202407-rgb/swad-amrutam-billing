@@ -148,8 +148,6 @@ class="productImage">
 ₹${item.variations[0].price}
 </p>
 
-<h3>${item.name}</h3>
-
 <div class="productActions">
 
 <button
