@@ -198,8 +198,8 @@ background:#121218;
 
 .productGrid{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:22px;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
 }
 
 .card{
@@ -239,9 +239,9 @@ margin-top:5px;
 /* CART */
 
 .cart{
-width:380px;
+width:300px;
 background:#181820;
-padding:20px;
+padding:18px;
 overflow:auto;
 border-left:1px solid #2d2d38;
 }
@@ -335,21 +335,6 @@ cursor:pointer;
 color:white;
 }
 
-/* WELCOME LOGO */
-
-.welcomeLogo{
-height:calc(100vh - 160px);
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.welcomeLogo img{
-width:700px;
-max-width:80%;
-opacity:0.25;
-object-fit:contain;
-}
 
 /* MOBILE */
 
