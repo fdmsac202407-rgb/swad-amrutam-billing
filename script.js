@@ -152,23 +152,7 @@ class="productImage">
 
 <div class="productActions">
 
-<button
-class="addOrderBtn"
-onclick="event.stopPropagation();
-
-if(item.variations.length > 1){
-
-openSizePopup(item);
-
-}else{
-
-addToCart(
-item.name,
-item.variations[0].type,
-item.variations[0].price
-);
-
-}">
+<button class="addOrderBtn">
 Add Order
 </button>
 
@@ -188,6 +172,46 @@ item.variations[0].price
 }else{
 
 openSizePopup(item);
+
+}
+
+};
+
+card.querySelector(".addOrderBtn").onclick = (e)=>{
+
+e.stopPropagation();
+
+if(item.variations.length > 1){
+
+openSizePopup(item);
+
+}else{
+
+addToCart(
+item.name,
+item.variations[0].type,
+item.variations[0].price
+);
+
+}
+
+};
+
+card.querySelector(".addOrderBtn").onclick = (e)=>{
+
+e.stopPropagation();
+
+if(item.variations.length > 1){
+
+openSizePopup(item);
+
+}else{
+
+addToCart(
+item.name,
+item.variations[0].type,
+item.variations[0].price
+);
 
 }
 
