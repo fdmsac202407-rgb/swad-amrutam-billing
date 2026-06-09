@@ -504,3 +504,15 @@ margin-bottom:10px;
 font-size:16px;
 color:#777;
 }
+
+.homeBtn{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+background:#8b5cf6;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
