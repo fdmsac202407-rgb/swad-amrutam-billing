@@ -175,18 +175,6 @@ border:1px solid #8b5cf6;
 box-shadow:0 0 15px rgba(139,92,246,.35);
 }
 
-.salesBtn{
-width:100%;
-padding:14px;
-background:#8b5cf6;
-color:white;
-border:none;
-border-radius:14px;
-cursor:pointer;
-font-size:16px;
-margin-top:15px;
-}
-
 /* PRODUCTS */
 
 .products{
@@ -505,14 +493,25 @@ font-size:16px;
 color:#777;
 }
 
-.homeBtn{
+.menuHeader,
+.homeBtn,
+.salesBtn{
 width:100%;
-padding:12px;
-margin-bottom:10px;
-border:none;
-border-radius:10px;
+padding:14px;
 background:#8b5cf6;
 color:white;
-font-weight:600;
+border:none;
+border-radius:14px;
 cursor:pointer;
+font-size:16px;
+font-weight:600;
+text-align:center;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.menuHeader:hover,
+.homeBtn:hover,
+.salesBtn:hover{
+background:#7c3aed;
 }
