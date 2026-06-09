@@ -517,6 +517,8 @@ document.getElementById("productGrid").innerHTML = "";
 
 document.getElementById("emptyState").innerHTML = `
 
+<div class="emptyWrapper">
+
 <div class="dashboardContainer">
 
 <h2 class="dashboardTitle">
@@ -538,10 +540,6 @@ document.getElementById("emptyState").innerHTML = `
 </div>
 
 </div>
-
-</div>
-
-`;
 
 </div>
 
