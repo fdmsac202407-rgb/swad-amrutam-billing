@@ -518,49 +518,6 @@ ${icons[category] || ""} ${category}
 });
 
 document.getElementById("productGrid").innerHTML = "";
-
-document.getElementById("emptyState").innerHTML = `
-
-<div class="emptyWrapper">
-
-<div class="dashboardContainer">
-
-<h2 class="dashboardTitle">
-🔥 Top Selling Items Today
-</h2>
-
-<p>No Sales Today</p>
-
-<div class="overviewGrid">
-
-<div class="overviewCard">
-<h3>Today's Revenue</h3>
-<h1>₹0</h1>
-</div>
-
-<div class="overviewCard">
-<h3>Today's Bills</h3>
-<h1>0</h1>
-</div>
-
-</div>
-
-</div>
-
-<div class="emptyCartBox">
-
-<div class="emptyIcon">🛒</div>
-
-<h2>Your Cart Is Empty</h2>
-
-<p>Select Category From Left Menu</p>
-
-</div>
-
-</div>
-
-`;
-
 document.getElementById("emptyState").style.display = "block";
 
 }
