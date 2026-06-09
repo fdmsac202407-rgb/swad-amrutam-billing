@@ -537,12 +537,6 @@ document.getElementById("emptyState").innerHTML = `
 <p>36 Cups</p>
 </div>
 
-<div class="topCard">
-🥪
-<h3>Sandwich</h3>
-<p>20 Plates</p>
-</div>
-
 </div>
 
 <div class="overviewGrid">
