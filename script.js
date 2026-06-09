@@ -107,6 +107,10 @@ document
 .getElementById("searchBox")
 .addEventListener("input", searchProducts);
 
+document.getElementById("searchBox").value = "";
+document.getElementById("productGrid").innerHTML = "";
+document.getElementById("emptyState").style.display = "block";
+
 }
 
 /* SHOW CATEGORY */
