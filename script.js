@@ -523,33 +523,25 @@ document.getElementById("emptyState").innerHTML = `
 🔥 Top Selling Items Today
 </h2>
 
-<div class="topItems">
-
-<div class="topCard">
-☕
-<h3>Masala Tea</h3>
-<p>45 Cups</p>
-</div>
-
-<div class="topCard">
-🍵
-<h3>Adrak Tea</h3>
-<p>36 Cups</p>
-</div>
-
-</div>
+<p>No Sales Today</p>
 
 <div class="overviewGrid">
 
 <div class="overviewCard">
 <h3>Today's Revenue</h3>
-<h1>₹1250</h1>
+<h1>₹0</h1>
 </div>
 
 <div class="overviewCard">
 <h3>Today's Bills</h3>
-<h1>18</h1>
+<h1>0</h1>
 </div>
+
+</div>
+
+</div>
+
+`;
 
 </div>
 
