@@ -648,6 +648,20 @@ document.getElementById("salesData").innerHTML = `
 window.loadCustomSales =
 loadCustomSales;
 
+function goHome(){
+
+document.getElementById("productGrid").innerHTML = "";
+
+document.getElementById("emptyState").style.display = "block";
+
+document
+.querySelectorAll(".menuCategory")
+.forEach(btn => btn.classList.remove("active"));
+
+}
+
+window.goHome = goHome;
+
 function toggleMenu(){
 
 const menu =
