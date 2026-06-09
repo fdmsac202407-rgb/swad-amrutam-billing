@@ -199,26 +199,6 @@ item.variations[0].price
 
 };
 
-card.querySelector(".addOrderBtn").onclick = (e)=>{
-
-e.stopPropagation();
-
-if(item.variations.length > 1){
-
-openSizePopup(item);
-
-}else{
-
-addToCart(
-item.name,
-item.variations[0].type,
-item.variations[0].price
-);
-
-}
-
-};
-
 grid.appendChild(card);
 
 });
@@ -535,30 +515,46 @@ ${icons[category] || ""} ${category}
 
 document.getElementById("productGrid").innerHTML = "";
 
-document.getElementById("productGrid").innerHTML = "";
-
 document.getElementById("emptyState").innerHTML = `
 
-<div class="emptyWrapper">
+<div class="dashboardContainer">
 
-<div class="topSellingBox">
-
-<h2>🔥 Top Selling Items Today</h2>
+<h2 class="dashboardTitle">
+🔥 Top Selling Items Today
+</h2>
 
 <div class="topItems">
 
-<div class="topItem">☕ Masala Tea</div>
-<div class="topItem">🍵 Adrak Tea</div>
-<div class="topItem">🥪 Sandwich</div>
-<div class="topItem">☕ Elaichi Tea</div>
-<div class="topItem">🥤 Cold Coffee</div>
-<div class="topItem">🍔 Veg Puff</div>
+<div class="topCard">
+☕
+<h3>Masala Tea</h3>
+<p>45 Cups</p>
+</div>
+
+<div class="topCard">
+🍵
+<h3>Adrak Tea</h3>
+<p>36 Cups</p>
+</div>
+
+<div class="topCard">
+🥪
+<h3>Sandwich</h3>
+<p>20 Plates</p>
+</div>
 
 </div>
 
-<div class="todayStats">
-<p>💰 Today's Revenue : ₹1250</p>
-<p>🧾 Today's Bills : 18</p>
+<div class="overviewGrid">
+
+<div class="overviewCard">
+<h3>Today's Revenue</h3>
+<h1>₹1250</h1>
+</div>
+
+<div class="overviewCard">
+<h3>Today's Bills</h3>
+<h1>18</h1>
 </div>
 
 </div>
@@ -574,54 +570,10 @@ document.getElementById("emptyState").innerHTML = `
 </div>
 
 </div>
+
 `;
 
 document.getElementById("emptyState").style.display = "block";
-
-document.getElementById("emptyState").innerHTML = `
-
-<div style="text-align:center">
-
-<h2 style="margin-bottom:20px;">
-🔥 Top Selling Items Today
-</h2>
-
-<div style="
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-bottom:25px;
-">
-
-<div class="card" style="width:180px;">
-☕<br><br>
-Masala Tea
-</div>
-
-<div class="card" style="width:180px;">
-🍵<br><br>
-Adrak Tea
-</div>
-
-<div class="card" style="width:180px;">
-🥪<br><br>
-Sandwich
-</div>
-
-</div>
-
-<div class="emptyIcon">🛒</div>
-
-<h2>Your Cart Is Empty</h2>
-
-<p>Select Category From Left Menu</p>
-
-</div>
-
-`;
-
-document.getElementById("emptyState").style.display = "flex";
 
 }
 
