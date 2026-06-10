@@ -767,26 +767,45 @@ customerId
 
 const data = await res.json();
 
+/* Dashboard Cards */
+
 document.getElementById("todayRevenue").innerText =
-data.todayRevenue || 0;
+`₹${data.todayRevenue || 0}`;
 
 document.getElementById("todayBills").innerText =
 data.todayBills || 0;
 
-let html = "";
+document.getElementById("todayCustomers").innerText =
+data.todayCustomers || 0;
 
-if(data.topSelling.length === 0){
+document.getElementById("avgBill").innerText =
+`₹${Math.round(
+(data.todayRevenue || 0) /
+(data.todayBills || 1)
+)}`;
 
-html = "<p>No Sales Today</p>";
+/* Top Selling */
 
-}else{
+const topDiv =
+document.getElementById("topItems");
+
+topDiv.innerHTML = "";
+
+if(!data.topSelling || data.topSelling.length === 0){
+
+topDiv.innerHTML =
+"<p>No Sales Today</p>";
+
+return;
+
+}
 
 data.topSelling.forEach((item,index)=>{
 
-html += `
-<div class="topSellingItem">
-🥇 ${index + 1}. ${item.item}
-<span style="float:right">${item.qty}</span>
+topDiv.innerHTML += `
+<div class="top-item">
+<span>🥇 ${index+1}. ${item.item}</span>
+<span>${item.qty}</span>
 </div>
 `;
 
