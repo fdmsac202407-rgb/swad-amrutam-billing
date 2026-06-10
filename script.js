@@ -1,3 +1,4 @@
+
 const API_URL = "https://script.google.com/macros/s/AKfycbwC3Gg9gSLKBCD40EMzqfQxb63NjF4IeeaOxZJ9SJ4ROz1d1ok6iLSUV0lzorGbjxJx/exec";
 
 let items = [];
@@ -810,10 +811,5 @@ topDiv.innerHTML += `
 `;
 
 });
-
-}
-
-document.getElementById("topSellingItems").innerHTML =
-html;
 
 }
