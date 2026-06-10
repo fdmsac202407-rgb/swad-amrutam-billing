@@ -803,7 +803,21 @@ return;
 
 data.topSelling.forEach((item,index)=>{
 
-let icon = item.category === "Food" ? "🍽️" : "🥤";
+let icon = "🥤";
+
+const name = item.item.toLowerCase();
+
+if(
+name.includes("farshi") ||
+name.includes("poha") ||
+name.includes("sandwich") ||
+name.includes("pizza") ||
+name.includes("burger") ||
+name.includes("puri") ||
+name.includes("snacks")
+){
+icon = "🍔";
+}
 
 topDiv.innerHTML += `
 <div class="top-item">
