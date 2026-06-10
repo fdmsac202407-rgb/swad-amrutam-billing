@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Swad Amrutam Billing</title>
 
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css">
 
 <link rel="manifest" href="manifest.json">
 
@@ -113,6 +113,18 @@ placeholder="🔍 Search Products">
 <div id="dashboardContent">
 
   <h2>📊 Today's Overview</h2>
+
+<div class="dashboardFilter">
+
+<input type="date" id="fromDate">
+
+<input type="date" id="toDate">
+
+<button onclick="loadCustomSales()">
+Search
+</button>
+
+</div>
 
   <div class="dashboard-grid">
     <div class="stat-card">
@@ -312,7 +324,7 @@ Close
 </div>
 
 <link rel="stylesheet" href="style.css?v=2">
-<script src="script.js?v=1"></script>
+<script src="script.js?v=2"></script>
 
 </body>
 
