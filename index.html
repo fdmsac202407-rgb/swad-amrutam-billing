@@ -84,12 +84,6 @@ onclick="goHome()">
 <div id="menuDropdown" class="menuDropdown">
 </div>
 
-<button
-class="salesBtn"
-onclick="openSalesDashboard()">
-📊 Sales Dashboard
-</button>
-
 </div>
 
 <!-- PRODUCTS -->
@@ -283,45 +277,7 @@ Close
 
 <!-- SALES POPUP -->
 
-<div class="popup" id="salesPopup">
 
-<div class="popupBox">
-
-<h2>Sales Dashboard</h2>
-
-<div style="margin-bottom:10px">
-
-<input
-type="date"
-id="fromDate"
-style="width:100%;padding:8px;margin-bottom:8px;">
-
-<input
-type="date"
-id="toDate"
-style="width:100%;padding:8px;">
-
-<button
-class="popupBtn"
-style="background:#2196f3"
-onclick="loadCustomSales()">
-Search
-</button>
-
-</div>
-
-<div id="salesData"></div>
-
-<button
-class="popupBtn"
-style="background:red"
-onclick="closeSalesPopup()">
-Close
-</button>
-
-</div>
-
-</div>
 
 <link rel="stylesheet" href="style.css?v=2">
 <script src="script.js?v=2"></script>
