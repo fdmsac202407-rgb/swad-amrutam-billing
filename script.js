@@ -102,6 +102,7 @@ price: Number(row.price)
 items = Object.values(grouped);
 
 loadCategories();
+loadDashboard();
 
 document
 .getElementById("searchBox")
@@ -448,6 +449,7 @@ body:JSON.stringify(data)
 });
 
 alert("Bill Saved");
+loadDashboard();
 
 }
 
@@ -658,6 +660,8 @@ document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
 
+loadDashboard();
+
 }
 
 window.goHome = goHome;
@@ -747,5 +751,49 @@ Add
 grid.appendChild(card);
 
 });
+
+}
+
+async function loadDashboard(){
+
+const customerId =
+localStorage.getItem("customerId");
+
+const res = await fetch(
+API_URL +
+"?action=dashboard&customerId=" +
+customerId
+);
+
+const data = await res.json();
+
+document.getElementById("todayRevenue").innerText =
+data.todayRevenue || 0;
+
+document.getElementById("todayBills").innerText =
+data.todayBills || 0;
+
+let html = "";
+
+if(data.topSelling.length === 0){
+
+html = "<p>No Sales Today</p>";
+
+}else{
+
+data.topSelling.forEach((item,index)=>{
+
+html += `
+<div class="topSellingItem">
+${index + 1}. ${item.name} (${item.qty})
+</div>
+`;
+
+});
+
+}
+
+document.getElementById("topSellingItems").innerHTML =
+html;
 
 }
