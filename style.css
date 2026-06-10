@@ -515,3 +515,43 @@ transition:.3s;
 .salesBtn:hover{
 background:#7c3aed;
 }
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin:20px 0;
+}
+
+.stat-card{
+    background:#141828;
+    border:1px solid #8b5cf6;
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+}
+
+.stat-card h3{
+    color:#aaa;
+    margin-bottom:10px;
+}
+
+.stat-card span{
+    font-size:32px;
+    font-weight:bold;
+    color:#fff;
+}
+
+.top-items-card{
+    background:#141828;
+    border:1px solid #8b5cf6;
+    border-radius:16px;
+    padding:20px;
+}
+
+.top-item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
