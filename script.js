@@ -785,7 +785,8 @@ data.topSelling.forEach((item,index)=>{
 
 html += `
 <div class="topSellingItem">
-${index + 1}. ${item.name} (${item.qty})
+🥇 ${index + 1}. ${item.item}
+<span style="float:right">${item.qty}</span>
 </div>
 `;
 
