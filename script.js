@@ -803,9 +803,11 @@ return;
 
 data.topSelling.forEach((item,index)=>{
 
+let icon = item.category === "Food" ? "🍽️" : "🥤";
+
 topDiv.innerHTML += `
 <div class="top-item">
-<span>🥇 ${index+1}. ${item.item}</span>
+<span>${icon} ${index+1}. ${item.item}</span>
 <span>${item.qty}</span>
 </div>
 `;
