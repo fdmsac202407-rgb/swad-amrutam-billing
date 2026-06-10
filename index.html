@@ -108,35 +108,36 @@ placeholder="🔍 Search Products">
 
 <div id="emptyState" class="emptyState">
 
-<h2 class="dashboardTitle">
-📊 Today's Overview
-</h2>
+<div id="dashboardContent">
 
-<div class="overviewGrid">
+  <h2>📊 Today's Overview</h2>
 
-<div class="overviewCard green">
-<h3>Today's Revenue</h3>
-<h1>₹<span id="todayRevenue">0</span></h1>
-</div>
+  <div class="dashboard-grid">
+    <div class="stat-card">
+      <h3>Revenue</h3>
+      <span id="todayRevenue">₹0</span>
+    </div>
 
-<div class="overviewCard blue">
-<h3>Today's Bills</h3>
-<h1 id="todayBills">0</h1>
-</div>
+    <div class="stat-card">
+      <h3>Bills</h3>
+      <span id="todayBills">0</span>
+    </div>
 
-</div>
+    <div class="stat-card">
+      <h3>Customers</h3>
+      <span id="todayCustomers">0</span>
+    </div>
 
-<div class="topSellingSection">
+    <div class="stat-card">
+      <h3>Avg Bill</h3>
+      <span id="avgBill">₹0</span>
+    </div>
+  </div>
 
-<h2>🔥 Top 10 Selling Items Today</h2>
-
-<div id="topSellingItems">
-
-<p>No Sales Today</p>
-
-</div>
-
-</div>
+  <div class="top-items-card">
+    <h2>🔥 Top Selling Items Today</h2>
+    <div id="topItems"></div>
+  </div>
 
 </div>
 
