@@ -371,9 +371,7 @@ document.getElementById("total")
 function payUPI(){
 
 paymentMode = "UPI";
-
 closePaymentPopup();
-
 confirmSaveBill(sendWhatsapp);
 
 }
@@ -381,9 +379,7 @@ confirmSaveBill(sendWhatsapp);
 function showQR(){
 
 paymentMode = "QR";
-
 closePaymentPopup();
-
 confirmSaveBill(sendWhatsapp);
 
 }
@@ -391,9 +387,7 @@ confirmSaveBill(sendWhatsapp);
 function cashPayment(){
 
 paymentMode = "Cash";
-
 closePaymentPopup();
-
 confirmSaveBill(sendWhatsapp);
 
 }
@@ -432,6 +426,12 @@ function confirmSaveBillChoice(send){
 sendWhatsapp = send;
 
 document.getElementById("saveBillPopup").style.display = "none";
+
+if(send){
+
+document.getElementById("customerNumber").focus();
+
+}
 
 openPaymentPopup();
 
