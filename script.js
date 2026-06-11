@@ -637,7 +637,7 @@ return;
 
 const res = await fetch(
 API_URL +
-"?action=customSales" +
+"?action=dashboard" +
 "&customerId=" + customerId +
 "&fromDate=" + fromDate +
 "&toDate=" + toDate
@@ -645,19 +645,46 @@ API_URL +
 
 const data = await res.json();
 
-document.getElementById("salesData").innerHTML = `
+/* Dashboard Cards */
 
-<div style="text-align:left">
+document.getElementById("todayRevenue").innerText =
+`₹${data.revenue || 0}`;
 
-<h3>📊 Custom Report</h3>
+document.getElementById("todayBills").innerText =
+data.bills || 0;
 
-<p>💰 Revenue : ₹${data.revenue}</p>
+document.getElementById("upiSales").innerText =
+`₹${data.upiSales || 0}`;
 
-<p>🧾 Bills : ${data.bills}</p>
+document.getElementById("highestBill").innerText =
+`₹${data.highestBill || 0}`;
 
+/* Top Selling */
+
+const topDiv =
+document.getElementById("topItems");
+
+topDiv.innerHTML = "";
+
+if(!data.topSelling || data.topSelling.length === 0){
+
+topDiv.innerHTML =
+"<p>No Sales Found</p>";
+
+return;
+
+}
+
+data.topSelling.forEach((item,index)=>{
+
+topDiv.innerHTML += `
+<div class="top-item">
+<span>🥇 ${index+1}. ${item.item}</span>
+<span>${item.qty}</span>
 </div>
-
 `;
+
+});
 
 }
 
@@ -794,14 +821,11 @@ document.getElementById("todayRevenue").innerText =
 document.getElementById("todayBills").innerText =
 data.todayBills || 0;
 
-document.getElementById("todayCustomers").innerText =
-data.todayCustomers || 0;
+document.getElementById("upiSales").innerText =
+`₹${data.upiSales || 0}`;
 
-document.getElementById("avgBill").innerText =
-`₹${Math.round(
-(data.todayRevenue || 0) /
-(data.todayBills || 1)
-)}`;
+document.getElementById("highestBill").innerText =
+`₹${data.highestBill || 0}`;
 
 /* Top Selling */
 
