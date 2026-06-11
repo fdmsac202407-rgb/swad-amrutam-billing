@@ -105,6 +105,11 @@ items = Object.values(grouped);
 loadCategories();
 loadDashboard();
 
+const today = new Date().toISOString().split("T")[0];
+
+document.getElementById("fromDate").value = today;
+document.getElementById("toDate").value = today;
+
 document
 .getElementById("searchBox")
 .addEventListener("input", searchProducts);
