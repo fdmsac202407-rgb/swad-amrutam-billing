@@ -418,7 +418,19 @@ window.closePaymentPopup=closePaymentPopup;
 
 /* SAVE BILL */
 
-async function saveBill(){
+function saveBill(){
+
+document.getElementById("saveBillPopup")
+.style.display = "flex";
+
+}
+
+window.saveBill = saveBill;
+
+async function confirmSaveBill(sendWhatsapp){
+
+document.getElementById("saveBillPopup")
+.style.display = "none";
 
 const customerName =
 document.getElementById("customerName").value;
@@ -456,25 +468,26 @@ method:"POST",
 body:JSON.stringify(data)
 });
 
-alert("Bill Saved");
+if(sendWhatsapp){
+sendWhatsApp();
+}
 
-/* Clear Cart */
+alert("✅ Bill Saved Successfully");
+
 cart = [];
 renderCart();
 
-/* Clear Customer Details */
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
 
-/* Reset Payment Mode */
 paymentMode = "Cash";
 
-/* Reload Dashboard */
 loadDashboard();
 
 }
 
-window.saveBill=saveBill;
+window.confirmSaveBill =
+confirmSaveBill;
 
 /* WHATSAPP */
 
