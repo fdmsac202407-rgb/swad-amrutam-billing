@@ -541,7 +541,115 @@ loadMenu();
 
 };
 
+/* SALES DASHBOARD */
 
+async function openSalesDashboard(){
+
+document.getElementById("menuDropdown").style.display = "none";
+
+document.getElementById("productGrid").innerHTML = "";
+
+const customerId =
+localStorage.getItem("customerId");
+
+const res =
+await fetch(
+API_URL +
+"?action=sales&customerId=" +
+customerId
+);
+
+const data =
+await res.json();
+
+document.getElementById("salesData").innerHTML = `
+
+<div style="text-align:left">
+
+<h3>📅 Today</h3>
+<p>Revenue : ₹${data.today}</p>
+<p>Bills : ${data.todayBills}</p>
+
+<hr>
+
+<h3>📆 This Week</h3>
+<p>Revenue : ₹${data.week}</p>
+<p>Bills : ${data.weekBills}</p>
+
+<hr>
+
+<h3>🗓 This Month</h3>
+<p>Revenue : ₹${data.month}</p>
+<p>Bills : ${data.monthBills}</p>
+
+</div>
+
+`;
+
+document.getElementById("salesPopup")
+.style.display = "flex";
+
+}
+
+function closeSalesPopup(){
+
+document.getElementById("salesPopup")
+.style.display = "none";
+
+}
+
+window.openSalesDashboard =
+openSalesDashboard;
+
+window.closeSalesPopup =
+closeSalesPopup;
+
+async function loadCustomSales(){
+
+const customerId =
+localStorage.getItem("customerId");
+
+const fromDate =
+document.getElementById("fromDate").value;
+
+const toDate =
+document.getElementById("toDate").value;
+
+if(!fromDate || !toDate){
+
+alert("Select Date Range");
+return;
+
+}
+
+const res = await fetch(
+API_URL +
+"?action=customSales" +
+"&customerId=" + customerId +
+"&fromDate=" + fromDate +
+"&toDate=" + toDate
+);
+
+const data = await res.json();
+
+document.getElementById("salesData").innerHTML = `
+
+<div style="text-align:left">
+
+<h3>📊 Custom Report</h3>
+
+<p>💰 Revenue : ₹${data.revenue}</p>
+
+<p>🧾 Bills : ${data.bills}</p>
+
+</div>
+
+`;
+
+}
+
+window.loadCustomSales =
+loadCustomSales;
 
 function goHome(){
 
@@ -695,25 +803,9 @@ return;
 
 data.topSelling.forEach((item,index)=>{
 
-let icon = "🥤";
-
-const name = item.item.toLowerCase();
-
-if(
-name.includes("farshi") ||
-name.includes("poha") ||
-name.includes("sandwich") ||
-name.includes("pizza") ||
-name.includes("burger") ||
-name.includes("puri") ||
-name.includes("snacks")
-){
-icon = "🍔";
-}
-
 topDiv.innerHTML += `
 <div class="top-item">
-<span>${icon} ${index+1}. ${item.item}</span>
+<span>🥇 ${index+1}. ${item.item}</span>
 <span>${item.qty}</span>
 </div>
 `;
