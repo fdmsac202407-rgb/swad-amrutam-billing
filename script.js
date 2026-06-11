@@ -103,12 +103,14 @@ price: Number(row.price)
 items = Object.values(grouped);
 
 loadCategories();
-loadDashboard();
 
-const today = new Date().toISOString().split("T")[0];
+const today =
+new Date().toISOString().split("T")[0];
 
 document.getElementById("fromDate").value = today;
 document.getElementById("toDate").value = today;
+
+loadDashboard();
 
 document
 .getElementById("searchBox")
@@ -695,6 +697,20 @@ topDiv.innerHTML += `
 
 window.loadCustomSales =
 loadCustomSales;
+
+function resetDashboard(){
+
+const today =
+new Date().toISOString().split("T")[0];
+
+document.getElementById("fromDate").value = today;
+document.getElementById("toDate").value = today;
+
+loadDashboard();
+
+}
+
+window.resetDashboard = resetDashboard;
 
 function goHome(){
 
