@@ -241,6 +241,8 @@ Close
 
 </div>
 
+<input type="hidden" id="sendWhatsappFlag" value="false">
+
 <!-- PAYMENT POPUP -->
 
 <div class="popup" id="paymentPopup">
@@ -296,14 +298,14 @@ Do you want to send bill to customer?
 <button
 class="popupBtn"
 style="background:#22c55e"
-onclick="confirmSaveBill(true)">
+onclick="confirmSaveBillChoice(true)">
 ✅ YES
 </button>
 
 <button
 class="popupBtn"
 style="background:#ef4444"
-onclick="confirmSaveBill(false)">
+onclick="confirmSaveBillChoice(false)">
 ❌ NO
 </button>
 
