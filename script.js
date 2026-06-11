@@ -813,6 +813,17 @@ customerId
 
 const data = await res.json();
 
+function resetDashboard(){
+
+document.getElementById("fromDate").value = "";
+document.getElementById("toDate").value = "";
+
+loadDashboard();
+
+}
+
+window.resetDashboard = resetDashboard;
+
 /* Dashboard Cards */
 
 document.getElementById("todayRevenue").innerText =
