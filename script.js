@@ -704,7 +704,7 @@ data.topSelling.slice(0,5).forEach((item,index)=>{
 
 topDiv.innerHTML += `
 <div class="top-item">
-<span>🥇 ${index+1}. ${item.item}</span>
+<span>${index+1}. ${item.item}</span>
 <span>${item.qty}</span>
 </div>
 `;
