@@ -450,6 +450,19 @@ body:JSON.stringify(data)
 });
 
 alert("Bill Saved");
+
+/* Clear Cart */
+cart = [];
+renderCart();
+
+/* Clear Customer Details */
+document.getElementById("customerName").value = "";
+document.getElementById("customerNumber").value = "";
+
+/* Reset Payment Mode */
+paymentMode = "Cash";
+
+/* Reload Dashboard */
 loadDashboard();
 
 }
