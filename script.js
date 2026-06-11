@@ -374,7 +374,7 @@ paymentMode = "UPI";
 
 closePaymentPopup();
 
-confirmSaveBill();
+confirmSaveBill(sendWhatsapp);
 
 }
 
@@ -384,7 +384,7 @@ paymentMode = "QR";
 
 closePaymentPopup();
 
-confirmSaveBill();
+confirmSaveBill(sendWhatsapp);
 
 }
 
@@ -394,7 +394,7 @@ paymentMode = "Cash";
 
 closePaymentPopup();
 
-confirmSaveBill();
+confirmSaveBill(sendWhatsapp);
 
 }
 
@@ -423,27 +423,21 @@ window.closePaymentPopup=closePaymentPopup;
 
 function saveBill(){
 
-sendWhatsapp = confirm(
-"Do you want to send bill to customer on WhatsApp?"
-);
-
-if(sendWhatsapp){
-
-document.getElementById("customerNumber").focus();
-
-alert("Enter Customer WhatsApp Number");
+document.getElementById("saveBillPopup").style.display = "flex";
 
 }
 
-else{
+function confirmSaveBillChoice(send){
 
-document.getElementById("customerNumber").value = "";
+sendWhatsapp = send;
 
-}
+document.getElementById("saveBillPopup").style.display = "none";
 
 openPaymentPopup();
 
 }
+
+window.confirmSaveBillChoice = confirmSaveBillChoice;
 
 window.saveBill = saveBill;
 
