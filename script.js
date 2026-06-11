@@ -435,6 +435,8 @@ alert(
 
 confirmSaveBill();
 
+}
+
 window.saveBill = saveBill;
 
 async function confirmSaveBill(sendWhatsapp){
