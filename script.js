@@ -415,12 +415,6 @@ window.closePaymentPopup=closePaymentPopup;
 
 /* SAVE BILL */
 
-function saveBill(){
-
-document.getElementById("saveBillPopup").style.display = "flex";
-
-}
-
 function confirmSaveBillChoice(send){
 
 sendWhatsapp = send;
@@ -431,11 +425,38 @@ if(send){
 
 document.getElementById("customerNumber").focus();
 
+alert("Please Enter WhatsApp Number");
+
+}else{
+
+openPaymentPopup();
+
+}
+
+}
+
+function checkPaymentMode(){
+
+if(sendWhatsapp){
+
+const number =
+document.getElementById("customerNumber").value;
+
+if(number.trim() === ""){
+
+alert("Please Enter WhatsApp Number First");
+document.getElementById("customerNumber").focus();
+return;
+
+}
+
 }
 
 openPaymentPopup();
 
 }
+
+window.checkPaymentMode = checkPaymentMode;
 
 window.confirmSaveBillChoice = confirmSaveBillChoice;
 
@@ -753,6 +774,39 @@ menu.style.display = "none";
 document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
+
+window.toggleMenu = toggleMenu;
+
+/* PAYMENT CHECK */
+
+function checkPaymentMode(){
+
+if(sendWhatsapp){
+
+const number =
+document.getElementById("customerNumber").value;
+
+if(number === ""){
+
+alert("Please Enter WhatsApp Number First");
+document.getElementById("customerNumber").focus();
+return;
+
+}
+
+}
+
+openPaymentPopup();
+
+}
+
+window.checkPaymentMode = checkPaymentMode;
+
+/* SEARCH */
+
+function searchProducts(){
+
+...
 
 loadDashboard();
 
