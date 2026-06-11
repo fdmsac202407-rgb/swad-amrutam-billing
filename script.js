@@ -5,6 +5,8 @@ let items = [];
 let cart = [];
 let paymentMode = "Cash";
 
+let sendWhatsapp = false;
+
 /* LOGIN */
 
 async function login(){
@@ -368,37 +370,38 @@ document.getElementById("total")
 
 function payUPI(){
 
-paymentMode="UPI";
+paymentMode = "UPI";
 
 closePaymentPopup();
 
-alert("UPI Selected");
+confirmSaveBill();
 
 }
 
 function showQR(){
 
-paymentMode="QR";
+paymentMode = "QR";
 
 closePaymentPopup();
 
-alert("QR Selected");
+confirmSaveBill();
 
 }
 
 function cashPayment(){
 
-paymentMode="Cash";
+paymentMode = "Cash";
 
 closePaymentPopup();
 
-alert("Cash Selected");
+confirmSaveBill();
 
 }
 
-window.payUPI=payUPI;
-window.showQR=showQR;
-window.cashPayment=cashPayment;
+window.payUPI = payUPI;
+window.showQR = showQR;
+window.cashPayment = cashPayment;
+
 function openPaymentPopup(){
 
 document.getElementById("paymentPopup")
@@ -420,20 +423,25 @@ window.closePaymentPopup=closePaymentPopup;
 
 function saveBill(){
 
-const sendBill =
-confirm("📲 Send WhatsApp Bill ?");
+sendWhatsapp = confirm(
+"Do you want to send bill to customer on WhatsApp?"
+);
 
-if(sendBill){
+if(sendWhatsapp){
 
 document.getElementById("customerNumber").focus();
 
-alert(
-"Please Enter WhatsApp Number and then click WhatsApp Bill"
-);
+alert("Enter Customer WhatsApp Number");
 
 }
 
-confirmSaveBill();
+else{
+
+document.getElementById("customerNumber").value = "";
+
+}
+
+openPaymentPopup();
 
 }
 
@@ -479,6 +487,12 @@ body:JSON.stringify(data)
 
 alert("✅ Bill Saved Successfully");
 
+if(sendWhatsapp){
+
+sendWhatsApp();
+
+}
+
 cart = [];
 renderCart();
 
@@ -487,8 +501,9 @@ document.getElementById("customerNumber").value = "";
 
 paymentMode = "Cash";
 
-loadDashboard();
+sendWhatsapp = false;
 
+loadDashboard();
 }
 
 window.confirmSaveBill =
