@@ -670,6 +670,11 @@ document.getElementById("productGrid").innerHTML = "";
 
 document.getElementById("emptyState").style.display = "block";
 
+const menu =
+document.getElementById("menuDropdown");
+
+menu.style.display = "none";
+
 document
 .querySelectorAll(".menuCategory")
 .forEach(btn => btn.classList.remove("active"));
