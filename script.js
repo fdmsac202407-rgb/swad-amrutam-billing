@@ -682,7 +682,7 @@ return;
 
 }
 
-data.topSelling.forEach((item,index)=>{
+data.topSelling.slice(0,5).forEach((item,index)=>{
 
 topDiv.innerHTML += `
 <div class="top-item">
