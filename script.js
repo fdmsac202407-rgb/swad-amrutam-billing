@@ -425,33 +425,21 @@ confirm("📲 Send WhatsApp Bill ?");
 
 if(sendBill){
 
-document
-.getElementById("customerNumber")
-.focus();
+document.getElementById("customerNumber").focus();
 
 alert(
-"Please Enter WhatsApp Number and click WhatsApp Bill"
+"Please Enter WhatsApp Number and then click WhatsApp Bill"
 );
 
 }
 
-confirmSaveBill(false);
-
-}
-
-window.saveBill = saveBill;
-
-document.getElementById("saveBillPopup")
-.style.display = "flex";
+confirmSaveBill();
 
 }
 
 window.saveBill = saveBill;
 
 async function confirmSaveBill(sendWhatsapp){
-
-document.getElementById("saveBillPopup")
-.style.display = "none";
 
 const customerName =
 document.getElementById("customerName").value;
