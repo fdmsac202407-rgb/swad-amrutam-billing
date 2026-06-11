@@ -424,8 +424,22 @@ const sendBill =
 confirm("📲 Send WhatsApp Bill ?");
 
 if(sendBill){
-askWhatsAppAndSend();
+
+document
+.getElementById("customerNumber")
+.focus();
+
+alert(
+"Please Enter WhatsApp Number and click WhatsApp Bill"
+);
+
 }
+
+confirmSaveBill(false);
+
+}
+
+window.saveBill = saveBill;
 
 document.getElementById("saveBillPopup")
 .style.display = "flex";
@@ -475,10 +489,6 @@ method:"POST",
 body:JSON.stringify(data)
 });
 
-if(sendWhatsapp){
-askWhatsAppAndSend();
-}
-
 alert("✅ Bill Saved Successfully");
 
 cart = [];
@@ -521,44 +531,6 @@ msg += `%0ATotal : ₹${total}`;
 
 window.open(
 `https://wa.me/91${number}?text=${msg}`
-);
-
-}
-
-function askWhatsAppAndSend(){
-
-let number =
-document.getElementById("customerNumber").value;
-
-if(!number){
-
-number = prompt(
-"Enter WhatsApp Number"
-);
-
-if(!number) return;
-
-}
-
-let msg =
-"☕ Swad Amrutam Bill%0A%0A";
-
-let total = 0;
-
-cart.forEach(item=>{
-
-msg +=
-`${item.name} (${item.type}) x${item.qty} = ₹${item.price * item.qty}%0A`;
-
-total += item.price * item.qty;
-
-});
-
-msg += `%0ATotal : ₹${total}`;
-
-window.open(
-`https://wa.me/91${number}?text=${msg}`,
-"_blank"
 );
 
 }
