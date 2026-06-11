@@ -810,32 +810,36 @@ async function loadDashboard(){
 const customerId =
 localStorage.getItem("customerId");
 
-const res = await fetch(
+const fromDate =
+document.getElementById("fromDate").value;
+
+const toDate =
+document.getElementById("toDate").value;
+
+let url =
 API_URL +
 "?action=dashboard&customerId=" +
-customerId
-);
+customerId;
 
-const data = await res.json();
+if(fromDate && toDate){
 
-function resetDashboard(){
-
-document.getElementById("fromDate").value = "";
-document.getElementById("toDate").value = "";
-
-loadDashboard();
+url +=
+"&fromDate=" + fromDate +
+"&toDate=" + toDate;
 
 }
 
-window.resetDashboard = resetDashboard;
+const res = await fetch(url);
 
-/* Dashboard Cards */
+const data = await res.json();
+
+/* Cards */
 
 document.getElementById("todayRevenue").innerText =
-`₹${data.todayRevenue || 0}`;
+`₹${data.revenue || 0}`;
 
 document.getElementById("todayBills").innerText =
-data.todayBills || 0;
+data.bills || 0;
 
 document.getElementById("upiSales").innerText =
 `₹${data.upiSales || 0}`;
@@ -850,10 +854,11 @@ document.getElementById("topItems");
 
 topDiv.innerHTML = "";
 
-if(!data.topSelling || data.topSelling.length === 0){
+if(!data.topSelling ||
+data.topSelling.length === 0){
 
 topDiv.innerHTML =
-"<p>No Sales Today</p>";
+"<p>No Sales Found</p>";
 
 return;
 
@@ -863,7 +868,7 @@ data.topSelling.forEach((item,index)=>{
 
 topDiv.innerHTML += `
 <div class="top-item">
-<span>🥇 ${index+1}. ${item.item}</span>
+<span>${index+1}. ${item.item}</span>
 <span>${item.qty}</span>
 </div>
 `;
