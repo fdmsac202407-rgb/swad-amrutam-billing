@@ -503,6 +503,16 @@ window.checkPaymentMode = checkPaymentMode;
 
 window.confirmSaveBillChoice = confirmSaveBillChoice;
 
+function closeSaveBillPopup(){
+
+    document.getElementById("saveBillPopup").style.display = "none";
+
+    sendWhatsapp = false;
+
+}
+
+window.closeSaveBillPopup = closeSaveBillPopup;
+
 function saveBill(){
 
     if(cart.length === 0){
