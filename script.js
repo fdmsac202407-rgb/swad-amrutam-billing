@@ -762,55 +762,20 @@ window.resetDashboard = resetDashboard;
 
 function goHome(){
 
-document.getElementById("productGrid").innerHTML = "";
+    document.getElementById("productGrid").innerHTML = "";
+    document.getElementById("emptyState").style.display = "block";
 
-document.getElementById("emptyState").style.display = "block";
+    const menu = document.getElementById("menuDropdown");
+    menu.style.display = "none";
 
-const menu =
-document.getElementById("menuDropdown");
+    document
+    .querySelectorAll(".menuCategory")
+    .forEach(btn => btn.classList.remove("active"));
 
-menu.style.display = "none";
-
-document
-.querySelectorAll(".menuCategory")
-.forEach(btn => btn.classList.remove("active"));
-
-window.toggleMenu = toggleMenu;
-
-/* PAYMENT CHECK */
-
-function checkPaymentMode(){
-
-if(sendWhatsapp){
-
-const number =
-document.getElementById("customerNumber").value;
-
-if(number === ""){
-
-alert("Please Enter WhatsApp Number First");
-document.getElementById("customerNumber").focus();
-return;
-
+    loadDashboard();
 }
 
-}
-
-openPaymentPopup();
-
-}
-
-window.checkPaymentMode = checkPaymentMode;
-
-/* SEARCH */
-
-function searchProducts(){
-
-...
-
-loadDashboard();
-
-}
+window.goHome = goHome;
 
 window.goHome = goHome;
 
