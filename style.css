@@ -352,13 +352,9 @@ font-weight:600;
 background:#8b5cf6;
 }
 
-.payBtn{
-background:transparent;
-border:2px solid #8b5cf6;
-}
-
-.whatsappBtn{
-background:#22c55e;
+.clearBtn{
+background:#ef4444;
+color:white;
 }
 
 /* POPUP */
