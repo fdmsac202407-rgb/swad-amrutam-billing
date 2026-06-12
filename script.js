@@ -79,7 +79,7 @@ const data = await res.json();
 console.log(data);
 
 const currentCustomerId =
-localStorage.getItem("customerId");
+String(localStorage.getItem("customerId")).trim();
 
 const filteredData = data.filter(row => {
 
