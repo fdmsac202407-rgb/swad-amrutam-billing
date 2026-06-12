@@ -417,23 +417,41 @@ window.closePaymentPopup=closePaymentPopup;
 
 function confirmSaveBillChoice(send){
 
-sendWhatsapp = send;
+    sendWhatsapp = send;
 
-document.getElementById("saveBillPopup").style.display = "none";
+    document.getElementById("saveBillPopup").style.display = "none";
 
-if(send){
+    if(send){
 
-document.getElementById("customerNumber").focus();
+        document.getElementById("customerNumber").focus();
 
-alert("Please Enter WhatsApp Number");
+        document.getElementById("customerNumber")
+        .style.border = "3px solid red";
 
-}else{
+    }else{
 
-openPaymentPopup();
+        openPaymentPopup();
 
+    }
 }
 
+function continueAfterNumber(){
+
+    const number =
+    document.getElementById("customerNumber").value;
+
+    if(number.trim() === ""){
+
+        alert("Please Enter WhatsApp Number");
+        document.getElementById("customerNumber").focus();
+        return;
+
+    }
+
+    openPaymentPopup();
 }
+
+window.continueAfterNumber = continueAfterNumber;
 
 function checkPaymentMode(){
 
@@ -459,6 +477,19 @@ openPaymentPopup();
 window.checkPaymentMode = checkPaymentMode;
 
 window.confirmSaveBillChoice = confirmSaveBillChoice;
+
+function saveBill(){
+
+    if(cart.length === 0){
+        alert("Please add item in cart");
+        return;
+    }
+
+    document.getElementById("saveBillPopup").style.display = "flex";
+
+}
+
+window.saveBill = saveBill;
 
 window.saveBill = saveBill;
 
