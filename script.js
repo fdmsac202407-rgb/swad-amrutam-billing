@@ -90,12 +90,12 @@ const filteredData = data.filter(row => {
   const customerId =
   String(row.customerId || "").trim();
 
-  // Blank Customer ID = badha mate visible
   if(customerId === "")
-    return true;
+  return true;
 
-  // Match customer ID
-  return customerId === currentCustomerId;
+const ids = customerId.split(",").map(id => id.trim());
+
+return ids.includes(currentCustomerId);
 
 });
 
