@@ -76,9 +76,31 @@ async function loadMenu(){
 const res = await fetch(API_URL);
 const data = await res.json();
 
+console.log(data);
+
+const currentCustomerId =
+localStorage.getItem("customerId");
+
+const filteredData = data.filter(row => {
+
+  if(row.active !== "Yes")
+    return false;
+
+  const customerId =
+  (row.customerId || "").trim();
+
+  // Blank Customer ID = badha mate visible
+  if(customerId === "")
+    return true;
+
+  // Match customer ID
+  return customerId === currentCustomerId;
+
+});
+
 const grouped = {};
 
-data.forEach(row=>{
+filteredData.forEach(row=>{
 
 if(row.active !== "Yes") return;
 
