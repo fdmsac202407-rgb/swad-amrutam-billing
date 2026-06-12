@@ -76,10 +76,11 @@ async function loadMenu(){
 const res = await fetch(API_URL);
 const data = await res.json();
 
-console.log(data);
-
 const currentCustomerId =
 String(localStorage.getItem("customerId")).trim();
+
+console.log("Current Login ID:", currentCustomerId);
+console.log("Menu Data:", data);
 
 const filteredData = data.filter(row => {
 
@@ -97,6 +98,8 @@ const filteredData = data.filter(row => {
   return customerId === currentCustomerId;
 
 });
+
+console.log("Filtered Data:", filteredData);
 
 const grouped = {};
 
