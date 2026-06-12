@@ -423,19 +423,16 @@ function confirmSaveBillChoice(send){
 
     if(send){
 
-        const number =
-        document.getElementById("customerNumber").value;
+        document.getElementById("customerNumber").focus();
 
-        if(number.trim() === ""){
+        document.getElementById("customerNumber")
+        .style.border = "3px solid red";
 
-            alert("Please Enter WhatsApp Number");
-            document.getElementById("customerNumber").focus();
-            return;
-        }
+    }else{
+
+        openPaymentPopup();
 
     }
-
-    openPaymentPopup();
 }
 
 function continueAfterNumber(){
@@ -544,8 +541,6 @@ sendWhatsApp();
 
 cart = [];
 renderCart();
-
-document.getElementById("customerNumber").style.border = "";
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
