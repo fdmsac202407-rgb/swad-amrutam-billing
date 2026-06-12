@@ -88,7 +88,7 @@ const filteredData = data.filter(row => {
     return false;
 
   const customerId =
-  (row.customerId || "").trim();
+  String(row.customerId || "").trim();
 
   // Blank Customer ID = badha mate visible
   if(customerId === "")
