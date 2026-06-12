@@ -611,6 +611,26 @@ window.open(
 
 window.sendWhatsApp=sendWhatsApp;
 
+function clearCart(){
+
+if(cart.length === 0){
+return;
+}
+
+if(confirm("Clear all items from cart?")){
+
+cart = [];
+renderCart();
+
+document.getElementById("customerName").value = "";
+document.getElementById("customerNumber").value = "";
+
+}
+
+}
+
+window.clearCart = clearCart;
+
 function loadCategories(){
 
 const categories = [...new Set(
