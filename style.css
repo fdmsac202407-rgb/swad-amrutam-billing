@@ -353,8 +353,9 @@ background:#8b5cf6;
 }
 
 .clearBtn{
-background:#ef4444;
-color:white;
+background:#ef4444 !important;
+color:#ffffff !important;
+font-weight:600;
 }
 
 /* POPUP */
