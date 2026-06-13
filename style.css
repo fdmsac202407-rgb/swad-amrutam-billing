@@ -1,3 +1,11 @@
+:root{
+    --primary-color:#7A1E1E;
+    --secondary-color:#D4A017;
+    --cream:#F8F5F0;
+    --white:#FFFFFF;
+    --text:#2D2D2D;
+}
+
 *{
 margin:0;
 padding:0;
@@ -6,8 +14,8 @@ font-family:'Segoe UI',Arial,sans-serif;
 }
 
 body{
-background:#1b1b22;
-color:#fff;
+    background:#F8F5F0;
+    color:#2D2D2D;
 }
 
 /* LOGIN */
@@ -127,11 +135,13 @@ height:calc(100vh - 70px);
 /* SIDEBAR */
 
 .sidebar{
-width:250px;
-background:#181820;
-padding:15px;
-overflow:auto;
-border-right:1px solid #2d2d38;
+    width:140px;
+    background:linear-gradient(
+        to bottom,
+        #6B0000,
+        #3D0000
+    );
+    padding:10px;
 }
 
 .menuHeader{
@@ -178,10 +188,7 @@ box-shadow:0 0 15px rgba(139,92,246,.35);
 /* PRODUCTS */
 
 .products{
-flex:1;
-padding:20px;
-overflow:auto;
-background:#121218;
+    background:#F8F5F0;
 }
 
 /* SEARCH BOX */
