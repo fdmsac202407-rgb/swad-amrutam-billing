@@ -56,7 +56,17 @@ LOGIN
 
 <div class="topBar">
 
-<h2 class="title">☕ Swad Amrutam Billing</h2>
+<div class="brandArea">
+
+<img
+src="https://www.smergers.com/media/franchiselogos/Swad_Amrutam_Chai_Logo.png"
+class="brandLogo">
+
+<h2 class="title">
+Swad Amrutam Billing
+</h2>
+
+</div>
 
 <div id="customerHeader" class="customerHeader"></div>
 
@@ -68,7 +78,17 @@ LOGIN
 
 <!-- SIDEBAR -->
 
-<div class="sidebar">
+<div class="sidebarBanner">
+
+<img
+src="https://www.smergers.com/media/franchiselogos/Swad_Amrutam_Chai_Logo.png"
+class="sidebarLogo">
+
+<h3>Swad Amrutam</h3>
+
+<p>Billing System</p>
+
+</div>
 
 <button
 class="homeBtn"
@@ -113,6 +133,10 @@ type="text"
 id="searchBox"
 class="searchBox"
 placeholder="🔍 Search Products">
+
+<button class="filterBtn">
+⚙ Filter
+</button>
 
 </div>
 
@@ -175,7 +199,13 @@ placeholder="🔍 Search Products">
 
 </div> <!-- emptyState -->
 
-<div id="productGrid" class="productGrid"></div>
+<div class="productSection">
+
+<div id="productGrid"
+class="productGrid">
+</div>
+
+</div>
 
 </div> <!-- products -->
 
@@ -184,9 +214,17 @@ placeholder="🔍 Search Products">
 <div class="cart">
 <div class="cartHeader">
 
+<div class="cartTopBar">
+
 <h2 class="cartTitle">
 🛒 Cart
 </h2>
+
+<div class="tableNo">
+Table 01
+</div>
+
+</div>
 
 </div>
 
@@ -213,16 +251,18 @@ id="customerNumber"
 placeholder="WhatsApp Number"
 onblur="checkPaymentMode()">
 
-<button
-class="actionBtn saveBtn"
-onclick="saveBill()">
-Save Bill
-</button>
+<div class="cartFooterButtons">
 
 <button
 class="actionBtn clearBtn"
 onclick="clearCart()">
-Clear Cart
+🗑 Clear
+</button>
+
+<button
+class="actionBtn saveBtn"
+onclick="saveBill()">
+💾 Save Bill
 </button>
 
 </div>
