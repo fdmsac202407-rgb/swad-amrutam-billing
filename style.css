@@ -182,8 +182,8 @@ border-color:#7A1E1E;
 
 .menuCategory.active{
 background:#7A1E1E;
-border:1px solid #8b5cf6;
-box-shadow:0 0 15px rgba(139,92,246,.35);
+border:1px solid #D4A017;
+box-shadow:0 0 12px rgba(212,160,23,.35);
 }
 
 /* PRODUCTS */
@@ -220,11 +220,6 @@ grid-template-columns:repeat(4,1fr);
 gap:12px;
 }
 
-.productGrid{
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-gap:15px;
-}
-
 .card{
 background:#ffffff;
 padding:8px;
@@ -238,7 +233,7 @@ box-shadow:0 2px 8px rgba(0,0,0,.08);
 
 .card:hover{
 transform:translateY(-4px);
-border-color:##7A1E1E;
+border-color:#7A1E1E;
 box-shadow:0 0 15px rgba(139,92,246,.25);
 }
 
@@ -473,7 +468,7 @@ margin-bottom:15px;
 
 .searchBox:focus{
 border-color:var(--primary-color);
-box-shadow:0 0 10px rgba(139,92,246,.3);
+box-shadow:0 0 10px rgba(122,30,30,.25);
 }
 
 .emptyState{
@@ -508,7 +503,7 @@ color:#777;
 .salesBtn{
 width:100%;
 padding:14px;
-background:##7A1E1E;
+background:#7A1E1E;
 color:white;
 border:none;
 border-radius:14px;
@@ -535,7 +530,7 @@ background:#5A1212;
 
 .stat-card{
     background:white;
-    border:1px solid ##7A1E1E;
+    border:1px solid #7A1E1E;
     border-radius:16px;
     padding:20px;
     text-align:center;
