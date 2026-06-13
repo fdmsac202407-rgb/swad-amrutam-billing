@@ -116,13 +116,13 @@ left:50%;
 top:50%;
 transform:translate(-50%,-50%);
 background:#1e1e28;
-border:2px solid #8b5cf6;
-color:#8b5cf6;
+border:2px solid #D4A017;
+color:#D4A017;
 padding:12px 25px;
 border-radius:14px;
 font-size:18px;
 font-weight:700;
-box-shadow:0 0 15px rgba(139,92,246,.35);
+box-shadow:0 0 15px rgba(212,160,23,.4);
 white-space:nowrap;
 z-index:10;
 }
@@ -177,11 +177,11 @@ transition:.3s;
 }
 
 .menuCategory:hover{
-border-color:#8b5cf6;
+border-color:#7A1E1E;
 }
 
 .menuCategory.active{
-background:#8b5cf6;
+background:#7A1E1E;
 border:1px solid #8b5cf6;
 box-shadow:0 0 15px rgba(139,92,246,.35);
 }
@@ -221,15 +221,14 @@ gap:18px;
 }
 
 .productGrid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:15px;
 }
 
 .card{
 background:#ffffff;
-padding:12px;
-border-radius:20px;
+padding:10px;
+border-radius:16px;
 text-align:center;
 cursor:pointer;
 transition:.3s;
@@ -239,14 +238,13 @@ box-shadow:0 2px 8px rgba(0,0,0,.08);
 
 .card:hover{
 transform:translateY(-4px);
-border-color:#8b5cf6;
+border-color:##7A1E1E;
 box-shadow:0 0 15px rgba(139,92,246,.25);
 }
 
 .card img{
-height:190px;
+height:120px;
 object-fit:cover;
-border-radius:15px;
 }
 
 .card h3{
@@ -318,6 +316,7 @@ background:#ffffff;
 padding:18px;
 overflow:auto;
 border-left:1px solid #ddd;
+box-shadow:-3px 0 15px rgba(0,0,0,.08);
 }
 
 .cart h2{
@@ -509,7 +508,7 @@ color:#777;
 .salesBtn{
 width:100%;
 padding:14px;
-background:#8b5cf6;
+background:##7A1E1E;
 color:white;
 border:none;
 border-radius:14px;
@@ -524,7 +523,7 @@ transition:.3s;
 .menuHeader:hover,
 .homeBtn:hover,
 .salesBtn:hover{
-background:#7c3aed;
+background:#5A1212;
 }
 
 .dashboard-grid{
@@ -535,8 +534,8 @@ background:#7c3aed;
 }
 
 .stat-card{
-    background:#141828;
-    border:1px solid #8b5cf6;
+    background:white;
+    border:1px solid ##7A1E1E;
     border-radius:16px;
     padding:20px;
     text-align:center;
@@ -550,12 +549,12 @@ background:#7c3aed;
 .stat-card span{
     font-size:32px;
     font-weight:bold;
-    color:#fff;
+    color:#7A1E1E;
 }
 
 .top-items-card{
     background:#141828;
-    border:1px solid #8b5cf6;
+    border:1px solid ##7A1E1E;
     border-radius:16px;
     padding:20px;
 }
@@ -580,8 +579,8 @@ flex-wrap:wrap;
 
 .dashboardFilter input[type="date"]{
 background:#141828;
-color:#8b5cf6;
-border:2px solid #8b5cf6;
+color:#7A1E1E;
+border:2px solid #7A1E1E;
 border-radius:12px;
 padding:10px 14px;
 font-size:15px;
@@ -613,7 +612,7 @@ transition:.3s;
 }
 
 .searchBtn:hover{
-background:#7c3aed;
+background:#5A1212;
 transform:translateY(-2px);
 }
 
@@ -677,8 +676,8 @@ margin-bottom:15px;
 }
 
 .sidebarLogo{
-width:80px;
-height:80px;
+width:120px;
+height:120px;
 object-fit:contain;
 }
 
@@ -691,8 +690,8 @@ gap:10px;
 }
 
 .brandLogo{
-width:45px;
-height:45px;
+width:60px;
+height:60px;
 object-fit:contain;
 }
 
