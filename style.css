@@ -135,7 +135,7 @@ height:calc(100vh - 70px);
 /* SIDEBAR */
 
 .sidebar{
-width:220px;
+width:170px;
 background:linear-gradient(
 to bottom,
 #6B0000,
@@ -216,8 +216,8 @@ color:#9ca3af;
 
 .productGrid{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
 }
 
 .productGrid{
@@ -227,8 +227,8 @@ gap:15px;
 
 .card{
 background:#ffffff;
-padding:10px;
-border-radius:16px;
+padding:8px;
+border-radius:15px;
 text-align:center;
 cursor:pointer;
 transition:.3s;
@@ -243,7 +243,7 @@ box-shadow:0 0 15px rgba(139,92,246,.25);
 }
 
 .card img{
-height:120px;
+height:110px;
 object-fit:cover;
 }
 
@@ -669,15 +669,15 @@ color:#666;
 
 .sidebarBanner{
 text-align:center;
-padding:15px;
+padding:10px;
 background:white;
 border-radius:15px;
 margin-bottom:15px;
 }
 
 .sidebarLogo{
-width:120px;
-height:120px;
+width:60px;
+height:60px;
 object-fit:contain;
 }
 
