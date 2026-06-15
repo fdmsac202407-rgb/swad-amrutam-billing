@@ -125,7 +125,7 @@ box-shadow:none;
 
 .container{
 display:grid;
-grid-template-columns:230px 1fr 360px;
+grid-template-columns:200px 1fr 330px;
 height:calc(100vh - 70px);
 overflow:hidden;
 }
@@ -372,8 +372,8 @@ font-weight:600;
 }
 
 .cart{
-width:360px;
-min-width:360px;
+width:330px;
+min-width:330px;
 }
 
 /* POPUP */
@@ -542,9 +542,10 @@ margin:8px 0;
 background:white;
 border:2px solid #D4A017;
 border-radius:10px;
-padding:10px;
+padding:8px;
+min-height:90px;
 text-align:center;
-box-shadow:0 4px 12px rgba(0,0,0,.08);
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .stat-card h3{
@@ -553,16 +554,17 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
 .stat-card span{
-    font-size:24px;
-    font-weight:bold;
-    color:#7A1E1E;
+font-size:20px;
+font-weight:bold;
+color:#7A1E1E;
 }
 
 .top-items-card{
 background:#141828;
 border:1px solid #7A1E1E;
-border-radius:16px;
-padding:12px;
+border-radius:12px;
+padding:10px;
+margin-top:8px;
 }
 
 .top-item{
@@ -593,7 +595,6 @@ border-radius:14px;
 padding:0 15px;
 font-size:14px;
 font-weight:600;
-}
 outline:none;
 box-shadow:0 0 10px rgba(139,92,246,.15);
 }
@@ -644,26 +645,26 @@ transform:translateY(-2px);
 /* BRAND BANNER */
 
 .brandBanner{
-height:70px;
+height:60px;
 background:#fff;
-border-radius:15px;
+border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
-gap:20px;
-padding:8px;
-margin-bottom:6px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+gap:12px;
+padding:5px;
+margin-bottom:5px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .bannerLogo{
-width:60px;
-height:60px;
+width:45px;
+height:45px;
 object-fit:contain;
 }
 
 .bannerCenter h1{
-font-size:20px;
+font-size:16px;
 color:#7A1E1E;
 margin:0;
 }
@@ -701,12 +702,6 @@ gap:12px;
 width:42px;
 height:42px;
 object-fit:contain;
-}
-
-.title{
-font-size:24px;
-font-weight:700;
-color:#7A1E1E;
 }
 
 .topRight{
