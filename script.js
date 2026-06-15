@@ -146,6 +146,7 @@ document
 document.getElementById("searchBox").value = "";
 document.getElementById("productGrid").innerHTML = "";
 document.getElementById("emptyState").style.display = "block";
+document.getElementById("searchArea").style.display = "none";
 
 }
 
@@ -154,6 +155,7 @@ document.getElementById("emptyState").style.display = "block";
 function showCategory(category){
 
 document.getElementById("emptyState").style.display = "none";
+document.getElementById("searchArea").style.display = "flex";
 
 document
 .querySelectorAll(".menuCategory")
@@ -850,6 +852,8 @@ function goHome(){
 
     document.getElementById("productGrid").innerHTML = "";
     document.getElementById("emptyState").style.display = "block";
+
+    document.getElementById("searchArea").style.display = "none";
 
     const menu = document.getElementById("menuDropdown");
     menu.style.display = "none";
