@@ -86,13 +86,13 @@ height:100vh;
 
 .topBar{
 height:70px;
-background:#15151d;
+background:#ffffff;
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 padding:0 20px;
-position:relative;
-border-bottom:1px solid #2d2d38;
+border-bottom:2px solid #D4A017;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .title{
@@ -111,20 +111,16 @@ font-weight:600;
 }
 
 .customerHeader{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
 background:#7A1E1E;
 border:2px solid #D4A017;
-color:#FFFFFF;
-padding:12px 30px;
-border-radius:15px;
-font-size:22px;
+color:#fff;
+padding:8px 18px;
+border-radius:12px;
+font-size:16px;
 font-weight:700;
-box-shadow:0 0 15px rgba(212,160,23,.35);
-white-space:nowrap;
-z-index:10;
+position:static;
+transform:none;
+box-shadow:none;
 }
 
 .container{
@@ -538,15 +534,15 @@ background:#5A1212;
 .dashboard-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin:10px 0;
+gap:8px;
+margin:8px 0;
 }
 
 .stat-card{
 background:white;
 border:2px solid #D4A017;
-border-radius:12px;
-padding:12px;
+border-radius:10px;
+padding:10px;
 text-align:center;
 box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
@@ -566,7 +562,7 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 background:#141828;
 border:1px solid #7A1E1E;
 border-radius:16px;
-padding:20px;
+padding:12px;
 }
 
 .top-item{
@@ -582,8 +578,8 @@ padding:20px;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:8px;
-margin:8px 0;
+gap:6px;
+margin:5px 0;
 flex-wrap:wrap;
 }
 
@@ -648,7 +644,7 @@ transform:translateY(-2px);
 /* BRAND BANNER */
 
 .brandBanner{
-height:80px;
+height:70px;
 background:#fff;
 border-radius:15px;
 display:flex;
@@ -656,7 +652,7 @@ align-items:center;
 justify-content:center;
 gap:20px;
 padding:8px;
-margin-bottom:8px;
+margin-bottom:6px;
 box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
@@ -698,13 +694,25 @@ object-fit:contain;
 .brandArea{
 display:flex;
 align-items:center;
-gap:10px;
+gap:12px;
 }
 
 .brandLogo{
-width:60px;
-height:60px;
+width:42px;
+height:42px;
 object-fit:contain;
+}
+
+.title{
+font-size:24px;
+font-weight:700;
+color:#7A1E1E;
+}
+
+.topRight{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 /* CART BUTTONS */
