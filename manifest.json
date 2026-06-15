@@ -3,8 +3,8 @@
   "short_name": "Swad Billing",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0b1020",
-  "theme_color": "#8b5cf6",
+  "background_color": "##ffffff",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "logo-192.png",
