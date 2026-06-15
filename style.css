@@ -488,7 +488,7 @@ justify-content:center;
 align-items:center;
 height:70vh;
 text-align:center;
-color:#888;
+color:2D2D2D;
 }
 
 .emptyIcon{
@@ -728,4 +728,12 @@ color:#fff;
 
 .top-item{
 color:#fff;
+}
+
+#dashboardContent h2{
+display:block !important;
+color:#7A1E1E !important;
+font-size:28px !important;
+font-weight:700 !important;
+margin-bottom:15px !important;
 }
