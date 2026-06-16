@@ -645,33 +645,41 @@ transform:translateY(-2px);
 /* BRAND BANNER */
 
 .brandBanner{
-height:60px;
-background:#fff;
-border-radius:12px;
+height:140px;
+background:linear-gradient(
+90deg,
+#fffdf8,
+#f7f1e8
+);
+border-radius:18px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
+overflow:hidden;
+}
+
+.bannerLeft{
 display:flex;
 align-items:center;
-justify-content:center;
-gap:12px;
-padding:5px;
-margin-bottom:5px;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
+gap:20px;
 }
 
 .bannerLogo{
-width:45px;
-height:45px;
-object-fit:contain;
+width:90px;
+height:90px;
 }
 
 .bannerCenter h1{
-font-size:16px;
+font-size:42px;
+font-weight:700;
 color:#7A1E1E;
-margin:0;
 }
 
 .bannerCenter p{
-margin-top:5px;
-color:#666;
+font-size:22px;
+color:#555;
 }
 
 /* SIDEBAR HEADER */
