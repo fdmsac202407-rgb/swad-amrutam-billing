@@ -7,6 +7,8 @@ let paymentMode = "Cash";
 
 let sendWhatsapp = false;
 
+let tables = {};
+
 /* LOGIN */
 
 async function login(){
@@ -293,6 +295,19 @@ window.closeSizePopup=closeSizePopup;
 
 function addToCart(name,type,price){
 
+const table =
+document.getElementById("tableSelect")?.value;
+
+if(table){
+
+if(!tables[table]){
+tables[table] = [];
+}
+
+cart = tables[table];
+
+}
+
 const existing =
 cart.find(c =>
 c.name===name &&
@@ -338,6 +353,19 @@ renderCart();
 window.changeQty=changeQty;
 
 function renderCart(){
+
+const table =
+document.getElementById("tableSelect")?.value;
+
+if(table){
+
+if(!tables[table]){
+tables[table] = [];
+}
+
+cart = tables[table];
+
+}
 
 const cartItems =
 document.getElementById("cartItems");
@@ -540,6 +568,8 @@ document.getElementById("customerNumber").value;
 
 const total =
 document.getElementById("total").innerText;
+const tableNo =
+document.getElementById("tableSelect").value;
 
 const data = {
 
@@ -559,7 +589,8 @@ qty:
 cart.map(i=>i.qty).join(","),
 
 total,
-paymentMode
+paymentMode,
+tableNo
 
 };
 
@@ -692,6 +723,32 @@ document.getElementById("customerHeader").innerHTML =
 `${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
 
 loadMenu();
+
+setTimeout(()=>{
+
+const tableSelect =
+document.getElementById("tableSelect");
+
+if(tableSelect){
+
+tableSelect.addEventListener("change",()=>{
+
+const table =
+tableSelect.value;
+
+if(!tables[table]){
+tables[table] = [];
+}
+
+cart = tables[table];
+
+renderCart();
+
+});
+
+}
+
+},1000);
 
 }
 
@@ -958,6 +1015,92 @@ grid.appendChild(card);
 }
 
 async function loadDashboard(){
+
+function printKOT(){
+
+if(cart.length===0){
+
+alert("Cart Empty");
+
+return;
+
+}
+
+let html = `
+<h2>SWAD AMRUTAM CHAI</h2>
+<h3>KOT</h3>
+<hr>
+`;
+
+cart.forEach(item=>{
+
+html += `
+<p>
+${item.name}
+(${item.type})
+x ${item.qty}
+</p>
+`;
+
+});
+
+const win =
+window.open("","","width=400,height=600");
+
+win.document.write(html);
+
+win.print();
+
+}
+
+function printBill(){
+
+if(cart.length===0){
+
+alert("Cart Empty");
+
+return;
+
+}
+
+let total = 0;
+
+let html = `
+<h2>SWAD AMRUTAM CHAI</h2>
+<hr>
+`;
+
+cart.forEach(item=>{
+
+let amount =
+item.price * item.qty;
+
+total += amount;
+
+html += `
+<p>
+${item.name}
+x${item.qty}
+=
+₹${amount}
+</p>
+`;
+
+});
+
+html += `
+<hr>
+<h2>Total : ₹${total}</h2>
+`;
+
+const win =
+window.open("","","width=400,height=700");
+
+win.document.write(html);
+
+win.print();
+
+}
 
 const customerId =
 localStorage.getItem("customerId");
