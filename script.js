@@ -1171,3 +1171,15 @@ topDiv.innerHTML += `
 });
 
 }
+
+function openTablesPage(){
+
+document.getElementById("emptyState").style.display = "none";
+
+document.querySelector(".productSection").style.display = "none";
+
+document.getElementById("tablesPage").style.display = "block";
+
+}
+
+window.openTablesPage = openTablesPage;
