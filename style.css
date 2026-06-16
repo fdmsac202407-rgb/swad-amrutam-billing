@@ -488,7 +488,7 @@ justify-content:center;
 align-items:center;
 height:70vh;
 text-align:center;
-color:2D2D2D;
+color:#888;
 }
 
 .emptyIcon{
@@ -645,41 +645,33 @@ transform:translateY(-2px);
 /* BRAND BANNER */
 
 .brandBanner{
-height:140px;
-background:linear-gradient(
-90deg,
-#fffdf8,
-#f7f1e8
-);
-border-radius:18px;
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 3px 12px rgba(0,0,0,.08);
-overflow:hidden;
-}
-
-.bannerLeft{
+height:60px;
+background:#fff;
+border-radius:12px;
 display:flex;
 align-items:center;
-gap:20px;
+justify-content:center;
+gap:12px;
+padding:5px;
+margin-bottom:5px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .bannerLogo{
-width:90px;
-height:90px;
+width:45px;
+height:45px;
+object-fit:contain;
 }
 
 .bannerCenter h1{
-font-size:42px;
-font-weight:700;
+font-size:16px;
 color:#7A1E1E;
+margin:0;
 }
 
 .bannerCenter p{
-font-size:22px;
-color:#555;
+margin-top:5px;
+color:#666;
 }
 
 /* SIDEBAR HEADER */
@@ -736,12 +728,4 @@ color:#fff;
 
 .top-item{
 color:#fff;
-}
-
-#dashboardContent h2{
-display:block !important;
-color:#7A1E1E !important;
-font-size:28px !important;
-font-weight:700 !important;
-margin-bottom:15px !important;
 }
