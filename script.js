@@ -654,6 +654,58 @@ window.open(
 
 window.sendWhatsApp=sendWhatsApp;
 
+function holdBill(){
+
+const tableNo =
+document.getElementById("tableSelect").value;
+
+if(!tableNo){
+
+alert("Please Select Table");
+return;
+
+}
+
+if(cart.length === 0){
+
+alert("Cart Empty");
+return;
+
+}
+
+const holdData = {
+
+tableNo: tableNo,
+
+customerName:
+document.getElementById("customerName").value,
+
+mobile:
+document.getElementById("customerNumber").value,
+
+cart: cart
+
+};
+
+localStorage.setItem(
+"table_" + tableNo,
+JSON.stringify(holdData)
+);
+
+alert(
+"Table " + tableNo +
+" Hold Successfully"
+);
+
+cart = [];
+
+renderCart();
+
+document.getElementById("customerName").value = "";
+document.getElementById("customerNumber").value = "";
+
+}
+
 function clearCart(){
 
 if(cart.length === 0){
