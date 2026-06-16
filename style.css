@@ -779,3 +779,48 @@ margin-top:10px;
     font-weight:700;
     margin:0;
 }
+
+.tableGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+padding:20px;
+}
+
+.tableCard{
+background:white;
+border:3px solid #D4A017;
+border-radius:20px;
+padding:25px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.tableCard:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.tableCard h3{
+font-size:24px;
+color:#7A1E1E;
+margin-bottom:10px;
+}
+
+.tableCard p{
+font-size:16px;
+font-weight:600;
+color:#16a34a;
+}
+
+.tablesHeader{
+padding:20px;
+text-align:center;
+}
+
+.tablesHeader h2{
+font-size:34px;
+color:#7A1E1E;
+}
