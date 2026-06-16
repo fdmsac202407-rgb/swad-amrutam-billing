@@ -104,12 +104,28 @@ onclick="goHome()">
 📊 Dashboard
 </button>
 
+<button
+class="homeBtn"
+onclick="openTablesPage()">
+🪑 Tables
+</button>
+
 <div class="menuHeader" onclick="toggleMenu()">
 <span>🧾 Billing</span>
 <span>▼</span>
 </div>
 
 <div id="menuDropdown" class="menuDropdown">
+</div>
+
+<div id="tablesPage" style="display:none">
+
+<h2>🪑 Table Management</h2>
+
+<div id="tableGrid"
+class="tableGrid">
+</div>
+
 </div>
 
 </div>
@@ -227,9 +243,22 @@ class="productGrid">
 🛒 Cart
 </h2>
 
-<div class="tableNo">
-Table 01
-</div>
+<select id="tableSelect" class="tableSelect">
+
+<option value="">
+Select Table
+</option>
+
+<option value="1">Table 01</option>
+<option value="2">Table 02</option>
+<option value="3">Table 03</option>
+<option value="4">Table 04</option>
+<option value="5">Table 05</option>
+<option value="6">Table 06</option>
+<option value="7">Table 07</option>
+<option value="8">Table 08</option>
+
+</select>
 
 </div>
 
@@ -267,9 +296,15 @@ onclick="clearCart()">
 </button>
 
 <button
+class="actionBtn holdBtn"
+onclick="holdBill()">
+⏸ Hold
+</button>
+
+<button
 class="actionBtn saveBtn"
 onclick="saveBill()">
-💾 Save Bill
+💾 Pay
 </button>
 
 </div>
