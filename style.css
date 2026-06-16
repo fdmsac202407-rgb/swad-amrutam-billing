@@ -748,8 +748,24 @@ margin-top:10px;
 }
 
 .cartTopBar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.tableSelect{
+    width:180px;
+    padding:10px;
+    border:2px solid #cfa43c;
+    border-radius:10px;
+    font-size:15px;
+    background:#fff;
+}
+
+.cartTitle{
+    font-size:32px;
+    font-weight:700;
+    margin:0;
 }
