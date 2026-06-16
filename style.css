@@ -729,3 +729,27 @@ color:#fff;
 .top-item{
 color:#fff;
 }
+
+.tableSelect{
+width:120px;
+padding:8px;
+border-radius:10px;
+border:1px solid #D4A017;
+font-weight:600;
+}
+
+.kotBtn{
+background:#f59e0b;
+}
+
+.billBtn{
+background:#16a34a;
+margin-top:10px;
+}
+
+.cartTopBar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
