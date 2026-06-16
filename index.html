@@ -118,16 +118,6 @@ onclick="openTablesPage()">
 <div id="menuDropdown" class="menuDropdown">
 </div>
 
-<div id="tablesPage" style="display:none">
-
-<h2>🪑 Table Management</h2>
-
-<div id="tableGrid"
-class="tableGrid">
-</div>
-
-</div>
-
 </div>
 
 <!-- PRODUCTS -->
@@ -222,6 +212,60 @@ display:block;">
 
 </div> <!-- emptyState -->
 
+<!-- TABLE MANAGEMENT PAGE -->
+
+<div id="tablesPage" style="display:none">
+
+<div class="tablesHeader">
+<h2>🪑 Table Management</h2>
+</div>
+
+<div id="tableGrid" class="tableGrid">
+
+<div class="tableCard" onclick="openTable(1)">
+<h3>Table 01</h3>
+<p id="tableStatus1">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(2)">
+<h3>Table 02</h3>
+<p id="tableStatus2">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(3)">
+<h3>Table 03</h3>
+<p id="tableStatus3">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(4)">
+<h3>Table 04</h3>
+<p id="tableStatus4">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(5)">
+<h3>Table 05</h3>
+<p id="tableStatus5">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(6)">
+<h3>Table 06</h3>
+<p id="tableStatus6">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(7)">
+<h3>Table 07</h3>
+<p id="tableStatus7">Available</p>
+</div>
+
+<div class="tableCard" onclick="openTable(8)">
+<h3>Table 08</h3>
+<p id="tableStatus8">Available</p>
+</div>
+
+</div>
+
+</div>
+
 <div class="productSection">
 
 <div id="productGrid"
@@ -243,7 +287,12 @@ class="productGrid">
 🛒 Cart
 </h2>
 
-<select id="tableSelect" class="tableSelect">
+<div class="tableBadge">
+🍽️ Table :
+<span id="selectedTable">
+Not Selected
+</span>
+</div>
 
 <option value="">
 Select Table
