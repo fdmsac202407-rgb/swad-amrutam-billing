@@ -551,8 +551,6 @@ function saveBill(){
 
 window.saveBill = saveBill;
 
-window.saveBill = saveBill;
-
 async function confirmSaveBill(sendWhatsapp){
 
 const customerName =
@@ -603,10 +601,17 @@ sendWhatsApp();
 }
 
 cart = [];
+
 renderCart();
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
+
+} // holdBill close
+
+window.holdBill = holdBill;
+
+function clearCart(){
 
 paymentMode = "Cash";
 
