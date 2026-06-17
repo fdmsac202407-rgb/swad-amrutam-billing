@@ -1341,25 +1341,3 @@ info.innerText =
 }
 
 }
-
-window.refreshTableStatus = refreshTableStatus;
-
-window.onload = function(){
-
-if(localStorage.getItem("isLoggedIn") === "true"){
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("billingPage").style.display="block";
-
-document.getElementById("customerHeader").innerHTML =
-`${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
-
-loadMenu();
-
-}
-
-refreshTableStatus();
-
-};
-
-}
