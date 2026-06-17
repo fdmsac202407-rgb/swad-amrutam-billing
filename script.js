@@ -658,8 +658,6 @@ function holdBill(){
 
 const tableNo = currentTable;
 
-...
-
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
 
