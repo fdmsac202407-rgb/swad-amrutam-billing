@@ -326,14 +326,15 @@ background:#5A1414;
 /* CART */
 
 .cart{
+width:330px;
+min-width:330px;
 background:#ffffff;
 padding:18px;
 overflow-y:auto;
 height:100%;
 border-left:1px solid #ddd;
 box-shadow:-3px 0 15px rgba(0,0,0,.08);
-position:sticky;
-top:0;
+flex-shrink:0;
 }
 
 .cart h2{
