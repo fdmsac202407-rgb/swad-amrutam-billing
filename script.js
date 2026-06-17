@@ -8,7 +8,6 @@ let paymentMode = "Cash";
 let sendWhatsapp = false;
 
 let tables = {};
-let currentTable = null;
 
 /* LOGIN */
 
@@ -296,13 +295,16 @@ window.closeSizePopup=closeSizePopup;
 
 function addToCart(name,type,price){
 
-if(currentTable){
+const table =
+document.getElementById("tableSelect")?.value;
 
-if(!tables[currentTable]){
-tables[currentTable] = [];
+if(table){
+
+if(!tables[table]){
+tables[table] = [];
 }
 
-cart = tables[currentTable];
+cart = tables[table];
 
 }
 
@@ -352,13 +354,16 @@ window.changeQty=changeQty;
 
 function renderCart(){
 
-if(currentTable){
+const table =
+document.getElementById("tableSelect")?.value;
 
-if(!tables[currentTable]){
-tables[currentTable] = [];
+if(table){
+
+if(!tables[table]){
+tables[table] = [];
 }
 
-cart = tables[currentTable];
+cart = tables[table];
 
 }
 
@@ -551,6 +556,8 @@ function saveBill(){
 
 window.saveBill = saveBill;
 
+window.saveBill = saveBill;
+
 async function confirmSaveBill(sendWhatsapp){
 
 const customerName =
@@ -561,8 +568,8 @@ document.getElementById("customerNumber").value;
 
 const total =
 document.getElementById("total").innerText;
-
-const tableNo = currentTable || "";
+const tableNo =
+document.getElementById("tableSelect").value;
 
 const data = {
 
@@ -601,17 +608,10 @@ sendWhatsApp();
 }
 
 cart = [];
-
 renderCart();
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
-
-} // holdBill close
-
-window.holdBill = holdBill;
-
-function clearCart(){
 
 paymentMode = "Cash";
 
@@ -656,17 +656,21 @@ window.sendWhatsApp=sendWhatsApp;
 
 function holdBill(){
 
-const tableNo = currentTable;
+const tableNo =
+document.getElementById("tableSelect").value;
 
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
+if(!tableNo){
 
-} //
+alert("Please Select Table");
+return;
 
-function clearCart(){
+}
 
 if(cart.length === 0){
+
+alert("Cart Empty");
 return;
+
 }
 
 const holdData = {
@@ -687,16 +691,11 @@ localStorage.setItem(
 "table_" + tableNo,
 JSON.stringify(holdData)
 );
-tables[tableNo] = cart;
 
 alert(
 "Table " + tableNo +
 " Hold Successfully"
 );
-
-refreshTableStatus();
-
-backToTables();
 
 cart = [];
 
@@ -704,6 +703,8 @@ renderCart();
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
+
+}
 
 function clearCart(){
 
@@ -713,22 +714,7 @@ return;
 
 if(confirm("Clear all items from cart?")){
 
-if(currentTable){
-
-tables[currentTable] = [];
-
-localStorage.removeItem(
-"table_" + currentTable
-);
-
-cart = tables[currentTable];
-
-}else{
-
 cart = [];
-
-}
-
 renderCart();
 
 document.getElementById("customerName").value = "";
@@ -789,6 +775,32 @@ document.getElementById("customerHeader").innerHTML =
 `${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
 
 loadMenu();
+
+setTimeout(()=>{
+
+const tableSelect =
+document.getElementById("tableSelect");
+
+if(tableSelect){
+
+tableSelect.addEventListener("change",()=>{
+
+const table =
+tableSelect.value;
+
+if(!tables[table]){
+tables[table] = [];
+}
+
+cart = tables[table];
+
+renderCart();
+
+});
+
+}
+
+},1000);
 
 }
 
@@ -1220,124 +1232,6 @@ document.querySelector(".productSection").style.display = "none";
 
 document.getElementById("tablesPage").style.display = "block";
 
-refreshTableStatus();
-
 }
 
 window.openTablesPage = openTablesPage;
-
-function openTable(tableNo){
-
-currentTable = tableNo;
-
-document.getElementById("selectedTable").innerText =
-"Table " + String(tableNo).padStart(2,"0");
-
-document.getElementById("tablesPage").style.display = "none";
-
-document.querySelector(".productSection").style.display = "block";
-
-document.getElementById("emptyState").style.display = "block";
-
-document.getElementById("searchArea").style.display = "flex";
-
-document.getElementById("menuDropdown").style.display = "block";
-
-/* Load Hold Data */
-
-const saved =
-localStorage.getItem("table_" + tableNo);
-
-if(saved){
-
-const holdData =
-JSON.parse(saved);
-
-tables[tableNo] =
-holdData.cart || [];
-
-document.getElementById("customerName").value =
-holdData.customerName || "";
-
-document.getElementById("customerNumber").value =
-holdData.mobile || "";
-
-}else{
-
-if(!tables[tableNo]){
-tables[tableNo] = [];
-}
-
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
-
-}
-
-cart = tables[tableNo];
-
-renderCart();
-
-}
-
-function backToTables(){
-
-currentTable = null;
-
-document.getElementById("tablesPage").style.display =
-"block";
-
-document.querySelector(".productSection").style.display =
-"none";
-
-document.getElementById("selectedTable").innerText =
-"Not Selected";
-
-}
-
-window.backToTables = backToTables;
-
-function refreshTableStatus(){
-
-for(let i=1;i<=8;i++){
-
-const data =
-localStorage.getItem("table_" + i);
-
-const status =
-document.getElementById("tableStatus"+i);
-
-const info =
-document.getElementById("tableInfo"+i);
-
-if(!status || !info) continue;
-
-if(data){
-
-const order =
-JSON.parse(data);
-
-status.innerText = "Running";
-
-status.className =
-"tableStatus running";
-
-info.innerText =
-(order.cart || [])
-.map(x => x.name + " x" + x.qty)
-.join(", ");
-
-}else{
-
-status.innerText = "Available";
-
-status.className =
-"tableStatus available";
-
-info.innerText =
-"No Active Order";
-
-}
-
-}
-
-}
