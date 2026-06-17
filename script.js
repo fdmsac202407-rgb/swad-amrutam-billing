@@ -653,18 +653,17 @@ function holdBill(){
 
 const tableNo = currentTable;
 
-if(!currentTable){
+...
 
-alert("Please Open Table First");
-return;
+document.getElementById("customerName").value = "";
+document.getElementById("customerNumber").value = "";
 
-}
+} //
+
+function clearCart(){
 
 if(cart.length === 0){
-
-alert("Cart Empty");
 return;
-
 }
 
 const holdData = {
