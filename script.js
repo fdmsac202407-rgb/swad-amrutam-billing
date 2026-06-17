@@ -8,6 +8,7 @@ let paymentMode = "Cash";
 let sendWhatsapp = false;
 
 let tables = {};
+let currentTable = null;
 
 /* LOGIN */
 
@@ -295,16 +296,13 @@ window.closeSizePopup=closeSizePopup;
 
 function addToCart(name,type,price){
 
-const table =
-document.getElementById("tableSelect")?.value;
+if(currentTable){
 
-if(table){
-
-if(!tables[table]){
-tables[table] = [];
+if(!tables[currentTable]){
+tables[currentTable] = [];
 }
 
-cart = tables[table];
+cart = tables[currentTable];
 
 }
 
@@ -354,16 +352,13 @@ window.changeQty=changeQty;
 
 function renderCart(){
 
-const table =
-document.getElementById("tableSelect")?.value;
+if(currentTable){
 
-if(table){
-
-if(!tables[table]){
-tables[table] = [];
+if(!tables[currentTable]){
+tables[currentTable] = [];
 }
 
-cart = tables[table];
+cart = tables[currentTable];
 
 }
 
@@ -568,8 +563,8 @@ document.getElementById("customerNumber").value;
 
 const total =
 document.getElementById("total").innerText;
-const tableNo =
-document.getElementById("tableSelect").value;
+
+const tableNo = currentTable || "";
 
 const data = {
 
@@ -656,12 +651,11 @@ window.sendWhatsApp=sendWhatsApp;
 
 function holdBill(){
 
-const tableNo =
-document.getElementById("tableSelect").value;
+const tableNo = currentTable;
 
-if(!tableNo){
+if(!currentTable){
 
-alert("Please Select Table");
+alert("Please Open Table First");
 return;
 
 }
@@ -691,6 +685,7 @@ localStorage.setItem(
 "table_" + tableNo,
 JSON.stringify(holdData)
 );
+tables[tableNo] = cart;
 
 alert(
 "Table " + tableNo +
@@ -714,7 +709,22 @@ return;
 
 if(confirm("Clear all items from cart?")){
 
+if(currentTable){
+
+tables[currentTable] = [];
+
+localStorage.removeItem(
+"table_" + currentTable
+);
+
+cart = tables[currentTable];
+
+}else{
+
 cart = [];
+
+}
+
 renderCart();
 
 document.getElementById("customerName").value = "";
@@ -775,32 +785,6 @@ document.getElementById("customerHeader").innerHTML =
 `${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
 
 loadMenu();
-
-setTimeout(()=>{
-
-const tableSelect =
-document.getElementById("tableSelect");
-
-if(tableSelect){
-
-tableSelect.addEventListener("change",()=>{
-
-const table =
-tableSelect.value;
-
-if(!tables[table]){
-tables[table] = [];
-}
-
-cart = tables[table];
-
-renderCart();
-
-});
-
-}
-
-},1000);
 
 }
 
@@ -1235,3 +1219,73 @@ document.getElementById("tablesPage").style.display = "block";
 }
 
 window.openTablesPage = openTablesPage;
+
+function openTable(tableNo){
+
+currentTable = tableNo;
+
+document.getElementById("selectedTable").innerText =
+"Table " + String(tableNo).padStart(2,"0");
+
+document.getElementById("tablesPage").style.display = "none";
+
+document.querySelector(".productSection").style.display = "block";
+
+document.getElementById("emptyState").style.display = "block";
+
+document.getElementById("searchArea").style.display = "flex";
+
+document.getElementById("menuDropdown").style.display = "block";
+
+/* Load Hold Data */
+
+const saved =
+localStorage.getItem("table_" + tableNo);
+
+if(saved){
+
+const holdData =
+JSON.parse(saved);
+
+tables[tableNo] =
+holdData.cart || [];
+
+document.getElementById("customerName").value =
+holdData.customerName || "";
+
+document.getElementById("customerNumber").value =
+holdData.mobile || "";
+
+}else{
+
+if(!tables[tableNo]){
+tables[tableNo] = [];
+}
+
+document.getElementById("customerName").value = "";
+document.getElementById("customerNumber").value = "";
+
+}
+
+cart = tables[tableNo];
+
+renderCart();
+
+}
+
+function backToTables(){
+
+currentTable = null;
+
+document.getElementById("tablesPage").style.display =
+"block";
+
+document.querySelector(".productSection").style.display =
+"none";
+
+document.getElementById("selectedTable").innerText =
+"Not Selected";
+
+}
+
+window.backToTables = backToTables;
