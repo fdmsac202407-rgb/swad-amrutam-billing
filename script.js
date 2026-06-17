@@ -692,14 +692,16 @@ alert(
 " Hold Successfully"
 );
 
+refreshTableStatus();
+
+backToTables();
+
 cart = [];
 
 renderCart();
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
-
-}
 
 function clearCart(){
 
@@ -1216,6 +1218,8 @@ document.querySelector(".productSection").style.display = "none";
 
 document.getElementById("tablesPage").style.display = "block";
 
+refreshTableStatus();
+
 }
 
 window.openTablesPage = openTablesPage;
@@ -1289,3 +1293,49 @@ document.getElementById("selectedTable").innerText =
 }
 
 window.backToTables = backToTables;
+
+function refreshTableStatus(){
+
+for(let i=1;i<=8;i++){
+
+const data =
+localStorage.getItem("table_" + i);
+
+const status =
+document.getElementById("tableStatus"+i);
+
+const info =
+document.getElementById("tableInfo"+i);
+
+if(!status || !info) continue;
+
+if(data){
+
+const order =
+JSON.parse(data);
+
+status.innerText = "Running";
+
+status.className =
+"tableStatus running";
+
+info.innerText =
+(order.cart || [])
+.map(x => x.name + " x" + x.qty)
+.join(", ");
+
+}else{
+
+status.innerText = "Available";
+
+status.className =
+"tableStatus available";
+
+info.innerText =
+"No Active Order";
+
+}
+
+}
+
+}
