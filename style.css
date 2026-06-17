@@ -124,10 +124,27 @@ box-shadow:none;
 }
 
 .container{
-display:grid;
-grid-template-columns:200px 1fr 330px;
+display:flex;
 height:calc(100vh - 70px);
 overflow:hidden;
+}
+
+.sidebar{
+width:200px;
+flex-shrink:0;
+}
+
+.products{
+flex:1;
+overflow-y:auto;
+}
+
+.cart{
+width:330px;
+flex-shrink:0;
+overflow-y:auto;
+background:#fff;
+border-left:1px solid #ddd;
 }
 
 /* SIDEBAR */
@@ -381,11 +398,6 @@ color:#ffffff !important;
 font-weight:600;
 }
 
-.cart{
-width:330px;
-min-width:330px;
-}
-
 /* POPUP */
 
 .popup{
@@ -434,7 +446,8 @@ text-align:center;
 }
 
 .container{
-display:block;
+display:flex;
+flex-direction:column;
 height:auto;
 }
 
@@ -877,4 +890,32 @@ font-size:13px;
 color:#666;
 line-height:1.5;
 min-height:40px;
+}
+
+/* FIX CART POSITION */
+
+#billingPage{
+height:100vh;
+overflow:hidden;
+}
+
+.container{
+display:flex !important;
+flex-direction:row !important;
+}
+
+.sidebar{
+width:220px;
+min-width:220px;
+}
+
+.products{
+flex:1;
+min-width:0;
+}
+
+.cart{
+width:330px !important;
+min-width:330px !important;
+display:block !important;
 }
