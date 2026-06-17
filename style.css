@@ -920,3 +920,23 @@ width:330px !important;
 min-width:330px !important;
 display:block !important;
 }
+
+.container{
+display:flex !important;
+flex-direction:row !important;
+}
+
+.sidebar{
+width:220px !important;
+min-width:220px !important;
+}
+
+.products{
+flex:1 !important;
+}
+
+.cart{
+width:330px !important;
+min-width:330px !important;
+display:block !important;
+}
