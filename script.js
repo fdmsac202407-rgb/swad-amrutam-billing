@@ -959,13 +959,19 @@ window.resetDashboard = resetDashboard;
 
 function goHome(){
 
+    // Table page hide
+    document.getElementById("tablesPage").style.display = "none";
+
+    // Billing/Product page show
+    document.querySelector(".productSection").style.display = "block";
+
     document.getElementById("productGrid").innerHTML = "";
     document.getElementById("emptyState").style.display = "block";
 
     document.getElementById("searchArea").style.display = "none";
 
     const menu = document.getElementById("menuDropdown");
-    menu.style.display = "none";
+    menu.style.display = "block";
 
     document
     .querySelectorAll(".menuCategory")
@@ -976,7 +982,6 @@ function goHome(){
 
 window.goHome = goHome;
 
-window.goHome = goHome;
 
 function toggleMenu(){
 
