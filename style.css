@@ -182,11 +182,20 @@ border-color:#D4A017;
 }
 
 .menuCategory.active{
-background:#D4A017;
-color:#2D2D2D;
+background:#FFFFFF;
+color:#7A1E1E;
 font-weight:700;
-border:none;
-box-shadow:none;
+border-left:5px solid #D4A017;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.menuCategory.active{
+background:#FFFFFF;
+color:#7A1E1E;
+font-weight:700;
+border-left:5px solid #D4A017;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+transform:translateX(3px);
 }
 
 /* PRODUCTS */
@@ -877,4 +886,45 @@ font-size:13px;
 color:#666;
 line-height:1.5;
 min-height:40px;
+}
+
+.viewBtn{
+width:100%;
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#7A1E1E;
+color:#fff;
+font-weight:600;
+cursor:pointer;
+}
+
+.viewBtn:hover{
+background:#5a1414;
+}
+
+.tableStatus{
+display:inline-block;
+padding:6px 12px;
+border-radius:20px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.tableStatus.available{
+background:#dcfce7;
+color:#16a34a;
+}
+
+.tableStatus.running{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.tableInfo{
+font-size:13px;
+color:#666;
+min-height:40px;
+margin-top:5px;
 }
