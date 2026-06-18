@@ -99,18 +99,20 @@ class="sidebarLogo">
 </div>
 
 <button
-class="homeBtn"
-onclick="goHome()">
+class="homeBtn active"
+onclick="setActiveMenu(this);goHome();">
 📊 Dashboard
 </button>
 
 <button
 class="homeBtn"
-onclick="openTablesPage()">
+onclick="setActiveMenu(this);openTablesPage();">
 🪑 Tables
 </button>
 
-<div class="menuHeader" onclick="toggleMenu()">
+<div
+class="menuHeader"
+onclick="setActiveMenu(this);toggleMenu();">
 <span>🧾 Billing</span>
 <span>▼</span>
 </div>
@@ -222,44 +224,182 @@ display:block;">
 
 <div id="tableGrid" class="tableGrid">
 
-<div class="tableCard" onclick="openTable(1)">
+<div class="tableCard" id="tableCard1">
 <h3>Table 01</h3>
-<p id="tableStatus1">Available</p>
+
+<div id="tableStatus1"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(2)">
+<div class="tableInfo"
+id="tableInfo1">
+No Active Order
+</div>
+
+<div class="tableButtons">
+
+<button
+class="viewBtn"
+onclick="openTable(1)">
+Open
+</button>
+
+<button
+class="viewBtn"
+onclick="viewTable(1)">
+View
+</button>
+
+</div>
+
+</div>
+
+<div class="tableCard" id="tableCard2">
 <h3>Table 02</h3>
-<p id="tableStatus2">Available</p>
+
+<div id="tableStatus2"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(3)">
+<div class="tableInfo"
+id="tableInfo2">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(2)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard3">
 <h3>Table 03</h3>
-<p id="tableStatus3">Available</p>
+
+<div id="tableStatus3"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(4)">
+<div class="tableInfo"
+id="tableInfo3">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(3)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard4">
 <h3>Table 04</h3>
-<p id="tableStatus4">Available</p>
+
+<div id="tableStatus4"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(5)">
+<div class="tableInfo"
+id="tableInfo4">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(4)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard5">
 <h3>Table 05</h3>
-<p id="tableStatus5">Available</p>
+
+<div id="tableStatus5"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(6)">
+<div class="tableInfo"
+id="tableInfo5">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(5)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard6">
 <h3>Table 06</h3>
-<p id="tableStatus6">Available</p>
+
+<div id="tableStatus6"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(7)">
+<div class="tableInfo"
+id="tableInfo6">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(6)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard7">
 <h3>Table 07</h3>
-<p id="tableStatus7">Available</p>
+
+<div id="tableStatus7"
+class="tableStatus available">
+Available
 </div>
 
-<div class="tableCard" onclick="openTable(8)">
+<div class="tableInfo"
+id="tableInfo7">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(7)">
+Open Table
+</button>
+
+</div>
+
+<div class="tableCard" id="tableCard8">
 <h3>Table 08</h3>
-<p id="tableStatus8">Available</p>
+
+<div id="tableStatus8"
+class="tableStatus available">
+Available
+</div>
+
+<div class="tableInfo"
+id="tableInfo8">
+No Active Order
+</div>
+
+<button
+class="viewBtn"
+onclick="openTable(8)">
+Open Table
+</button>
+
 </div>
 
 </div>
