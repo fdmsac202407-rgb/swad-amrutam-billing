@@ -150,6 +150,8 @@ document.getElementById("productGrid").innerHTML = "";
 document.getElementById("emptyState").style.display = "block";
 document.getElementById("searchArea").style.display = "none";
 
+goHome();
+
 }
 
 /* SHOW CATEGORY */
@@ -959,19 +961,23 @@ window.resetDashboard = resetDashboard;
 
 function goHome(){
 
-    // Table page hide
-    document.getElementById("tablesPage").style.display = "none";
-
-    // Billing/Product page show
-    document.querySelector(".productSection").style.display = "block";
-
-    document.getElementById("productGrid").innerHTML = "";
+    // Dashboard Show
     document.getElementById("emptyState").style.display = "block";
 
+    // Tables Hide
+    document.getElementById("tablesPage").style.display = "none";
+
+    // Product Section Show
+    document.querySelector(".productSection").style.display = "block";
+
+    // Product Grid Clear
+    document.getElementById("productGrid").innerHTML = "";
+
+    // Search Hide
     document.getElementById("searchArea").style.display = "none";
 
-    const menu = document.getElementById("menuDropdown");
-    menu.style.display = "block";
+    // Billing Menu Close
+    document.getElementById("menuDropdown").style.display = "none";
 
     document
     .querySelectorAll(".menuCategory")
@@ -985,18 +991,31 @@ window.goHome = goHome;
 
 function toggleMenu(){
 
-const menu =
-document.getElementById("menuDropdown");
+    const menu =
+    document.getElementById("menuDropdown");
 
-if(menu.style.display === "block"){
+    // Dashboard Hide
+    document.getElementById("emptyState").style.display = "none";
 
-menu.style.display = "none";
+    // Tables Hide
+    document.getElementById("tablesPage").style.display = "none";
 
-}else{
+    // Product Section Show
+    document.querySelector(".productSection").style.display = "block";
 
-menu.style.display = "block";
+    if(menu.style.display === "block"){
 
-}
+        menu.style.display = "none";
+
+        document.getElementById("searchArea").style.display = "none";
+
+    }else{
+
+        menu.style.display = "block";
+
+        document.getElementById("searchArea").style.display = "flex";
+
+    }
 
 }
 
@@ -1231,12 +1250,22 @@ topDiv.innerHTML += `
 
 function openTablesPage(){
 
-document.getElementById("emptyState").style.display = "none";
+    // Dashboard Hide
+    document.getElementById("emptyState").style.display = "none";
 
-document.querySelector(".productSection").style.display = "none";
+    // Billing Close
+    document.getElementById("menuDropdown").style.display = "none";
 
-document.getElementById("tablesPage").style.display = "block";
+    // Search Hide
+    document.getElementById("searchArea").style.display = "none";
+
+    // Product Section Hide
+    document.querySelector(".productSection").style.display = "none";
+
+    // Tables Show
+    document.getElementById("tablesPage").style.display = "block";
 
 }
 
-window.openTablesPage = openTablesPage;
+window.openTablesPage = openTable
+sPage;
