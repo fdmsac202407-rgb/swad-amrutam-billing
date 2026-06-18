@@ -544,10 +544,10 @@ margin-bottom:10px;
 transition:.3s;
 }
 
-.menuHeader:hover,
-.homeBtn:hover,
-.salesBtn:hover{
-background:#5A1212;
+.menuHeader:hover:not(.active),
+.homeBtn:hover:not(.active),
+.salesBtn:hover:not(.active){
+    background:#A52A2A;
 }
 
 .dashboard-grid{
@@ -927,4 +927,15 @@ font-size:13px;
 color:#666;
 min-height:40px;
 margin-top:5px;
+}
+
+/* Main Tabs Active State */
+.menuHeader.active,
+.homeBtn.active,
+.salesBtn.active{
+    background:#141828 !important;
+    color:#FFFFFF !important;
+    border-left:5px solid #D4A017;
+    font-weight:700;
+    box-shadow:0 4px 12px rgba(0,0,0,.20);
 }
