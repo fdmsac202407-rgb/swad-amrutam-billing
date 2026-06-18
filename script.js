@@ -988,6 +988,18 @@ function goHome(){
 
 window.goHome = goHome;
 
+function setActiveMenu(el){
+
+document
+.querySelectorAll(".homeBtn, .menuHeader")
+.forEach(btn => btn.classList.remove("active"));
+
+el.classList.add("active");
+
+}
+
+window.setActiveMenu = setActiveMenu;
+
 
 function toggleMenu(){
 
@@ -1269,3 +1281,28 @@ function openTablesPage(){
 
 window.openTablesPage = openTable
 sPage;
+
+function openTable(tableNo){
+
+document.getElementById("selectedTable").innerText =
+"Table " + tableNo;
+
+document.getElementById("tablesPage").style.display = "none";
+
+document.querySelector(".productSection").style.display = "block";
+
+document.getElementById("searchArea").style.display = "flex";
+
+document.getElementById("menuDropdown").style.display = "block";
+
+if(!tables[tableNo]){
+tables[tableNo] = [];
+}
+
+cart = tables[tableNo];
+
+renderCart();
+
+}
+
+window.openTable = openTable;
