@@ -1,1242 +1,930 @@
+:root{
+    --primary-color:#7A1E1E;
+    --secondary-color:#D4A017;
+    --cream:#F8F5F0;
+    --white:#FFFFFF;
+    --text:#2D2D2D;
+}
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwC3Gg9gSLKBCD40EMzqfQxb63NjF4IeeaOxZJ9SJ4ROz1d1ok6iLSUV0lzorGbjxJx/exec";
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
 
-let items = [];
-let cart = [];
-let paymentMode = "Cash";
-
-let sendWhatsapp = false;
-
-let tables = {};
+body{
+    background:#F8F5F0;
+    color:#2D2D2D;
+}
 
 /* LOGIN */
 
-async function login(){
+#loginPage{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#14141d,#1e1e28,#252536);
+padding:20px;
+}
 
-const customerId =
-document.getElementById("customerId").value;
+.loginBox{
+width:100%;
+max-width:380px;
+background:rgba(255,255,255,.06);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+border:1px solid rgba(139,92,246,.25);
+}
 
-const username =
-document.getElementById("username").value;
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
 
-const password =
-document.getElementById("password").value;
+.logo img{
+width:130px;
+}
 
-const res =
-await fetch(API_URL + "?type=users");
+.loginTitle{
+text-align:center;
+font-size:28px;
+font-weight:bold;
+margin-bottom:10px;
+}
 
-const users =
-await res.json();
+.loginBox input{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+background:#202028;
+color:#fff;
+}
 
-const user =
-users.find(u =>
+.loginBtn{
+width:100%;
+padding:14px;
+margin-top:15px;
+background:var(--primary-color);
+border:none;
+border-radius:12px;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
 
-u.customerId === customerId &&
-u.username === username &&
-u.password === password &&
-u.active === "Yes"
+/* BILLING */
 
+#billingPage{
+display:none;
+height:100vh;
+}
+
+.topBar{
+height:70px;
+background:#ffffff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+border-bottom:2px solid #D4A017;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.title{
+font-size:22px;
+font-weight:700;
+}
+
+.logoutBtn{
+background:#dc2626;
+border:none;
+color:white;
+padding:12px 20px;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+}
+
+.customerHeader{
+background:#7A1E1E;
+border:2px solid #D4A017;
+color:#fff;
+padding:8px 18px;
+border-radius:12px;
+font-size:16px;
+font-weight:700;
+position:static;
+transform:none;
+box-shadow:none;
+}
+
+.container{
+display:grid;
+grid-template-columns:200px 1fr 330px;
+height:calc(100vh - 70px);
+overflow:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+background:linear-gradient(
+to bottom,
+#6B0000,
+#3D0000
 );
-
-if(user){
-
-localStorage.setItem("outlet",username);
-localStorage.setItem("customerId",customerId);
-localStorage.setItem("isLoggedIn","true");
-
-/* NEW */
-document.getElementById("customerHeader").innerHTML =
-`${username} (ID: ${customerId})`;
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("billingPage").style.display="block";
-
-loadMenu();
-
-}else{
-
-alert("Invalid Login");
-
+padding:15px;
+overflow-y:auto;
+height:100%;
 }
 
+.menuHeader{
+width:100%;
+padding:14px;
+background:var(--primary-color);
+color:white;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+text-align:center;
+margin-bottom:15px;
 }
 
-window.login = login;
-function logout(){
-
-localStorage.clear();
-location.reload();
-
+.menuDropdown{
+display:none;
 }
 
-window.logout = logout;
-
-/* LOAD MENU */
-
-async function loadMenu(){
-
-const res = await fetch(API_URL);
-const data = await res.json();
-
-const currentCustomerId =
-String(localStorage.getItem("customerId")).trim();
-
-console.log("Current Login ID:", currentCustomerId);
-console.log("Menu Data:", data);
-
-const filteredData = data.filter(row => {
-
-  if(row.active !== "Yes")
-    return false;
-
-  const customerId =
-  String(row.customerId || "").trim();
-
-  if(customerId === "")
-  return true;
-
-const ids = customerId.split(",").map(id => id.trim());
-
-return ids.includes(currentCustomerId);
-
-});
-
-console.log("Filtered Data:", filteredData);
-
-const grouped = {};
-
-filteredData.forEach(row=>{
-
-if(row.active !== "Yes") return;
-
-const key = row.itemName;
-
-if(!grouped[key]){
-
-grouped[key] = {
-name: row.itemName,
-category: row.category,
-image: row.imageUrl || "https://via.placeholder.com/150",
-variations:[]
-};
-
+.menuCategory{
+width:100%;
+padding:14px;
+background:#8B1E1E;
+color:white;
+border:1px solid #A52A2A;
+border-radius:14px;
+margin-bottom:10px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+transition:.3s;
 }
 
-grouped[key].variations.push({
-type: row.size || "Single",
-price: Number(row.price)
-});
-
-});
-
-items = Object.values(grouped);
-
-loadCategories();
-
-const today =
-new Date().toISOString().split("T")[0];
-
-document.getElementById("fromDate").value = today;
-document.getElementById("toDate").value = today;
-
-loadDashboard();
-
-document
-.getElementById("searchBox")
-.addEventListener("input", searchProducts);
-
-document.getElementById("searchBox").value = "";
-document.getElementById("productGrid").innerHTML = "";
-document.getElementById("emptyState").style.display = "block";
-document.getElementById("searchArea").style.display = "none";
-
+.menuCategory:hover{
+background:#D4A017;
+color:#2D2D2D;
+border-color:#D4A017;
 }
 
-/* SHOW CATEGORY */
-
-function showCategory(category){
-
-document.getElementById("emptyState").style.display = "none";
-document.getElementById("searchArea").style.display = "flex";
-
-document
-.querySelectorAll(".menuCategory")
-.forEach(btn => btn.classList.remove("active"));
-
-const activeBtn =
-Array.from(document.querySelectorAll(".menuCategory"))
-.find(btn => btn.innerText === category);
-
-if(activeBtn){
-activeBtn.classList.add("active");
+.menuCategory.active{
+background:#FFFFFF;
+color:#7A1E1E;
+font-weight:700;
+border-left:5px solid #D4A017;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
 }
 
-const grid =
-document.getElementById("productGrid");
-
-grid.innerHTML = "";
-
-items
-.filter(item=>item.category===category)
-.forEach(item=>{
-
-const card =
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML = `
-<img
-src="${item.image}"
-class="productImage">
-
-<h3>${item.name}</h3>
-
-<p class="priceText">
-₹${item.variations[0].price}
-</p>
-
-<div class="productActions">
-
-<button class="addOrderBtn">
-Add Order
-</button>
-
-</div>
-`;
-
-card.onclick=()=>{
-
-if(item.variations.length===1){
-
-addToCart(
-item.name,
-item.variations[0].type,
-item.variations[0].price
-);
-
-}else{
-
-openSizePopup(item);
-
+.menuCategory.active{
+background:#FFFFFF;
+color:#7A1E1E;
+font-weight:700;
+border-left:5px solid #D4A017;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+transform:translateX(3px);
 }
 
-};
+/* PRODUCTS */
 
-card.querySelector(".addOrderBtn").onclick = (e)=>{
-
-e.stopPropagation();
-
-if(item.variations.length > 1){
-
-openSizePopup(item);
-
-}else{
-
-addToCart(
-item.name,
-item.variations[0].type,
-item.variations[0].price
-);
-
+.products{
+padding:20px;
+overflow-y:auto;
+background:#F8F5F0;
+height:100%;
 }
 
-};
+/* SEARCH BOX */
 
-grid.appendChild(card);
-
-});
-
+.searchBox{
+width:320px;
+height:42px;
+background:#1f2230;
+border:1px solid #35384a;
+border-radius:10px;
+padding:0 15px;
+color:#fff;
+font-size:14px;
+outline:none;
+margin-bottom:20px;
 }
 
-window.showCategory=showCategory;
-
-/* POPUP */
-
-function openSizePopup(item){
-
-document.getElementById("sizePopup")
-.style.display="flex";
-
-const options =
-document.getElementById("sizeOptions");
-
-options.innerHTML="";
-
-item.variations.forEach(v=>{
-
-options.innerHTML += `
-<button
-class="popupBtn"
-style="background:#00c853"
-onclick="addToCart(
-'${item.name}',
-'${v.type}',
-${v.price}
-)">
-${v.type} - ₹${v.price}
-</button>
-`;
-
-});
-
+.searchBox::placeholder{
+color:#9ca3af;
 }
 
-function closeSizePopup(){
-
-document.getElementById("sizePopup")
-.style.display="none";
-
+.productGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
 }
 
-window.closeSizePopup=closeSizePopup;
+.card{
+background:#ffffff;
+padding:6px;
+border-radius:12px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+border:1px solid #eee;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:#D4A017;
+box-shadow:0 0 15px rgba(212,160,23,.25);
+}
+
+.card img{
+height:100px;
+object-fit:cover;
+}
+
+.card h3{
+font-size:14px;
+margin-top:10px;
+color:#2D2D2D;
+font-weight:600;
+}
+
+.card p{
+color:#D4A017;
+font-weight:700;
+font-size:18px;
+margin-top:5px;
+}
+
+.productActions{
+margin-top:10px;
+}
+
+.qtyControl{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin-bottom:8px;
+}
+
+.qtyBtn{
+width:32px;
+height:32px;
+border:none;
+border-radius:8px;
+background:var(--primary-color);
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.qtyCount{
+font-size:20px;
+font-weight:600;
+color:white;
+}
+
+.addOrderBtn{
+width:100%;
+padding:10px;
+background:var(--primary-color);
+color:white;
+border:none;
+border-radius:10px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.addOrderBtn:hover{
+background:#5A1414;
+}
 
 /* CART */
 
-function addToCart(name,type,price){
-
-const table =
-document.getElementById("tableSelect")?.value;
-
-if(table){
-
-if(!tables[table]){
-tables[table] = [];
+.cart{
+background:#ffffff;
+padding:18px;
+overflow-y:auto;
+height:100%;
+border-left:1px solid #ddd;
+box-shadow:-3px 0 15px rgba(0,0,0,.08);
+position:sticky;
+top:0;
 }
 
-cart = tables[table];
-
+.cart h2{
+font-size:24px;
+margin-bottom:12px;
+font-weight:700;
 }
 
-const existing =
-cart.find(c =>
-c.name===name &&
-c.type===type
-);
-
-if(existing){
-
-existing.qty++;
-
-}else{
-
-cart.push({
-name,
-type,
-price,
-qty:1
-});
-
+.cartItem{
+background:#F8F5F0;
+padding:12px;
+margin-bottom:10px;
+border-radius:12px;
+border:1px solid #2d2d38;
 }
 
-closeSizePopup();
-renderCart();
-
+.totalBox{
+margin-top:15px;
+font-size:20px;
+font-weight:600;
 }
 
-window.addToCart=addToCart;
-
-function changeQty(index,change){
-
-cart[index].qty += change;
-
-if(cart[index].qty<=0){
-
-cart.splice(index,1);
-
+.cart input{
+width:100%;
+padding:14px;
+margin-top:12px;
+background:#202028;
+border:1px solid #333;
+color:white;
+border-radius:12px;
 }
 
-renderCart();
-
+.actionBtn{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+cursor:pointer;
+font-weight:600;
 }
 
-window.changeQty=changeQty;
-
-function renderCart(){
-
-const table =
-document.getElementById("tableSelect")?.value;
-
-if(table){
-
-if(!tables[table]){
-tables[table] = [];
+.saveBtn{
+background:var(--primary-color);
 }
 
-cart = tables[table];
-
+.holdBtn{
+background:#f59e0b;
+color:white;
+font-weight:600;
 }
 
-const cartItems =
-document.getElementById("cartItems");
-
-cartItems.innerHTML="";
-
-let total=0;
-
-cart.forEach((item,index)=>{
-
-total += item.price*item.qty;
-
-cartItems.innerHTML += `
-<div class="cartItem">
-
-<div class="cartTop">
-
-<div>
-<b>${item.name}</b>
-<br>
-<small>${item.type}</small>
-</div>
-
-<div>
-₹${item.price * item.qty}
-</div>
-
-</div>
-
-<div class="cartQty">
-
-<button class="qtyBtn"
-onclick="changeQty(${index},-1)">
-−
-</button>
-
-<span>${item.qty}</span>
-
-<button class="qtyBtn"
-onclick="changeQty(${index},1)">
-+
-</button>
-
-</div>
-
-</div>
-`;
-
-});
-
-document.getElementById("total")
-.innerText=total;
-
+.holdBtn:hover{
+background:#d97706;
 }
 
-/* PAYMENT */
-
-function payUPI(){
-
-paymentMode = "UPI";
-closePaymentPopup();
-confirmSaveBill(sendWhatsapp);
-
+.clearBtn{
+background:#ef4444 !important;
+color:#ffffff !important;
+font-weight:600;
 }
 
-function showQR(){
-
-paymentMode = "QR";
-closePaymentPopup();
-confirmSaveBill(sendWhatsapp);
-
+.cart{
+width:330px;
+min-width:330px;
 }
 
-function cashPayment(){
+/* POPUP */
 
-paymentMode = "Cash";
-closePaymentPopup();
-confirmSaveBill(sendWhatsapp);
-
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-window.payUPI = payUPI;
-window.showQR = showQR;
-window.cashPayment = cashPayment;
-
-function openPaymentPopup(){
-
-document.getElementById("paymentPopup")
-.style.display="flex";
-
+.popupBox{
+background:#1e1e28;
+padding:20px;
+border-radius:18px;
+width:320px;
+text-align:center;
+border:1px solid #333;
 }
 
-function closePaymentPopup(){
-
-document.getElementById("paymentPopup")
-.style.display="none";
-
+.popupBtn{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+color:white;
 }
 
-window.openPaymentPopup=openPaymentPopup;
-window.closePaymentPopup=closePaymentPopup;
 
-/* SAVE BILL */
+/* MOBILE */
 
-function confirmSaveBillChoice(send){
+@media screen and (max-width:768px){
 
-    sendWhatsapp = send;
-
-    document.getElementById("saveBillPopup").style.display = "none";
-
-    if(send){
-
-        document.getElementById("customerNumber").focus();
-
-        document.getElementById("customerNumber")
-        .style.border = "3px solid red";
-
-    }else{
-
-        openPaymentPopup();
-
-    }
+.topBar{
+height:auto;
+padding:10px;
+flex-direction:column;
+gap:10px;
+text-align:center;
 }
 
-function continueAfterNumber(){
-
-    const number =
-    document.getElementById("customerNumber").value;
-
-    if(number.trim() === ""){
-
-        alert("Please Enter WhatsApp Number");
-        document.getElementById("customerNumber").focus();
-        return;
-
-    }
-
-    openPaymentPopup();
+.container{
+display:block;
+height:auto;
 }
 
-window.continueAfterNumber = continueAfterNumber;
+.sidebar{
+width:100%;
+}
 
-function checkPaymentMode(){
+.products{
+width:100%;
+padding:10px;
+}
 
-if(sendWhatsapp){
+.productGrid{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
 
-const number =
-document.getElementById("customerNumber").value;
+.card img{
+height:100px;
+}
 
-if(number.trim() === ""){
+.cart{
+width:100%;
+margin-top:10px;
+}
 
-alert("Please Enter WhatsApp Number First");
-document.getElementById("customerNumber").focus();
-return;
+.popupBox{
+width:90%;
+}
 
+.customerHeader{
+position:static;
+transform:none;
+margin-top:10px;
 }
 
 }
 
-openPaymentPopup();
-
+.searchBox{
+width:100%;
+height:48px;
+background:#202028;
+border:1px solid #333;
+border-radius:12px;
+padding:0 15px;
+color:#fff;
+font-size:16px;
+outline:none;
+margin-bottom:10px;
 }
 
-window.checkPaymentMode = checkPaymentMode;
-
-window.confirmSaveBillChoice = confirmSaveBillChoice;
-
-function closeSaveBillPopup(){
-
-    document.getElementById("saveBillPopup").style.display = "none";
-
-    sendWhatsapp = false;
-
+.searchBox:focus{
+border-color:var(--primary-color);
+box-shadow:0 0 10px rgba(122,30,30,.25);
 }
 
-window.closeSaveBillPopup = closeSaveBillPopup;
-
-function saveBill(){
-
-    if(cart.length === 0){
-        alert("Please add item in cart");
-        return;
-    }
-
-    document.getElementById("saveBillPopup").style.display = "flex";
-
+.emptyState{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:70vh;
+text-align:center;
+color:#888;
 }
 
-window.saveBill = saveBill;
-
-window.saveBill = saveBill;
-
-async function confirmSaveBill(sendWhatsapp){
-
-const customerName =
-document.getElementById("customerName").value;
-
-const mobile =
-document.getElementById("customerNumber").value;
-
-const total =
-document.getElementById("total").innerText;
-const tableNo =
-document.getElementById("tableSelect").value;
-
-const data = {
-
-customerId:
-localStorage.getItem("customerId"),
-
-outlet:
-localStorage.getItem("outlet"),
-
-customerName,
-mobile,
-
-items:
-cart.map(i=>i.name).join(","),
-
-qty:
-cart.map(i=>i.qty).join(","),
-
-total,
-paymentMode,
-tableNo
-
-};
-
-await fetch(API_URL,{
-method:"POST",
-body:JSON.stringify(data)
-});
-
-alert("✅ Bill Saved Successfully");
-
-if(sendWhatsapp){
-
-sendWhatsApp();
-
+.emptyIcon{
+font-size:80px;
+margin-bottom:20px;
+opacity:.4;
 }
 
-cart = [];
-renderCart();
-
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
-
-paymentMode = "Cash";
-
-sendWhatsapp = false;
-
-loadDashboard();
+.emptyState h2{
+font-size:28px;
+color:#fff;
+margin-bottom:10px;
 }
 
-window.confirmSaveBill =
-confirmSaveBill;
-
-/* WHATSAPP */
-
-function sendWhatsApp(){
-
-const number =
-document.getElementById("customerNumber").value;
-
-let msg =
-"☕ Swad Amrutam Bill%0A%0A";
-
-let total=0;
-
-cart.forEach(item=>{
-
-msg +=
-`${item.name} (${item.type}) x${item.qty} = ₹${item.price*item.qty}%0A`;
-
-total += item.price*item.qty;
-
-});
-
-msg += `%0ATotal : ₹${total}`;
-
-window.open(
-`https://wa.me/91${number}?text=${msg}`
-);
-
+.emptyState p{
+font-size:16px;
+color:#777;
 }
 
-window.sendWhatsApp=sendWhatsApp;
-
-function holdBill(){
-
-const tableNo =
-document.getElementById("tableSelect").value;
-
-if(!tableNo){
-
-alert("Please Select Table");
-return;
-
+.menuHeader,
+.homeBtn,
+.salesBtn{
+width:100%;
+padding:14px;
+background:#7A1E1E;
+color:white;
+border:none;
+border-radius:14px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+text-align:center;
+margin-bottom:10px;
+transition:.3s;
 }
 
-if(cart.length === 0){
-
-alert("Cart Empty");
-return;
-
+.menuHeader:hover,
+.homeBtn:hover,
+.salesBtn:hover{
+background:#5A1212;
 }
 
-const holdData = {
-
-tableNo: tableNo,
-
-customerName:
-document.getElementById("customerName").value,
-
-mobile:
-document.getElementById("customerNumber").value,
-
-cart: cart
-
-};
-
-localStorage.setItem(
-"table_" + tableNo,
-JSON.stringify(holdData)
-);
-
-alert(
-"Table " + tableNo +
-" Hold Successfully"
-);
-
-cart = [];
-
-renderCart();
-
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
-
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+margin:8px 0;
 }
 
-function clearCart(){
-
-if(cart.length === 0){
-return;
+.stat-card{
+background:white;
+border:2px solid #D4A017;
+border-radius:10px;
+padding:8px;
+min-height:90px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-if(confirm("Clear all items from cart?")){
-
-cart = [];
-renderCart();
-
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
-
+.stat-card h3{
+    color:#aaa;
+    margin-bottom:10px;
 }
 
+.stat-card span{
+font-size:20px;
+font-weight:bold;
+color:#7A1E1E;
 }
 
-window.clearCart = clearCart;
-
-function loadCategories(){
-
-const categories = [...new Set(
-items.map(item => item.category)
-)];
-
-const categoryList =
-document.getElementById("menuDropdown");
-
-categoryList.innerHTML = "";
-
-categories.forEach(category => {
-
-const icons = {
-"Tea":"☕",
-"Coffee":"☕",
-"Snacks":"🍔",
-"Cold Drinks":"🥤",
-"Shake":"🥤",
-"Hot":"🔥",
-"Cold":"❄️"
-};
-
-categoryList.innerHTML += `
-<button
-class="menuCategory"
-onclick="showCategory('${category}')">
-${icons[category] || ""} ${category}
-</button>
-`;
-
-});
-
-document.getElementById("productGrid").innerHTML = "";
-document.getElementById("emptyState").style.display = "block";
-
+.top-items-card{
+background:#141828;
+border:1px solid #7A1E1E;
+border-radius:12px;
+padding:10px;
+margin-top:8px;
 }
 
-window.onload = function(){
-
-if(localStorage.getItem("isLoggedIn") === "true"){
-
-document.getElementById("loginPage").style.display="none";
-document.getElementById("billingPage").style.display="block";
-
-document.getElementById("customerHeader").innerHTML =
-`${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
-
-loadMenu();
-
-setTimeout(()=>{
-
-const tableSelect =
-document.getElementById("tableSelect");
-
-if(tableSelect){
-
-tableSelect.addEventListener("change",()=>{
-
-const table =
-tableSelect.value;
-
-if(!tables[table]){
-tables[table] = [];
+.top-item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-cart = tables[table];
+/* DASHBOARD FILTER */
 
-renderCart();
-
-});
-
+.dashboardFilter{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+margin:5px 0;
+flex-wrap:wrap;
 }
 
-},1000);
-
+.dashboardFilter input[type="date"]{
+width:180px;
+height:42px;
+background:#141828;
+color:white;
+border:2px solid #7A1E1E;
+border-radius:14px;
+padding:0 15px;
+font-size:14px;
+font-weight:600;
+outline:none;
+box-shadow:0 0 10px rgba(139,92,246,.15);
 }
 
-};
-
-/* SALES DASHBOARD */
-
-async function openSalesDashboard(){
-
-document.getElementById("menuDropdown").style.display = "none";
-
-document.getElementById("productGrid").innerHTML = "";
-
-const customerId =
-localStorage.getItem("customerId");
-
-const res =
-await fetch(
-API_URL +
-"?action=sales&customerId=" +
-customerId
-);
-
-const data =
-await res.json();
-
-document.getElementById("salesData").innerHTML = `
-
-<div style="text-align:left">
-
-<h3>📅 Today</h3>
-<p>Revenue : ₹${data.today}</p>
-<p>Bills : ${data.todayBills}</p>
-
-<hr>
-
-<h3>📆 This Week</h3>
-<p>Revenue : ₹${data.week}</p>
-<p>Bills : ${data.weekBills}</p>
-
-<hr>
-
-<h3>🗓 This Month</h3>
-<p>Revenue : ₹${data.month}</p>
-<p>Bills : ${data.monthBills}</p>
-
-</div>
-
-`;
-
-document.getElementById("salesPopup")
-.style.display = "flex";
-
+.dashboardFilter input[type="date"]:focus{
+box-shadow:0 0 15px rgba(212,160,23,.35);
 }
 
-function closeSalesPopup(){
-
-document.getElementById("salesPopup")
-.style.display = "none";
-
+.dashboardFilter input[type="date"]::-webkit-calendar-picker-indicator{
+cursor:pointer;
+filter:invert(55%) sepia(85%) saturate(1500%) hue-rotate(225deg);
 }
 
-window.openSalesDashboard =
-openSalesDashboard;
-
-window.closeSalesPopup =
-closeSalesPopup;
-
-async function loadCustomSales(){
-
-const customerId =
-localStorage.getItem("customerId");
-
-const fromDate =
-document.getElementById("fromDate").value;
-
-const toDate =
-document.getElementById("toDate").value;
-
-if(!fromDate || !toDate){
-
-alert("Select Date Range");
-return;
-
+.searchBtn{
+height:45px;
+padding:0 20px;
+border:none;
+border-radius:12px;
+background:var(--primary-color);
+color:white;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
 }
 
-const res = await fetch(
-API_URL +
-"?action=dashboard" +
-"&customerId=" + customerId +
-"&fromDate=" + fromDate +
-"&toDate=" + toDate
-);
-
-const data = await res.json();
-
-/* Dashboard Cards */
-
-document.getElementById("todayRevenue").innerText =
-`₹${data.revenue || 0}`;
-
-document.getElementById("todayBills").innerText =
-data.bills || 0;
-
-document.getElementById("upiSales").innerText =
-`₹${data.upiSales || 0}`;
-
-document.getElementById("highestBill").innerText =
-`₹${data.highestBill || 0}`;
-
-/* Top Selling */
-
-const topDiv =
-document.getElementById("topItems");
-
-topDiv.innerHTML = "";
-
-if(!data.topSelling || data.topSelling.length === 0){
-
-topDiv.innerHTML =
-"<p>No Sales Found</p>";
-
-return;
-
+.searchBtn:hover{
+background:#5A1212;
+transform:translateY(-2px);
 }
 
-data.topSelling.slice(0,5).forEach((item,index)=>{
-
-topDiv.innerHTML += `
-<div class="top-item">
-<span>${index+1}. ${item.item}</span>
-<span>${item.qty}</span>
-</div>
-`;
-
-});
-
+.resetBtn{
+height:40px;
+padding:0 15px;
+border:none;
+border-radius:12px;
+background:#ef4444;
+color:white;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
 }
 
-window.loadCustomSales =
-loadCustomSales;
-
-function resetDashboard(){
-
-const today =
-new Date().toISOString().split("T")[0];
-
-document.getElementById("fromDate").value = today;
-document.getElementById("toDate").value = today;
-
-loadDashboard();
-
+.resetBtn:hover{
+background:#dc2626;
+transform:translateY(-2px);
 }
 
-window.resetDashboard = resetDashboard;
+/* BRAND BANNER */
 
-function goHome(){
-
-    // Table page hide
-    document.getElementById("tablesPage").style.display = "none";
-
-    // Billing/Product page show
-    document.querySelector(".productSection").style.display = "block";
-
-    document.getElementById("productGrid").innerHTML = "";
-    document.getElementById("emptyState").style.display = "block";
-
-    document.getElementById("searchArea").style.display = "none";
-
-    const menu = document.getElementById("menuDropdown");
-    menu.style.display = "block";
-
-    document
-    .querySelectorAll(".menuCategory")
-    .forEach(btn => btn.classList.remove("active"));
-
-    loadDashboard();
+.brandBanner{
+height:60px;
+background:#fff;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+padding:5px;
+margin-bottom:5px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-window.goHome = goHome;
-
-
-function toggleMenu(){
-
-const menu =
-document.getElementById("menuDropdown");
-
-if(menu.style.display === "block"){
-
-menu.style.display = "none";
-
-}else{
-
-menu.style.display = "block";
-
+.bannerLogo{
+width:45px;
+height:45px;
+object-fit:contain;
 }
 
+.bannerCenter h1{
+font-size:16px;
+color:#7A1E1E;
+margin:0;
 }
 
-window.toggleMenu = toggleMenu;
-
-function searchProducts(){
-
-const search =
-document.getElementById("searchBox")
-.value
-.toLowerCase();
-
-const grid =
-document.getElementById("productGrid");
-
-grid.innerHTML = "";
-
-document.getElementById("emptyState").style.display = "none";
-
-items
-.filter(item =>
-item.name.toLowerCase().includes(search)
-)
-.forEach(item=>{
-
-const card =
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML = `
-<img
-src="${item.image}"
-class="productImage">
-
-<h3>${item.name}</h3>
-
-<p class="priceText">
-₹${item.variations[0].price}
-</p>
-
-<div class="productActions">
-
-<button
-class="qtyBtn"
-onclick="event.stopPropagation();
-addToCart(
-'${item.name}',
-'${item.variations[0].type}',
-${item.variations[0].price}
-)">
-+
-</button>
-
-<button
-class="addOrderBtn"
-onclick="event.stopPropagation();
-addToCart(
-'${item.name}',
-'${item.variations[0].type}',
-${item.variations[0].price}
-)">
-Add
-</button>
-
-</div>
-`;
-
-grid.appendChild(card);
-
-});
-
+.bannerCenter p{
+margin-top:5px;
+color:#666;
 }
 
-async function loadDashboard(){
+/* SIDEBAR HEADER */
 
-function printKOT(){
-
-if(cart.length===0){
-
-alert("Cart Empty");
-
-return;
-
+.sidebarBanner{
+text-align:center;
+padding:8px;
+background:white;
+border-radius:15px;
+margin-bottom:15px;
 }
 
-let html = `
-<h2>SWAD AMRUTAM CHAI</h2>
-<h3>KOT</h3>
-<hr>
-`;
-
-cart.forEach(item=>{
-
-html += `
-<p>
-${item.name}
-(${item.type})
-x ${item.qty}
-</p>
-`;
-
-});
-
-const win =
-window.open("","","width=400,height=600");
-
-win.document.write(html);
-
-win.print();
-
+.sidebarLogo{
+width:80px;
+height:80px;
+object-fit:contain;
 }
 
-function printBill(){
+/* TOP HEADER */
 
-if(cart.length===0){
-
-alert("Cart Empty");
-
-return;
-
+.brandArea{
+display:flex;
+align-items:center;
+gap:12px;
 }
 
-let total = 0;
-
-let html = `
-<h2>SWAD AMRUTAM CHAI</h2>
-<hr>
-`;
-
-cart.forEach(item=>{
-
-let amount =
-item.price * item.qty;
-
-total += amount;
-
-html += `
-<p>
-${item.name}
-x${item.qty}
-=
-₹${amount}
-</p>
-`;
-
-});
-
-html += `
-<hr>
-<h2>Total : ₹${total}</h2>
-`;
-
-const win =
-window.open("","","width=400,height=700");
-
-win.document.write(html);
-
-win.print();
-
+.brandLogo{
+width:42px;
+height:42px;
+object-fit:contain;
 }
 
-const customerId =
-localStorage.getItem("customerId");
-
-const fromDate =
-document.getElementById("fromDate").value;
-
-const toDate =
-document.getElementById("toDate").value;
-
-let url =
-API_URL +
-"?action=dashboard&customerId=" +
-customerId;
-
-if(fromDate && toDate){
-
-url +=
-"&fromDate=" + fromDate +
-"&toDate=" + toDate;
-
+.topRight{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-const res = await fetch(url);
+/* CART BUTTONS */
 
-const data = await res.json();
-
-/* Cards */
-
-document.getElementById("todayRevenue").innerText =
-`₹${data.revenue || 0}`;
-
-document.getElementById("todayBills").innerText =
-data.bills || 0;
-
-document.getElementById("upiSales").innerText =
-`₹${data.upiSales || 0}`;
-
-document.getElementById("highestBill").innerText =
-`₹${data.highestBill || 0}`;
-
-/* Top Selling */
-
-const topDiv =
-document.getElementById("topItems");
-
-topDiv.innerHTML = "";
-
-if(!data.topSelling ||
-data.topSelling.length === 0){
-
-topDiv.innerHTML =
-"<p>No Sales Found</p>";
-
-return;
-
+.cartFooterButtons{
+display:flex;
+gap:10px;
+margin-top:15px;
 }
 
-data.topSelling.slice(0,5).forEach((item,index)=>{
-
-topDiv.innerHTML += `
-<div class="top-item">
-<span>${index+1}. ${item.item}</span>
-<span>${item.qty}</span>
-</div>
-`;
-
-});
-
+.cartFooterButtons button{
+flex:1;
 }
 
-function openTablesPage(){
-
-document.getElementById("emptyState").style.display = "none";
-
-document.querySelector(".productSection").style.display = "none";
-
-document.getElementById("tablesPage").style.display = "block";
-
+.top-items-card h2{
+color:#fff;
 }
 
-window.openTablesPage = openTablesPage;
+.top-item{
+color:#fff;
+}
+
+.tableSelect{
+width:120px;
+padding:8px;
+border-radius:10px;
+border:1px solid #D4A017;
+font-weight:600;
+}
+
+.kotBtn{
+background:#f59e0b;
+}
+
+.billBtn{
+background:#16a34a;
+margin-top:10px;
+}
+
+.cartTopBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.tableSelect{
+    width:180px;
+    padding:10px;
+    border:2px solid #cfa43c;
+    border-radius:10px;
+    font-size:15px;
+    background:#fff;
+}
+
+.cartTitle{
+    font-size:32px;
+    font-weight:700;
+    margin:0;
+}
+
+.tableGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+padding:20px;
+}
+
+.tableCard{
+background:white;
+border:3px solid #D4A017;
+border-radius:20px;
+padding:25px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.tableCard:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.tableCard h3{
+font-size:24px;
+color:#7A1E1E;
+margin-bottom:10px;
+}
+
+.tableCard p{
+font-size:16px;
+font-weight:600;
+color:#16a34a;
+}
+
+.tablesHeader{
+padding:20px;
+text-align:center;
+}
+
+.tablesHeader h2{
+font-size:34px;
+color:#7A1E1E;
+}
+
+.tableGrid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-top:20px;
+}
+
+.tableCard{
+background:#fff;
+border-radius:15px;
+padding:20px;
+cursor:pointer;
+text-align:center;
+border:2px solid #e5e7eb;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.tableCard:hover{
+transform:translateY(-3px);
+border-color:#7A1E1E;
+}
+
+.tableCard h3{
+color:#7A1E1E;
+margin-bottom:10px;
+font-size:20px;
+}
+
+.tableStatus{
+padding:6px 12px;
+border-radius:20px;
+font-weight:600;
+margin-bottom:10px;
+display:inline-block;
+}
+
+.tableStatus.available{
+background:#dcfce7;
+color:#16a34a;
+}
+
+.tableStatus.running{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.tableInfo{
+font-size:13px;
+color:#666;
+line-height:1.5;
+min-height:40px;
+}
+
+.viewBtn{
+width:100%;
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#7A1E1E;
+color:#fff;
+font-weight:600;
+cursor:pointer;
+}
+
+.viewBtn:hover{
+background:#5a1414;
+}
+
+.tableStatus{
+display:inline-block;
+padding:6px 12px;
+border-radius:20px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.tableStatus.available{
+background:#dcfce7;
+color:#16a34a;
+}
+
+.tableStatus.running{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.tableInfo{
+font-size:13px;
+color:#666;
+min-height:40px;
+margin-top:5px;
+}
