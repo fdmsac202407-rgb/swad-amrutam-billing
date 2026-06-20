@@ -1305,8 +1305,6 @@ cart = tables[tableNo];
 
 renderCart();
 
-// Auto Open First Category
-
 const firstCategory =
 document.querySelector(".menuCategory");
 
