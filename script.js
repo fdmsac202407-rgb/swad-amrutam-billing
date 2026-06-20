@@ -60,8 +60,6 @@ alert("Invalid Login");
 
 }
 
-}
-
 window.login = login;
 function logout(){
 
