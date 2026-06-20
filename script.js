@@ -1305,6 +1305,15 @@ cart = tables[tableNo];
 
 renderCart();
 
+// Auto Open First Category
+
+const firstCategory =
+document.querySelector(".menuCategory");
+
+if(firstCategory){
+
+firstCategory.click();
+
 }
 
 window.openTable = openTable;
