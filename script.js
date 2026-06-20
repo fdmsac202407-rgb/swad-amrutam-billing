@@ -1287,7 +1287,7 @@ function openTable(tableNo){
 selectedTable = tableNo;
 
 document.getElementById("selectedTable").innerText =
-"Table : Table " + tableNo;
+tableNo;
 
 document.getElementById("tablesPage").style.display = "none";
 
