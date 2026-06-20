@@ -1279,8 +1279,7 @@ function openTablesPage(){
 
 }
 
-window.openTablesPage = openTable
-sPage;
+window.openTablesPage = openTablesPage;
 
 function openTable(tableNo){
 
