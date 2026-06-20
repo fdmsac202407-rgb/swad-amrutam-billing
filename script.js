@@ -1307,6 +1307,4 @@ renderCart();
 
 }
 
-}
-
 window.openTable = openTable;
