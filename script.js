@@ -8,6 +8,7 @@ let paymentMode = "Cash";
 let sendWhatsapp = false;
 
 let tables = {};
+let selectedTable = null;
 
 /* LOGIN */
 
@@ -1283,8 +1284,10 @@ window.openTablesPage = openTablesPage;
 
 function openTable(tableNo){
 
+selectedTable = tableNo;
+
 document.getElementById("selectedTable").innerText =
-"Table " + tableNo;
+"Table : Table " + tableNo;
 
 document.getElementById("tablesPage").style.display = "none";
 
@@ -1301,6 +1304,8 @@ tables[tableNo] = [];
 cart = tables[tableNo];
 
 renderCart();
+
+}
 
 }
 
