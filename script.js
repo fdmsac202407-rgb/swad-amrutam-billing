@@ -1241,6 +1241,20 @@ function openTable(tableNo){
 
     selectedTable = tableNo;
 
+document.querySelectorAll(".tableCard").forEach(card=>{
+    card.classList.remove("selectedTable");
+});
+
+const currentCard =
+document.getElementById("table_" + tableNo);
+
+if(currentCard){
+    currentCard.classList.add("selectedTable");
+}
+
+localStorage.setItem("activeTable", tableNo);
+updateTableCards();
+
     document.getElementById("selectedTable").innerText =
     "Table " + tableNo;
 
@@ -1287,19 +1301,31 @@ function updateTableCards(){
         const status =
         document.getElementById("status_" + i);
 
+        const card =
+        document.getElementById("table_" + i);
+
         if(!status) continue;
 
         if(data){
 
             status.innerHTML =
-            '<span style="color:#ff9800">Hold</span>';
+            '<span style="color:#ff9800;font-weight:bold">USED</span>';
+
+            if(card){
+                card.style.background = "#fff3cd";
+                card.style.border = "2px solid #ff9800";
+            }
 
         }else{
 
             status.innerHTML =
-            '<span style="color:#00c853">Available</span>';
-        }
+            '<span style="color:#00c853;font-weight:bold">AVAILABLE</span>';
 
+            if(card){
+                card.style.background = "#ffffff";
+                card.style.border = "1px solid #ddd";
+            }
+        }
     }
 }
 
