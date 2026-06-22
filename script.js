@@ -1261,9 +1261,6 @@ document.querySelectorAll(".tableCard").forEach(card=>{
     card.classList.remove("selectedTable");
 });
 
-const currentCard =
-document.getElementById("table_" + tableNo);
-
 if(currentCard){
     currentCard.classList.add("selectedTable");
 }
