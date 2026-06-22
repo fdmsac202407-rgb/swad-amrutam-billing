@@ -609,7 +609,6 @@ cart = [];
 renderCart();
 
 document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
 
 paymentMode = "Cash";
 
