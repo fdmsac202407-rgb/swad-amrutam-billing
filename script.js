@@ -693,7 +693,6 @@ function holdBill(){
 
     renderCart();
 
-}
 window.holdBill = holdBill;
 
 function clearCart(){
