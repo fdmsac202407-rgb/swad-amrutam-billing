@@ -1253,42 +1253,39 @@ window.openTablesPage = openTablesPage;
 
 function openTable(tableNo){
 
-function openTable(tableNo){
+    selectedTable = tableNo;
 
-selectedTable = tableNo;
+    document.getElementById("selectedTable").innerText =
+    "Table " + tableNo;
 
-document.getElementById("selectedTable").innerText =
-"Table " + tableNo;
+    document.getElementById("tablesPage").style.display = "none";
 
-document.getElementById("tablesPage").style.display = "none";
+    document.querySelector(".productSection").style.display = "block";
 
-document.querySelector(".productSection").style.display = "block";
+    document.getElementById("searchArea").style.display = "flex";
 
-document.getElementById("searchArea").style.display = "flex";
+    document.getElementById("menuDropdown").style.display = "block";
 
-/* IMPORTANT */
-document.getElementById("menuDropdown").style.display = "block";
+    if(!tables[tableNo]){
+        tables[tableNo] = [];
+    }
 
-if(!tables[tableNo]){
-tables[tableNo] = [];
+    cart = tables[tableNo];
+
+    renderCart();
+
+    const firstCategory =
+    document.querySelector(".menuCategory");
+
+    if(firstCategory){
+
+        showCategory(
+            firstCategory.innerText
+            .replace(/^[^\w]+/,'')
+            .trim()
+        );
+
+    }
 }
-
-cart = tables[tableNo];
-
-renderCart();
-
-/* First Category Auto Open */
-const firstCategory =
-document.querySelector(".menuCategory");
-
-if(firstCategory){
-
-showCategory(
-firstCategory.innerText.replace(/^[^\w]+/,'').trim()
-);
-
-}
-
-}}
 
 window.openTable = openTable;
