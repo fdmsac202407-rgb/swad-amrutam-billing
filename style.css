@@ -928,3 +928,24 @@ color:#666;
 min-height:40px;
 margin-top:5px;
 }
+
+.table-card.active{
+    border:3px solid #2196f3 !important;
+    background:#e3f2fd !important;
+    transform:scale(1.02);
+}
+
+.table-card.active .table-status{
+    color:#2196f3;
+    font-weight:bold;
+}
+
+.tableStatus.available{
+color:#00c853;
+font-weight:bold;
+}
+
+.tableStatus.occupied{
+color:#ff9800;
+font-weight:bold;
+}
