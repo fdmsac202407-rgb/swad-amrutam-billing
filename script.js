@@ -654,50 +654,48 @@ window.sendWhatsApp=sendWhatsApp;
 
 function holdBill(){
 
-const tableNo =
-document.getElementById("tableSelect").value;
+    if(!selectedTable){
 
-if(!tableNo){
+        alert("Please Select Table");
+        return;
+    }
 
-alert("Please Select Table");
-return;
+    if(cart.length === 0){
+
+        alert("Cart Empty");
+        return;
+    }
+
+    const holdData = {
+
+        customerName:
+        document.getElementById("customerName").value,
+
+        mobile:
+        document.getElementById("customerNumber").value,
+
+        cart: cart
+
+    };
+
+    localStorage.setItem(
+        "table_" + selectedTable,
+        JSON.stringify(holdData)
+    );
+
+    alert(
+        "Table " + selectedTable +
+        " Hold Successfully"
+    );
+
+    updateTableCards();
+
+    cart = [];
+
+    renderCart();
 
 }
-
-if(cart.length === 0){
-
-alert("Cart Empty");
-return;
-
-}
-
-const holdData = {
-
-tableNo: tableNo,
-
-customerName:
-document.getElementById("customerName").value,
-
-mobile:
-document.getElementById("customerNumber").value,
-
-cart: cart
-
-};
-
-localStorage.setItem(
-"table_" + tableNo,
-JSON.stringify(holdData)
-);
-
-alert(
-"Table " + tableNo +
-" Hold Successfully"
-);
-
-cart = [];
-
-renderCart();
+window.holdBill = holdBill;
 
 document.getElementById("customerName").value = "";
 document.getElementById("customerNumber").value = "";
@@ -1286,6 +1284,67 @@ function openTable(tableNo){
         );
 
     }
+
 }
 
 window.openTable = openTable;
+
+function updateTableCards(){
+
+    for(let i=1;i<=20;i++){
+
+        const data =
+        localStorage.getItem("table_" + i);
+
+        const status =
+        document.getElementById("status_" + i);
+
+        if(!status) continue;
+
+        if(data){
+
+            status.innerHTML =
+            '<span style="color:#ff9800">Hold</span>';
+
+        }else{
+
+            status.innerHTML =
+            '<span style="color:#00c853">Available</span>';
+        }
+
+    }
+}
+
+function viewTable(tableNo){
+
+    const data =
+    localStorage.getItem("table_" + tableNo);
+
+    if(!data){
+
+        alert("No Hold Order Found");
+        return;
+    }
+
+    const order =
+    JSON.parse(data);
+
+    selectedTable = tableNo;
+
+    cart = order.cart || [];
+
+    document.getElementById("customerName").value =
+    order.customerName || "";
+
+    document.getElementById("customerNumber").value =
+    order.mobile || "";
+
+    renderCart();
+
+    document.getElementById("tablesPage").style.display = "none";
+
+    document.querySelector(".productSection").style.display = "block";
+
+}
+
+window.viewTable = viewTable;
