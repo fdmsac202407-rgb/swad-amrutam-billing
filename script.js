@@ -60,6 +60,8 @@ alert("Invalid Login");
 
 }
 
+}
+
 window.login = login;
 function logout(){
 
@@ -1309,6 +1311,8 @@ document.querySelector(".menuCategory");
 if(firstCategory){
 
 firstCategory.click();
+
+}
 
 }
 
