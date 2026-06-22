@@ -1340,6 +1340,4 @@ function viewTable(tableNo){
 
     document.querySelector(".productSection").style.display = "block";
 
-}
-
 window.viewTable = viewTable;
