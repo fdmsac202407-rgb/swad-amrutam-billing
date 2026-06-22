@@ -654,27 +654,19 @@ window.sendWhatsApp=sendWhatsApp;
 function holdBill(){
 
     if(!selectedTable){
-
         alert("Please Select Table");
         return;
     }
 
     if(cart.length === 0){
-
         alert("Cart Empty");
         return;
     }
 
     const holdData = {
-
-        customerName:
-        document.getElementById("customerName").value,
-
-        mobile:
-        document.getElementById("customerNumber").value,
-
+        customerName: document.getElementById("customerName").value,
+        mobile: document.getElementById("customerNumber").value,
         cart: cart
-
     };
 
     localStorage.setItem(
@@ -682,16 +674,17 @@ function holdBill(){
         JSON.stringify(holdData)
     );
 
-    alert(
-        "Table " + selectedTable +
-        " Hold Successfully"
-    );
+    alert("Table " + selectedTable + " Hold Successfully");
 
     updateTableCards();
 
     cart = [];
-
     renderCart();
+
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerNumber").value = "";
+
+}
 
 window.holdBill = holdBill;
 
