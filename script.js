@@ -1242,6 +1242,22 @@ function openTable(tableNo){
     selectedTable = tableNo;
 
 document.querySelectorAll(".tableCard").forEach(card=>{
+    card.style.background = "#ffffff";
+    card.style.border = "1px solid #ddd";
+});
+
+const currentCard =
+document.getElementById("tableCard" + tableNo);
+
+if(currentCard){
+
+    currentCard.style.background = "#4caf50";
+    currentCard.style.color = "#fff";
+    currentCard.style.border = "3px solid #2e7d32";
+
+}
+
+document.querySelectorAll(".tableCard").forEach(card=>{
     card.classList.remove("selectedTable");
 });
 
@@ -1299,32 +1315,32 @@ function updateTableCards(){
         localStorage.getItem("table_" + i);
 
         const status =
-        document.getElementById("status_" + i);
+        document.getElementById("tableStatus" + i);
 
         const card =
-        document.getElementById("table_" + i);
+        document.getElementById("tableCard" + i);
 
-        if(!status) continue;
+        if(!status || !card) continue;
 
         if(data){
 
-            status.innerHTML =
-            '<span style="color:#ff9800;font-weight:bold">USED</span>';
+            status.innerHTML = "USED";
 
-            if(card){
-                card.style.background = "#fff3cd";
-                card.style.border = "2px solid #ff9800";
-            }
+            status.classList.remove("available");
+            status.classList.add("occupied");
+
+            card.style.background = "#fff3cd";
+            card.style.border = "2px solid #ff9800";
 
         }else{
 
-            status.innerHTML =
-            '<span style="color:#00c853;font-weight:bold">AVAILABLE</span>';
+            status.innerHTML = "AVAILABLE";
 
-            if(card){
-                card.style.background = "#ffffff";
-                card.style.border = "1px solid #ddd";
-            }
+            status.classList.remove("occupied");
+            status.classList.add("available");
+
+            card.style.background = "#ffffff";
+            card.style.border = "1px solid #ddd";
         }
     }
 }
