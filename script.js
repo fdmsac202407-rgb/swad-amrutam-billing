@@ -696,11 +696,6 @@ function holdBill(){
 }
 window.holdBill = holdBill;
 
-document.getElementById("customerName").value = "";
-document.getElementById("customerNumber").value = "";
-
-}
-
 function clearCart(){
 
 if(cart.length === 0){
@@ -1226,6 +1221,8 @@ topDiv.innerHTML += `
 });
 
 }
+
+window.loadDashboard = loadDashboard;
 
 function openTablesPage(){
 
