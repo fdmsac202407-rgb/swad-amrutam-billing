@@ -298,16 +298,13 @@ window.closeSizePopup=closeSizePopup;
 
 function addToCart(name,type,price){
 
-const table =
-document.getElementById("tableSelect")?.value;
+if(selectedTable){
 
-if(table){
-
-if(!tables[table]){
-tables[table] = [];
+if(!tables[selectedTable]){
+tables[selectedTable] = [];
 }
 
-cart = tables[table];
+cart = tables[selectedTable];
 
 }
 
@@ -571,9 +568,7 @@ document.getElementById("customerNumber").value;
 
 const total =
 document.getElementById("total").innerText;
-const tableNo =
-document.getElementById("tableSelect").value;
-
+const tableNo = selectedTable;
 const data = {
 
 customerId:
@@ -778,32 +773,6 @@ document.getElementById("customerHeader").innerHTML =
 `${localStorage.getItem("outlet")} (ID: ${localStorage.getItem("customerId")})`;
 
 loadMenu();
-
-setTimeout(()=>{
-
-const tableSelect =
-document.getElementById("tableSelect");
-
-if(tableSelect){
-
-tableSelect.addEventListener("change",()=>{
-
-const table =
-tableSelect.value;
-
-if(!tables[table]){
-tables[table] = [];
-}
-
-cart = tables[table];
-
-renderCart();
-
-});
-
-}
-
-},1000);
 
 }
 
@@ -1284,10 +1253,12 @@ window.openTablesPage = openTablesPage;
 
 function openTable(tableNo){
 
+function openTable(tableNo){
+
 selectedTable = tableNo;
 
 document.getElementById("selectedTable").innerText =
-tableNo;
+"Table " + tableNo;
 
 document.getElementById("tablesPage").style.display = "none";
 
@@ -1295,6 +1266,7 @@ document.querySelector(".productSection").style.display = "block";
 
 document.getElementById("searchArea").style.display = "flex";
 
+/* IMPORTANT */
 document.getElementById("menuDropdown").style.display = "block";
 
 if(!tables[tableNo]){
@@ -1305,15 +1277,18 @@ cart = tables[tableNo];
 
 renderCart();
 
+/* First Category Auto Open */
 const firstCategory =
 document.querySelector(".menuCategory");
 
 if(firstCategory){
 
-firstCategory.click();
+showCategory(
+firstCategory.innerText.replace(/^[^\w]+/,'').trim()
+);
 
 }
 
-}
+}}
 
 window.openTable = openTable;
