@@ -411,22 +411,39 @@ z-index:999;
 }
 
 .popupBox{
-background:#1e1e28;
-padding:20px;
-border-radius:18px;
-width:320px;
+background:#ffffff;
+padding:25px;
+border-radius:20px;
+width:380px;
 text-align:center;
-border:1px solid #333;
+border:3px solid #D4A017;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.popupBox h2{
+color:#7A1E1E;
+margin-bottom:20px;
+font-size:30px;
+font-weight:700;
 }
 
 .popupBtn{
 width:100%;
-padding:12px;
-margin-top:10px;
+padding:15px;
+margin-top:12px;
 border:none;
 border-radius:12px;
 cursor:pointer;
-color:white;
+font-size:18px;
+font-weight:700;
+background:#7A1E1E;
+color:#fff;
+transition:.3s;
+}
+
+.popupBtn:hover{
+background:#5A1414;
+transform:translateY(-2px);
 }
 
 
