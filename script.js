@@ -271,7 +271,6 @@ item.variations.forEach(v=>{
 options.innerHTML += `
 <button
 class="sizeOptionBtn"
-style="background:#00c853"
 onclick="addToCart(
 '${item.name}',
 '${v.type}',
