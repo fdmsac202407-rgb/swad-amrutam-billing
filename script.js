@@ -1339,37 +1339,3 @@ function updateTableCards(){
         }
     }
 }
-
-function viewTable(tableNo){
-
-    const data =
-    localStorage.getItem("table_" + tableNo);
-
-    if(!data){
-
-        alert("No Hold Order Found");
-        return;
-    }
-
-    const order =
-    JSON.parse(data);
-
-    selectedTable = tableNo;
-
-    cart = order.cart || [];
-
-    document.getElementById("customerName").value =
-    order.customerName || "";
-
-    document.getElementById("customerNumber").value =
-    order.mobile || "";
-
-    renderCart();
-
-    document.getElementById("tablesPage").style.display = "none";
-
-    document.querySelector(".productSection").style.display = "block";
-
-} 
-
-window.viewTable = viewTable;
