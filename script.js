@@ -508,24 +508,7 @@ function continueAfterNumber(){
 window.continueAfterNumber = continueAfterNumber;
 
 function checkPaymentMode(){
-
-if(sendWhatsapp){
-
-const number =
-document.getElementById("customerNumber").value;
-
-if(number.trim() === ""){
-
-alert("Please Enter WhatsApp Number First");
-document.getElementById("customerNumber").focus();
-return;
-
-}
-
-}
-
-openPaymentPopup();
-
+    openPaymentPopup();
 }
 
 window.checkPaymentMode = checkPaymentMode;
@@ -549,7 +532,7 @@ function saveBill(){
         return;
     }
 
-    document.getElementById("saveBillPopup").style.display = "flex";
+    openPaymentPopup();
 
 }
 
@@ -598,13 +581,14 @@ body:JSON.stringify(data)
 
 alert("✅ Bill Saved Successfully");
 
-if(sendWhatsapp){
+if(mobile && mobile.trim() !== ""){
 
-sendWhatsApp();
+    sendWhatsApp();
 
 }
 
 cart = [];
+
 renderCart();
 
 document.getElementById("customerName").value = "";
