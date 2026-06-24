@@ -270,7 +270,7 @@ item.variations.forEach(v=>{
 
 options.innerHTML += `
 <button
-class="popupBtn"
+class="sizeOptionBtn"
 style="background:#00c853"
 onclick="addToCart(
 '${item.name}',
