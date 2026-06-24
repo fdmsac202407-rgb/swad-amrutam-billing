@@ -1137,3 +1137,28 @@ transform:translateY(-2px);
 .billBtn:hover{
     background:#059669;
 }
+
+.cartFooterButtons .actionBtn{
+color:white !important;
+border:none !important;
+}
+
+.cartFooterButtons .kotBtn{
+background:#2563eb !important;
+}
+
+.cartFooterButtons .billBtn{
+background:#10b981 !important;
+}
+
+.cartFooterButtons .saveBtn{
+background:#7A1E1E !important;
+}
+
+.cartFooterButtons .clearBtn{
+background:#ef4444 !important;
+}
+
+.cartFooterButtons .holdBtn{
+background:#f59e0b !important;
+}
