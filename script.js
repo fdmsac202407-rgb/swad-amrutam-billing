@@ -581,6 +581,21 @@ body:JSON.stringify(data)
 
 alert("✅ Bill Saved Successfully");
 
+if(selectedTable){
+
+    localStorage.removeItem("table_" + selectedTable);
+
+    tables[selectedTable] = [];
+
+    document.getElementById("selectedTable").innerText =
+    "Not Selected";
+
+    selectedTable = null;
+
+    updateTableCards();
+
+}
+
 if(mobile && mobile.trim() !== ""){
 
     sendWhatsApp();
