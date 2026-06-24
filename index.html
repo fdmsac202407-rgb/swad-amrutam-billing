@@ -475,41 +475,65 @@ onclick="closeSizePopup()">
 
 <!-- PAYMENT POPUP -->
 
+<!-- PAYMENT POPUP -->
+
 <div class="popup" id="paymentPopup">
 
-<div class="popupBox">
+    <div class="paymentCard">
 
-<h2>Payment Mode</h2>
+        <div class="paymentHeader">
 
-<button
-class="popupBtn"
-style="background:#00c853"
-onclick="payUPI()">
-UPI
-</button>
+            <h2>Select Payment Method</h2>
 
-<button
-class="popupBtn"
-style="background:#9c27b0"
-onclick="showQR()">
-QR
-</button>
+            <p>Select a payment option to continue</p>
 
-<button
-class="popupBtn"
-style="background:#ff5722"
-onclick="cashPayment()">
-Cash
-</button>
+        </div>
 
-<button
-class="popupBtn"
-style="background:red"
-onclick="closePaymentPopup()">
-Close
-</button>
+        <div class="paymentOption"
+             onclick="payUPI()">
 
-</div>
+            <div class="paymentIcon">📱</div>
+
+            <div class="paymentInfo">
+                <h3>UPI Payment</h3>
+                <small>Pay using any UPI App</small>
+            </div>
+
+        </div>
+
+        <div class="paymentOption"
+             onclick="showQR()">
+
+            <div class="paymentIcon">📷</div>
+
+            <div class="paymentInfo">
+                <h3>Scan QR</h3>
+                <small>Scan and pay instantly</small>
+            </div>
+
+        </div>
+
+        <div class="paymentOption"
+             onclick="cashPayment()">
+
+            <div class="paymentIcon">💵</div>
+
+            <div class="paymentInfo">
+                <h3>Cash Payment</h3>
+                <small>Receive cash payment</small>
+            </div>
+
+        </div>
+
+        <button
+        class="cancelPaymentBtn"
+        onclick="closePaymentPopup()">
+
+            ✖ Cancel
+
+        </button>
+
+    </div>
 
 </div>
 
