@@ -1048,11 +1048,11 @@ transform:translateY(-2px);
 /* PAYMENT POPUP */
 
 .paymentCard{
-    width:500px;
+    width:420px;
     background:#ffffff;
-    border-radius:25px;
-    padding:30px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.20);
 }
 
 .paymentHeader{
@@ -1062,8 +1062,8 @@ transform:translateY(-2px);
 
 .paymentHeader h2{
     color:#7A1E1E;
-    font-size:34px;
-    margin-bottom:8px;
+    font-size:26px;
+    margin-bottom:5px;
 }
 
 .paymentHeader p{
@@ -1074,14 +1074,12 @@ transform:translateY(-2px);
 .paymentOption{
     display:flex;
     align-items:center;
-    gap:20px;
-    padding:18px;
-    margin-bottom:15px;
+    gap:15px;
+    padding:12px;
+    margin-bottom:10px;
     border:1px solid #e5e5e5;
-    border-radius:15px;
+    border-radius:12px;
     cursor:pointer;
-    transition:0.3s;
-    background:#fff;
 }
 
 .paymentOption:hover{
@@ -1090,9 +1088,8 @@ transform:translateY(-2px);
 }
 
 .paymentIcon{
-    font-size:32px;
-    width:60px;
-    text-align:center;
+    font-size:26px;
+    width:45px;
 }
 
 .paymentInfo h3{
@@ -1101,14 +1098,13 @@ transform:translateY(-2px);
     font-size:22px;
 }
 
-.paymentInfo small{
-    color:#777;
-    font-size:14px;
+.paymentInfo h3{
+    font-size:18px;
 }
 
 .cancelPaymentBtn{
     width:100%;
-    padding:15px;
+    padding:12px;
     border:none;
     border-radius:12px;
     background:#e5e7eb;
