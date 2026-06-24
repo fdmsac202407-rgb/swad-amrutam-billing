@@ -422,9 +422,9 @@ box-shadow:0 10px 30px rgba(0,0,0,.25);
 
 .popupBox h2{
 color:#7A1E1E;
-margin-bottom:20px;
-font-size:30px;
+font-size:42px;
 font-weight:700;
+margin-bottom:25px;
 }
 
 .popupBtn{
@@ -965,4 +965,63 @@ font-weight:bold;
 .tableStatus.occupied{
 color:#ff9800;
 font-weight:bold;
+}
+
+.popupBox{
+background:#ffffff;
+width:420px;
+max-width:90%;
+padding:30px;
+border-radius:24px;
+text-align:center;
+border:3px solid #D4A017;
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+animation:popupShow .25s ease;
+}
+
+@keyframes popupShow{
+from{
+opacity:0;
+transform:scale(.90);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.sizeOptionBtn{
+width:100%;
+padding:18px;
+margin-bottom:15px;
+border:none;
+border-radius:16px;
+background:linear-gradient(135deg,#7A1E1E,#A52A2A);
+color:#fff;
+font-size:22px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.sizeOptionBtn:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(122,30,30,.30);
+}
+
+.closePopupBtn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+background:#ef4444;
+color:#fff;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.closePopupBtn:hover{
+background:#dc2626;
 }
