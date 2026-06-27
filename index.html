@@ -128,14 +128,21 @@ onclick="setActiveMenu(this);toggleMenu();">
 
 <div class="brandBanner">
 
-<img
-src="https://www.smergers.com/media/franchiselogos/Swad_Amrutam_Chai_Logo.png"
-class="bannerLogo">
+    <div class="bannerLeft">
 
-<div class="bannerCenter">
-<h1>સ્વાદ અમૃતમ ચા</h1>
-<p>એક કપ ચા... સુકૂન ભર જાય !</p>
-</div>
+        <img
+        src="https://www.smergers.com/media/franchiselogos/Swad_Amrutam_Chai_Logo.png"
+        class="bannerLogo">
+
+    </div>
+
+    <div class="bannerCenter">
+
+        <h1>સ્વાદ અમૃતમ ચા</h1>
+
+        <p>એક કપ ચા... સુકૂન ભર જાય !</p>
+
+    </div>
 
 </div>
 
@@ -181,25 +188,50 @@ display:block;">
 
   <div class="dashboard-grid">
 
-  <div class="stat-card">
-    <h3>Revenue</h3>
-    <span id="todayRevenue">₹0</span>
-  </div>
+<div class="stat-card">
 
-  <div class="stat-card">
-    <h3>Bills</h3>
-    <span id="todayBills">0</span>
-  </div>
+<div class="statIcon">💰</div>
 
-  <div class="stat-card">
-    <h3>UPI Sales</h3>
-    <span id="upiSales">₹0</span>
-  </div>
+<h3>Today's Revenue</h3>
 
-  <div class="stat-card">
-    <h3>Highest Bill</h3>
-    <span id="highestBill">₹0</span>
-  </div>
+<span id="todayRevenue">₹0</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="statIcon">🧾</div>
+
+<h3>Total Bills</h3>
+
+<span id="todayBills">0</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="statIcon">🥇</div>
+
+<h3>Top Selling</h3>
+
+<span id="topSellingItem">Masala Tea</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="statIcon">🍵</div>
+
+<h3>Total Items</h3>
+
+<span id="todayItems">0</span>
+
+</div>
+
+</div>
 
 </div>
 
@@ -405,16 +437,24 @@ No Active Order
 
         </div>
 
-        <input
-            type="text"
-            id="customerName"
-            placeholder="Customer Name">
+        <div class="inputBox">
+    <span class="inputIcon">👤</span>
 
-        <input
-            type="number"
-            id="customerNumber"
-            placeholder="WhatsApp Number"
-            onblur="checkPaymentMode()">
+    <input
+        type="text"
+        id="customerName"
+        placeholder="Customer Name">
+</div>
+
+        <div class="inputBox">
+    <span class="inputIcon">📱</span>
+
+    <input
+        type="number"
+        id="customerNumber"
+        placeholder="WhatsApp Number"
+        onblur="checkPaymentMode()">
+</div>
 
     </div>
 
