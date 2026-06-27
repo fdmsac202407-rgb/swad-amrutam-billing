@@ -125,7 +125,7 @@ box-shadow:none;
 
 .container{
     display:grid;
-    grid-template-columns:220px 1fr 320px;
+    grid-template-columns:220px minmax(0,1fr) 420px;
     height:calc(100vh - 70px);
     overflow:hidden;
 }
@@ -297,14 +297,18 @@ background:#5A1414;
 /* CART */
 
 .cart{
-background:#ffffff;
-padding:18px;
-overflow-y:auto;
-height:100%;
-border-left:1px solid #ddd;
-box-shadow:-3px 0 15px rgba(0,0,0,.08);
-position:sticky;
-top:0;
+    width:420px;
+    min-width:420px;
+    height:100%;
+    background:#fff;
+    border-left:1px solid #ddd;
+    box-shadow:-3px 0 15px rgba(0,0,0,.08);
+
+    display:flex;
+    flex-direction:column;
+
+    padding:18px;
+    overflow:hidden;
 }
 
 .cart h2{
@@ -724,10 +728,10 @@ gap:10px;
 /* CART BUTTONS */
 
 .cartFooterButtons{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:8px;
-margin-top:15px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
 }
 
 .cartFooterButtons button{
@@ -1053,4 +1057,22 @@ background:#ef4444 !important;
 
 .cartFooterButtons .holdBtn{
 background:#f59e0b !important;
+}
+
+.cartBody{
+    flex:1;
+    overflow-y:auto;
+    padding-right:5px;
+}
+
+#cartItems{
+    max-height:320px;
+    overflow-y:auto;
+}
+
+.saveBtn{
+    grid-column:1 / -1;
+    height:55px;
+    font-size:22px;
+    border-radius:12px;
 }
