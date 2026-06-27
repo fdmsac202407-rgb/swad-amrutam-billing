@@ -375,81 +375,86 @@ No Active Order
 <!-- CART -->
 
 <div class="cart">
-<div class="cartHeader">
 
-<div class="cartTopBar">
+    <div class="cartHeader">
 
-<h2 class="cartTitle">
-🛒 Cart
-</h2>
+        <div class="cartTopBar">
 
-<div class="tableBadge">
-🍽️ Table :
-<span id="selectedTable">
-Not Selected
-</span>
-</div>
+            <h2 class="cartTitle">🛒 Cart</h2>
 
-</div>
+            <div class="tableBadge">
+                🍽️ Table :
+                <span id="selectedTable">
+                    Not Selected
+                </span>
+            </div>
 
-</div>
+        </div>
 
-<div id="cartItems"></div>
+    </div>
 
-<div class="totalBox">
+    <div class="cartBody">
 
-<span>Total</span>
+        <div class="totalBox">
 
-<span>
-₹<span id="total">0</span>
-</span>
+            <span>Total</span>
 
-</div>
+            <span>
+                ₹<span id="total">0</span>
+            </span>
 
-<input
-type="text"
-id="customerName"
-placeholder="Customer Name">
+        </div>
 
-<input
-type="number"
-id="customerNumber"
-placeholder="WhatsApp Number"
-onblur="checkPaymentMode()">
+        <input
+            type="text"
+            id="customerName"
+            placeholder="👤 Customer Name">
 
-<div class="cartFooterButtons">
+        <input
+            type="number"
+            id="customerNumber"
+            placeholder="🟢 WhatsApp Number"
+            onblur="checkPaymentMode()">
 
-<button
-class="actionBtn clearBtn"
-onclick="clearCart()">
-🗑 Clear
-</button>
+        <div id="cartItems"></div>
 
-<button
-class="actionBtn holdBtn"
-onclick="holdBill()">
-⏸ Hold
-</button>
+    </div>
 
-<button
-class="actionBtn"
-onclick="printKOT()">
-🖨 KOT
-</button>
+    <div class="cartFooterButtons">
 
-<button
-class="actionBtn"
-onclick="printBill()">
-🧾 Bill
-</button>
+        <button
+            class="actionBtn clearBtn"
+            onclick="clearCart()">
+            🗑 Clear
+        </button>
 
-<button
-class="actionBtn saveBtn"
-onclick="saveBill()">
-💾 Pay
-</button>
+        <button
+            class="actionBtn holdBtn"
+            onclick="holdBill()">
+            ⏸ Hold
+        </button>
 
-</div>
+        <button
+            class="actionBtn kotBtn"
+            onclick="printKOT()">
+            🖨 KOT
+        </button>
+
+        <button
+            class="actionBtn billBtn"
+            onclick="printBill()">
+            🧾 Bill
+        </button>
+
+    </div>
+
+    <button
+        class="actionBtn saveBtn"
+        onclick="saveBill()">
+
+        💾 Pay ₹<span id="payTotal">0</span>
+
+    </button>
 
 </div>
 
