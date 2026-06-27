@@ -317,11 +317,25 @@ font-weight:700;
 }
 
 .cartItem{
-background:#F8F5F0;
-padding:12px;
-margin-bottom:10px;
-border-radius:12px;
-border:1px solid #2d2d38;
+    background:#F8F5F0;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+}
+
+.cartItem h3{
+    font-size:16px;
+    margin-bottom:4px;
+}
+
+.cartItem p{
+    font-size:14px;
+    margin:2px 0;
+}
+
+.cartItem .qtyControl{
+    margin-top:6px;
 }
 
 .totalBox{
@@ -1071,14 +1085,14 @@ background:#f59e0b !important;
 
 .cartBody{
     flex:1;
-    overflow:hidden;
-    display:grid;
-    grid-template-rows:1fr auto auto auto;
-    gap:10px;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
 }
 
 #cartItems{
-    height:100%;
+    flex:1;
     overflow-y:auto;
+    min-height:0;
     padding-right:5px;
 }
