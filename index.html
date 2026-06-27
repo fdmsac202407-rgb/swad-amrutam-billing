@@ -384,9 +384,7 @@ No Active Order
 
             <div class="tableBadge">
                 🍽️ Table :
-                <span id="selectedTable">
-                    Not Selected
-                </span>
+                <span id="selectedTable">Not Selected</span>
             </div>
 
         </div>
@@ -394,6 +392,8 @@ No Active Order
     </div>
 
     <div class="cartBody">
+
+        <div id="cartItems"></div>
 
         <div class="totalBox">
 
@@ -408,41 +408,31 @@ No Active Order
         <input
             type="text"
             id="customerName"
-            placeholder="👤 Customer Name">
+            placeholder="Customer Name">
 
         <input
             type="number"
             id="customerNumber"
-            placeholder="🟢 WhatsApp Number"
+            placeholder="WhatsApp Number"
             onblur="checkPaymentMode()">
-
-        <div id="cartItems"></div>
 
     </div>
 
     <div class="cartFooterButtons">
 
-        <button
-            class="actionBtn clearBtn"
-            onclick="clearCart()">
+        <button class="actionBtn clearBtn" onclick="clearCart()">
             🗑 Clear
         </button>
 
-        <button
-            class="actionBtn holdBtn"
-            onclick="holdBill()">
+        <button class="actionBtn holdBtn" onclick="holdBill()">
             ⏸ Hold
         </button>
 
-        <button
-            class="actionBtn kotBtn"
-            onclick="printKOT()">
+        <button class="actionBtn kotBtn" onclick="printKOT()">
             🖨 KOT
         </button>
 
-        <button
-            class="actionBtn billBtn"
-            onclick="printBill()">
+        <button class="actionBtn billBtn" onclick="printBill()">
             🧾 Bill
         </button>
 
@@ -451,9 +441,7 @@ No Active Order
     <button
         class="actionBtn saveBtn"
         onclick="saveBill()">
-
-        💾 Pay ₹<span id="payTotal">0</span>
-
+        💾 Pay
     </button>
 
 </div>
