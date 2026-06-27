@@ -378,37 +378,32 @@ cart.forEach((item,index)=>{
 total += item.price*item.qty;
 
 cartItems.innerHTML += `
-<div class="cartItem">
+<div class="cartItem compactItem">
 
-<div class="cartTop">
+    <div class="itemLeft">
+        <div class="itemName">${item.name}</div>
+        <div class="itemType">${item.type}</div>
+    </div>
 
-<div>
-<b>${item.name}</b>
-<br>
-<small>${item.type}</small>
-</div>
+    <div class="itemRight">
 
-<div>
-₹${item.price * item.qty}
-</div>
+        <div class="itemPrice">
+            ₹${item.price * item.qty}
+        </div>
 
-</div>
+        <div class="cartQty">
 
-<div class="cartQty">
+            <button class="qtyBtn"
+            onclick="changeQty(${index},-1)">−</button>
 
-<button class="qtyBtn"
-onclick="changeQty(${index},-1)">
-−
-</button>
+            <span>${item.qty}</span>
 
-<span>${item.qty}</span>
+            <button class="qtyBtn"
+            onclick="changeQty(${index},1)">+</button>
 
-<button class="qtyBtn"
-onclick="changeQty(${index},1)">
-+
-</button>
+        </div>
 
-</div>
+    </div>
 
 </div>
 `;
