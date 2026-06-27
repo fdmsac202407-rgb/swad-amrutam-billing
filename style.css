@@ -1071,13 +1071,14 @@ background:#f59e0b !important;
 
 .cartBody{
     flex:1;
-    display:flex;
-    flex-direction:column;
     overflow:hidden;
+    display:grid;
+    grid-template-rows:1fr auto auto auto;
+    gap:10px;
 }
 
 #cartItems{
-    flex:1;
+    height:100%;
     overflow-y:auto;
-    margin-bottom:12px;
+    padding-right:5px;
 }
